@@ -1,0 +1,68 @@
+.main-header{
+    min-height: auto;  
+}
+
+a.btn {
+  display: inline-block;
+  text-align: center;
+}
+
+.main-menu li a.btn-primary {
+  color: var(--color-white);
+}
+
+.main-menu a[aria-current="page"] {
+  padding-bottom: 4px;
+  border-bottom: 2px solid var(--color-primary);
+}
+
+/* about переваги*/
+.section-title--values::after {
+  width: 241px;
+}
+
+.section-subtitle--values {
+  margin-bottom: 60px;
+}
+
+.about-values {
+  padding: 80px 0;
+  background: var(--color-bg-accent);
+}
+
+.about-values-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 40px 32px;
+}
+
+.about-value {
+  padding-top: 20px;
+  border-top: 3px solid var(--color-primary);
+}
+
+.about-value-title {
+  margin-bottom: 12px;
+  font-family: var(--font-heading);
+  font-size: 1.5rem;
+  font-weight: 400;
+  color: var(--color-secondary);
+}
+
+.about-value-text {
+  font-size: 1.125rem;
+  line-height: 1.7;
+  color: var(--text-secondary);
+}
+
+@media (min-width: 768px) {
+  .about-values-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (min-width: 1152px) {
+  .about-values-grid {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}

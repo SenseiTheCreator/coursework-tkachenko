@@ -1,6 +1,7 @@
 @import url("_variables.css");
 @import url("https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Rubik:ital,wght@0,300..900;1,300..900&family=Mulish:ital,wght@0,200..1000;1,200..1000&display=swap");
 @import url("sections.css");
+@import url("about.css");
 /* RESET */
 * {
   margin: 0;
@@ -47,7 +48,7 @@ ul {
 
 /* HEADER */
 .main-header {
-  min-height: 100svh;
+  min-height: auto;
   background-image:
     linear-gradient(rgba(0, 0, 0, 0.35), rgba(0, 0, 0, 0.35)),
     url("../images/header-photo.jpg");

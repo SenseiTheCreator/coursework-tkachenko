@@ -1,0 +1,517 @@
+<!doctype html>
+<html lang="uk">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Travellian</title>
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/swiper@8/swiper-bundle.min.css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css"
+      integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+    <link rel="icon" type="image/png" href="assets/images/favicon.png" />
+    <link rel="stylesheet" href="assets/styles/_variables.css" />
+    <link rel="stylesheet" href="assets/styles/style.css" />
+  </head>
+
+  <body>
+    <header class="main-header main-header--inner">
+     <!-- NAVBAR -->
+      <div class="navbar d-flex vertical-center">
+        <nav class="d-flex vertical-center">
+          <div class="logo d-flex">
+            <img src="assets/images/icons/logo.svg" alt="Travellian" />
+          </div>
+
+          <!-- MENU -->
+
+          <div id="iconBlock" class="menu-icon">
+            <div id="iconOpen" class="menu-icon-open">
+              <img src="assets/images/icons/burger-menu.svg" alt="Menu" />
+            </div>
+            <div id="iconClose" class="menu-icon-close d-none">
+              <i class="fa-solid fa-xmark"></i>
+            </div>
+          </div>
+
+          <ul id="mainMenu" class="main-menu d-flex">
+            <li><a href="index.html">Головна</a></li>
+            <li><a href="about.html">Про нас</a></li>
+            <li><a href="#">Подорожі</a></li>
+            <li><a href="#">Блог</a></li>
+            <li><a href="#">Ціни</a></li>
+            <li class="menu-mobile-btn">
+              <button class="btn btn-outline mobile-login">Увійти</button>
+            </li>
+            <li class="menu-mobile-btn">
+              <button class="btn btn-primary mobile-signup">Зареєструватися</button>
+            </li>
+          </ul>
+
+          <div class="nav-actions d-flex">
+            <button id="loginBtn" class="btn btn-outline">Увійти</button>
+            <button id="signupBtn" class="btn btn-primary">Зареєструватися</button>
+          </div>
+        </nav>
+      </div>
+
+      <!-- HERO -->
+      <div class="hero content-wrap">
+        <h1 class="hero-title">Про нас</h1>
+        <p class="hero-subtitle">
+          Допомагаємо відкривати Європу без зайвого клопоту
+        </p>
+      </div>
+    </header>
+
+    <main>
+      <!-- STORY -->
+      <section class="blog-section" id="story">
+        <div class="section-head content-wrap">
+          <div class="section-head-text">
+            <h2 class="section-title section-title--blog">Наша історія</h2>
+            <p class="section-subtitle section-subtitle--blog">
+              Як невелика франківська компанія стала агенцією турів Європою
+            </p>
+          </div>
+        </div>
+
+        <div class="blog-card content-wrap">
+          <img
+            src="assets/images/italy-blog-photo.png"
+            alt="Італійське узбережжя"
+            class="blog-card-img"
+          />
+          <div class="blog-card-body">
+            <h3 class="blog-card-title">
+              Мандруємо Європою<br />з 2016 року
+            </h3>
+            <p class="blog-card-text">
+              Travellian з’явилася в Івано-Франківську як невелике бюро, що організовувало
+              поїздки для друзів і знайомих. Дуже швидко стало зрозуміло: людям
+              потрібні не просто квитки й готелі, а маршрут, у якому все
+              продумано наперед. Сьогодні ми возимо мандрівників найпопулярнішими
+              містами Європи — від Риму й Парижа до Праги та Будапешта. Кожну
+              програму спершу проходить наша команда, тому ми точно знаємо, де
+              смачна кава, а де краще не стояти в черзі.
+            </p>
+            <a href="#" class="blog-card-link">
+              <span>Переглянути тури</span>
+              <i class="fa-solid fa-arrow-right-long"></i>
+            </a>
+          </div>
+        </div>
+      </section>
+
+      <!-- VALUES -->
+      <section class="about-values" id="values">
+        <div class="section-head content-wrap">
+          <div class="section-head-text">
+            <h2 class="section-title section-title--values">
+              Чому обирають нас
+            </h2>
+            <p class="section-subtitle section-subtitle--values">
+              Чотири речі, на яких тримається кожна наша поїздка
+            </p>
+          </div>
+        </div>
+
+        <ul class="about-values-grid content-wrap">
+          <li class="about-value">
+            <h3 class="about-value-title">Прозорі ціни</h3>
+            <p class="about-value-text">
+              У вартість одразу входять проживання, сніданки та програма. Жодних
+              прихованих доплат на місці.
+            </p>
+          </li>
+          <li class="about-value">
+            <h3 class="about-value-title">Малі групи</h3>
+            <p class="about-value-text">
+              До 15 осіб у групі, щоб гід встигав приділити увагу кожному
+              мандрівнику.
+            </p>
+          </li>
+          <li class="about-value">
+            <h3 class="about-value-title">Гід українською</h3>
+            <p class="about-value-text">
+              Розповідаємо про місця живою мовою, без завчених цитат із
+              путівників.
+            </p>
+          </li>
+          <li class="about-value">
+            <h3 class="about-value-title">Підтримка на зв’язку</h3>
+            <p class="about-value-text">
+              Менеджер відповідає на питання ще до поїздки й залишається на
+              зв’язку, поки ви в дорозі.
+            </p>
+          </li>
+        </ul>
+      </section>
+
+      <!-- GALLERY -->
+      <section class="gallery-section" id="gallery">
+        <div class="section-head content-wrap">
+          <div class="section-head-text">
+            <h2 class="section-title section-title--gallery">
+              Галерея напрямів
+            </h2>
+            <p class="section-subtitle section-subtitle--gallery">
+              Світлини наших мандрівників
+            </p>
+          </div>
+          <div class="section-head-arrows arrows-desktop">
+            <button id="gallery-prev" class="arrow-btn swiper-btn-prev-gallery">
+              <img src="assets/images/icons/slider-left.svg" alt="Назад" />
+            </button>
+            <button id="gallery-next" class="arrow-btn swiper-btn-next-gallery">
+              <img src="assets/images/icons/slider-right.svg" alt="Далі" />
+            </button>
+          </div>
+        </div>
+        <div class="gallery-swiper swiper">
+          <div class="swiper-wrapper">
+            <div class="swiper-slide">
+              <div class="gallery-grid">
+                <img
+                  src="assets/images/gallery-first.png"
+                  alt="Світлина з подорожі, 1"
+                  class="gallery-img"
+                />
+                <img
+                  src="assets/images/gallery-second.jpg"
+                  alt="Світлина з подорожі, 2"
+                  class="gallery-img"
+                />
+                <img
+                  src="assets/images/gallery-third.jpg"
+                  alt="Світлина з подорожі, 3"
+                  class="gallery-img"
+                />
+                <img
+                  src="assets/images/gallery-four.jpg"
+                  alt="Світлина з подорожі, 4"
+                  class="gallery-img"
+                />
+              </div>
+            </div>
+            <div class="swiper-slide">
+              <div class="gallery-grid">
+                <img
+                  src="assets/images/gallery-first.png"
+                  alt="Світлина з подорожі, 5"
+                  class="gallery-img"
+                />
+                <img
+                  src="assets/images/gallery-second.jpg"
+                  alt="Світлина з подорожі, 6"
+                  class="gallery-img"
+                />
+                <img
+                  src="assets/images/gallery-third.jpg"
+                  alt="Світлина з подорожі, 7"
+                  class="gallery-img"
+                />
+                <img
+                  src="assets/images/gallery-four.jpg"
+                  alt="Світлина з подорожі, 8"
+                  class="gallery-img"
+                />
+              </div>
+            </div>
+          </div>
+          <div class="section-head-arrows arrows-mobile arrows-mobile--gallery">
+            <button
+              id="gallery-prev-mob"
+              class="arrow-btn swiper-btn-prev-gallery"
+            >
+              <img src="assets/images/icons/slider-left.svg" alt="Назад" />
+            </button>
+            <button
+              id="gallery-next-mob"
+              class="arrow-btn swiper-btn-next-gallery"
+            >
+              <img src="assets/images/icons/slider-right.svg" alt="Далі" />
+            </button>
+          </div>
+        </div>
+      </section>
+
+      <!-- EXPERIENCES -->
+      <section class="experiences-section" id="experiences">
+        <div class="section-head content-wrap">
+          <div class="section-head-text">
+            <h2 class="section-title section-title--exp">
+              Враження мандрівників
+            </h2>
+            <p class="section-subtitle section-subtitle--exp">
+              Що кажуть ті, хто вже подорожував із нами
+            </p>
+          </div>
+        </div>
+
+        <div class="experiences-swiper swiper content-wrap">
+          <div class="swiper-wrapper">
+            <div class="swiper-slide">
+              <figure class="exp-card">
+                <img
+                  src="assets/images/avatar-first.png"
+                  alt="Олена К."
+                  class="exp-card-avatar"
+                />
+                <p class="exp-card-text">
+                  Все було організовано бездоганно: готель у центрі, гід
+                  українською, жодного зайвого клопоту.
+                </p>
+                <div class="exp-card-stars">
+                  <img src="assets/images/icons/star.svg" alt="" />
+                  <img src="assets/images/icons/star.svg" alt="" />
+                  <img src="assets/images/icons/star.svg" alt="" />
+                  <img src="assets/images/icons/star.svg" alt="" />
+                  <img src="assets/images/icons/star.svg" alt="" />
+                </div>
+                <p class="exp-card-name">Олена К.</p>
+                <p class="exp-card-job">Тур «Вічний Рим»</p>
+              </figure>
+            </div>
+
+            <div class="swiper-slide">
+              <figure class="exp-card">
+                <img
+                  src="assets/images/avatar-second.png"
+                  alt="Андрій М."
+                  class="exp-card-avatar"
+                />
+                <p class="exp-card-text">
+                  Зручно бронювати на сайті, а менеджер відповів на всі питання
+                  ще до поїздки.
+                </p>
+                <div class="exp-card-stars">
+                  <img src="assets/images/icons/star.svg" alt="" />
+                  <img src="assets/images/icons/star.svg" alt="" />
+                  <img src="assets/images/icons/star.svg" alt="" />
+                  <img src="assets/images/icons/star.svg" alt="" />
+                  <img src="assets/images/icons/star.svg" alt="" />
+                </div>
+                <p class="exp-card-name">Андрій М.</p>
+                <p class="exp-card-job">Париж за 5 днів</p>
+              </figure>
+            </div>
+
+            <div class="swiper-slide">
+              <figure class="exp-card">
+                <img
+                  src="assets/images/avatar-third.png"
+                  alt="Ірина С."
+                  class="exp-card-avatar"
+                />
+                <p class="exp-card-text">
+                  Програма насичена, але без поспіху. Поїду з вами ще раз — уже
+                  до Португалії.
+                </p>
+                <div class="exp-card-stars">
+                  <img src="assets/images/icons/star.svg" alt="" />
+                  <img src="assets/images/icons/star.svg" alt="" />
+                  <img src="assets/images/icons/star.svg" alt="" />
+                  <img src="assets/images/icons/star.svg" alt="" />
+                  <img src="assets/images/icons/star.svg" alt="" />
+                </div>
+                <p class="exp-card-name">Ірина С.</p>
+                <p class="exp-card-job">Барселона Гауді</p>
+              </figure>
+            </div>
+          </div>
+          <div class="section-head-arrows section-head-arrows--exp">
+            <button class="arrow-btn swiper-btn-prev-exp">
+              <img src="assets/images/icons/slider-left.svg" alt="Назад" />
+            </button>
+            <button class="arrow-btn swiper-btn-next-exp">
+              <img src="assets/images/icons/slider-right.svg" alt="Далі" />
+            </button>
+          </div>
+        </div>
+      </section>
+
+      <!-- NEWSLETTER -->
+      <section class="newsletter-section">
+        <div class="newsletter content-wrap">
+          <h2 class="newsletter-title">Наша розсилка</h2>
+          <form class="newsletter-form">
+            <div class="newsletter-field">
+              <label class="newsletter-label" for="newsletter-email"
+                >Email</label
+              >
+              <input
+                id="newsletter-email"
+                name="email"
+                type="email"
+                class="newsletter-input"
+                placeholder="Ваш email"
+                required
+              />
+            </div>
+            <button type="submit" class="newsletter-btn">Підписатися</button>
+          </form>
+        </div>
+      </section>
+    </main>
+
+    <!-- FOOTER -->
+    <footer class="main-footer">
+      <div class="footer-body content-wrap">
+        <div class="footer-col footer-col-logo">
+          <img
+            src="assets/images/icons/logo.svg"
+            alt="Travellian"
+            class="footer-logo"
+          />
+          <p class="footer-copy">
+            Copyright © Travellian 2020 All rights reserved
+          </p>
+        </div>
+
+        <div class="footer-col">
+          <h3 class="footer-col-title">Меню</h3>
+          <ul class="footer-col-list">
+            <li><a href="#">Головна</a></li>
+            <li><a href="#">Про нас</a></li>
+            <li><a href="#">Подорожі</a></li>
+            <li><a href="#">Блог</a></li>
+            <li><a href="#">Ціни</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-col">
+          <h3 class="footer-col-title">Інформація</h3>
+          <ul class="footer-col-list">
+            <li><a href="#">Про нас</a></li>
+            <li><a href="#">Контакти</a></li>
+            <li><a href="#">Політика приватності</a></li>
+            <li><a href="#">Умови використання</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-col">
+          <h3 class="footer-col-title">Контакти</h3>
+          <address class="footer-col-list">
+            <p>+380 965 604 217</p>
+            <p>info@travellian.com</p>
+            <p>223 Вовчинецька, Івано-Франківськ, Україна</p>
+          </address>
+        </div>
+
+        <div class="footer-col">
+          <h3 class="footer-col-title">Підпишіться на наші новини</h3>
+          <div class="footer-social">
+            <a href="#" class="footer-social-link">
+              <img src="assets/images/icons/facebook.svg" alt="Facebook" />
+            </a>
+            <a href="#" class="footer-social-link">
+              <img src="assets/images/icons/pinterest.svg" alt="Pinterest" />
+            </a>
+            <a href="#" class="footer-social-link">
+              <img src="assets/images/icons/instagram.svg" alt="Instagram" />
+            </a>
+            <a href="#" class="footer-social-link">
+              <img src="assets/images/icons/twitter.svg" alt="Twitter" />
+            </a>
+          </div>
+        </div>
+      </div>
+    </footer>
+
+    <!-- LOGIN MODAL -->
+    <div id="loginModal" class="modal-overlay d-none">
+      <div class="modal-box">
+        <button id="closeLogin" class="modal-close">
+          <i class="fa-solid fa-xmark"></i>
+        </button>
+        <h2 class="modal-title">Увійти</h2>
+        <p class="modal-subtitle">
+          Ласкаво просимо назад! Будь ласка, увійдіть, щоб отримати доступ до свого облікового запису.
+        </p>
+        <form class="modal-form">
+          <input type="email" placeholder="Введіть ваш Email" />
+          <input type="password" placeholder="Введіть ваш Пароль" />
+          <a href="#" class="modal-forgot">Забули пароль?</a>
+          <button type="submit" class="modal-btn modal-btn--primary">
+            Увійти
+          </button>
+          <button
+            type="button"
+            id="toSignUp"
+            class="modal-btn modal-btn--secondary"
+          >
+            Зареєструватися
+          </button>
+        </form>
+        <div class="modal-divider">
+          <span>Або продовжити з</span>
+        </div>
+        <div class="modal-socials">
+          <button class="social-btn">
+            <i class="fa-brands fa-google"></i>
+          </button>
+          <button class="social-btn">
+            <i class="fa-brands fa-facebook"></i>
+          </button>
+          <button class="social-btn">
+            <i class="fa-brands fa-apple"></i>
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- SIGNUP MODAL -->
+    <div id="signupModal" class="modal-overlay d-none">
+      <div class="modal-box">
+        <button id="closeSignup" class="modal-close">
+          <i class="fa-solid fa-xmark"></i>
+        </button>
+        <h2 class="modal-title">Зареєструватися</h2>
+        <p class="modal-subtitle">
+          Приєднуйтесь до Travellian і почніть відкривати Європу разом із нами!
+        </p>
+        <form class="modal-form">
+          <input type="text" placeholder="Введіть ваше ім'я" />
+          <input type="text" placeholder="Введіть вашу фамілію" />
+          <input type="email" placeholder="Введіть ваш Email" />
+          <input type="password" placeholder="Введіть ваш Пароль" />
+          <button type="submit" class="modal-btn modal-btn--primary">
+            Зареєструватися
+          </button>
+          <button
+            type="button"
+            id="toLogin"
+            class="modal-btn modal-btn--secondary"
+          >
+            Увійти
+          </button>
+        </form>
+        <div class="modal-divider">
+          <span>Або продовжити з</span>
+        </div>
+        <div class="modal-socials">
+          <button class="social-btn">
+            <i class="fa-brands fa-google"></i>
+          </button>
+          <button class="social-btn">
+            <i class="fa-brands fa-facebook"></i>
+          </button>
+          <button class="social-btn">
+            <i class="fa-brands fa-apple"></i>
+          </button>
+        </div>
+      </div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/swiper@8/swiper-bundle.min.js"></script>
+    <script src="assets/scripts/common.js"></script>
+    <script src="assets/scripts/about.js"></script>
+    <script src="assets/scripts/main.js"></script>
+  </body>
+</html>
