@@ -554,7 +554,7 @@
   flex-direction: column;
   justify-content: center;
   align-items: flex-start;
-  gap: 60px;
+  gap: 40px;
   background: var(--color-white);
   box-shadow: 0 0 4px rgba(0, 0, 0, 0.3);
   border-radius: 20px;
@@ -568,7 +568,7 @@
 
 .newsletter-title {
   font-family: var(--font-heading);
-  font-size: 2.5rem;
+  font-size: 2.25rem;
   font-weight: 400;
   color: rgba(118, 126, 134, 1);
 }
@@ -586,6 +586,7 @@
   flex-direction: column;
   gap: 16px;
   width: 100%;
+  min-width: 0;
   box-sizing: border-box;
   max-width: 100%;
 }
@@ -1083,12 +1084,14 @@
 
   .newsletter-title {
     margin: 0;
-    flex-shrink: 0;
+    flex: 0 1 auto;
+    max-width: 50%;
     padding: 20px 0;
   }
 
   .newsletter-form {
     flex: 1;
+    min-width: 0;
     display: flex;
     flex-direction: row;
     align-items: flex-end;

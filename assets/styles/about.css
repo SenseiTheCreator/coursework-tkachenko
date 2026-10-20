@@ -1,28 +1,70 @@
-.main-header{
-    min-height: auto;  
+/* ABOUT HEADER */
+/* Подвійний клас, щоб перебити .main-header зі style.css */
+.main-header.main-header--inner {
+  background-image:
+    linear-gradient(rgba(23, 36, 50, 0.7), rgba(23, 36, 50, 0.7)),
+    url("../images/header-photo.jpg");
+  background-position: center;
 }
 
-a.btn {
-  display: inline-block;
-  text-align: center;
+.page-hero {
+  padding: 24px 0 56px;
 }
 
-.main-menu li a.btn-primary {
+.breadcrumbs {
+  list-style: none;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 20px;
+  font-family: var(--font-body);
+  font-size: 0.875rem;
+  color: rgba(255, 255, 255, 0.8);
+}
+
+.breadcrumbs li + li::before {
+  content: "/";
+  margin-right: 8px;
+}
+
+.breadcrumbs a {
+  color: inherit;
+  text-decoration: underline;
+}
+
+.breadcrumbs a:hover {
   color: var(--color-white);
 }
 
-.main-menu a[aria-current="page"] {
-  padding-bottom: 4px;
-  border-bottom: 2px solid var(--color-primary);
+.page-hero-title {
+  font-family: var(--font-heading);
+  font-size: 2.5rem;
+  font-weight: 400;
+  line-height: 1.2;
+  margin-bottom: 16px;
 }
 
-/* about переваги*/
+.page-hero-title::after {
+  content: "";
+  display: block;
+  width: 120px;
+  height: 3px;
+  margin-top: 20px;
+  background: var(--color-primary);
+}
+
+.page-hero-subtitle {
+  font-family: var(--font-body);
+  font-size: 1.125rem;
+  font-weight: 400;
+  line-height: 1.6;
+  max-width: 560px;
+  opacity: 0.9;
+}
+
+/* ABOUT VALUES */
 .section-title--values::after {
   width: 241px;
-}
-
-.section-subtitle--values {
-  margin-bottom: 60px;
 }
 
 .about-values {
@@ -33,7 +75,7 @@ a.btn {
 .about-values-grid {
   display: grid;
   grid-template-columns: 1fr;
-  gap: 40px 32px;
+  gap: 40px;
 }
 
 .about-value {
@@ -42,27 +84,81 @@ a.btn {
 }
 
 .about-value-title {
-  margin-bottom: 12px;
   font-family: var(--font-heading);
   font-size: 1.5rem;
   font-weight: 400;
   color: var(--color-secondary);
+  line-height: 1.2;
+  margin-bottom: 12px;
 }
 
 .about-value-text {
+  font-family: var(--font-body);
   font-size: 1.125rem;
-  line-height: 1.7;
   color: var(--text-secondary);
+  line-height: 1.6;
 }
 
+/* ===== TABLET 768px ===== */
 @media (min-width: 768px) {
+  .page-hero {
+    padding: 32px 0 72px;
+  }
+
+  .page-hero-title {
+    font-size: 3.375rem;
+  }
+
+  .page-hero-subtitle {
+    font-size: 1.25rem;
+  }
+
   .about-values-grid {
     grid-template-columns: repeat(2, 1fr);
+    gap: 48px 32px;
+  }
+
+  .about-value-title {
+    font-size: 1.75rem;
   }
 }
 
+/* ===== DESKTOP 1152px ===== */
 @media (min-width: 1152px) {
+  .page-hero {
+    padding: 40px 0 72px;
+  }
+
+  .page-hero-title {
+    font-size: 4rem;
+  }
+
+  .page-hero-subtitle {
+    font-size: 1.5rem;
+    max-width: 680px;
+  }
+
+  .about-values {
+    padding: 100px 0;
+  }
+
   .about-values-grid {
     grid-template-columns: repeat(4, 1fr);
+    gap: 32px;
+  }
+}
+
+/* ===== DESKTOP 1440px ===== */
+@media (min-width: 1440px) {
+  .page-hero {
+    padding: 56px 0 80px;
+  }
+
+  .about-values {
+    padding: 140px 0;
+  }
+
+  .about-values-grid {
+    gap: 40px;
   }
 }
