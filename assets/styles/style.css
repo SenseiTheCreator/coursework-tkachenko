@@ -48,6 +48,10 @@ ul {
 }
 
 /* HEADER */
+.main-menu a.is-active {
+  border-bottom: 2px solid var(--color-primary);
+}
+
 .main-header {
   min-height: auto;
   background-image:
@@ -570,16 +574,17 @@ ul {
 
   .btn-book {
     display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: flex-start;
+    flex-shrink: 0;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
     gap: 12px;
-    width: 170px;
-    min-width: 170px;
+    width: 200px;
     height: 100%;
+    min-width: 200px;
     padding: 60px 20px;
     border-radius: 0 20px 20px 0;
-    font-size: 2.25rem;
+    font-size: 1.75rem;
     line-height: 1.33;
     white-space: normal;
     text-align: left;
@@ -715,7 +720,7 @@ ul {
     min-width: 170px;
     height: 100%;
     padding: 0 24px;
-    font-size: 2.25rem;
+    font-size: 1.75rem;
     border-radius: 0 12px 12px 0;
     white-space: normal;
     text-align: left;
@@ -729,7 +734,7 @@ ul {
 
   .btn-book {
     height: 216px;
-    font-size: 2.25rem;
+    font-size: 1.75rem;
   }
 }
 
@@ -774,7 +779,7 @@ ul {
 
   .btn-book {
     height: 216px;
-    font-size: 2.25rem;
+    font-size: 1.75rem;
   }
 }
 
@@ -824,7 +829,7 @@ ul {
 
   .btn-book {
     width: 170px;
-    font-size: 2.25rem;
+    font-size: 1.75rem;
   }
 
   .form-row:first-child .form-field-wrap:first-child {

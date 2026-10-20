@@ -234,7 +234,7 @@
 
 .offer-card-btn {
   height: 56px;
-  width: 127px;
+  min-width: 127px;
   padding: 16px 24px;
   background: var(--color-secondary);
   color: var(--color-white);
