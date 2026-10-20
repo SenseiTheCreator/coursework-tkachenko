@@ -2,6 +2,7 @@
 @import url("https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Rubik:ital,wght@0,300..900;1,300..900&family=Mulish:ital,wght@0,200..1000;1,200..1000&display=swap");
 @import url("sections.css");
 @import url("about.css");
+
 /* RESET */
 * {
   margin: 0;
@@ -594,6 +595,7 @@ ul {
   .content-wrap {
     padding: 0 32px;
   }
+
   .navbar {
     height: 128px;
     padding: 0 32px;

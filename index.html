@@ -1,987 +1,837 @@
 <!doctype html>
 <html lang="uk">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Travellian</title>
-    <link
-      rel="stylesheet"
-      href="https://cdn.jsdelivr.net/npm/swiper@8/swiper-bundle.min.css"
-    />
-    <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css"
-      integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw=="
-      crossorigin="anonymous"
-      referrerpolicy="no-referrer"
-    />
-    <link rel="icon" type="image/png" href="assets/images/favicon.png" />
-    <link rel="stylesheet" href="assets/styles/_variables.css" />
-    <link rel="stylesheet" href="assets/styles/style.css" />
-  </head>
 
-  <body>
-    <header class="main-header">
-      <!-- NAVBAR -->
-      <div class="navbar d-flex vertical-center">
-        <nav class="d-flex vertical-center">
-          <div class="logo d-flex">
-            <img src="assets/images/icons/logo.svg" alt="Travellian" />
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Travellian</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@8/swiper-bundle.min.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css"
+    integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw=="
+    crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <link rel="icon" type="image/png" href="assets/images/favicon.png" />
+  <link rel="stylesheet" href="assets/styles/_variables.css" />
+  <link rel="stylesheet" href="assets/styles/style.css" />
+</head>
+
+<body>
+  <header class="main-header">
+    <!-- NAVBAR -->
+    <div class="navbar d-flex vertical-center">
+      <nav class="d-flex vertical-center">
+        <div class="logo d-flex">
+          <img src="assets/images/icons/logo.svg" alt="Travellian" />
+        </div>
+
+        <!-- MENU -->
+
+        <div id="iconBlock" class="menu-icon">
+          <div id="iconOpen" class="menu-icon-open">
+            <img src="assets/images/icons/burger-menu.svg" alt="Menu" />
           </div>
+          <div id="iconClose" class="menu-icon-close d-none">
+            <i class="fa-solid fa-xmark"></i>
+          </div>
+        </div>
 
-          <!-- MENU -->
+        <ul id="mainMenu" class="main-menu d-flex">
+          <li><a href="#">Головна</a></li>
+          <li><a href="about.html">Про нас</a></li>
+          <li><a href="#">Подорожі</a></li>
+          <li><a href="#">Блог</a></li>
+          <li><a href="#">Пропозиції</a></li>
+          <li class="menu-mobile-btn">
+            <button class="btn btn-outline mobile-login">Увійти</button>
+          </li>
+          <li class="menu-mobile-btn">
+            <button class="btn btn-primary mobile-signup">Зареєструватися</button>
+          </li>
+        </ul>
 
-          <div id="iconBlock" class="menu-icon">
-            <div id="iconOpen" class="menu-icon-open">
-              <img src="assets/images/icons/burger-menu.svg" alt="Menu" />
+        <div class="nav-actions d-flex">
+          <button id="loginBtn" class="btn btn-outline">Увійти</button>
+          <button id="signupBtn" class="btn btn-primary">Зареєструватися</button>
+        </div>
+      </nav>
+    </div>
+
+    <!-- HERO -->
+    <div class="hero content-wrap">
+      <h1 class="hero-title">Час вирушати назустріч пригодам!</h1>
+      <p class="hero-subtitle">Відкривайте нові місця, знайомтеся з культурами та
+        створюйте спогади, які залишаться з вами назавжди</p>
+    </div>
+
+    <div class="hero-pagination">
+      <span class="active"></span>
+      <span></span>
+      <span></span>
+      <span></span>
+      <span></span>
+    </div>
+
+    <!-- BOOKING FORM -->
+    <div class="booking-wrap">
+      <div class="booking-form">
+        <div class="form-fields-group">
+          <div class="form-row">
+            <div class="form-field-wrap">
+              <label class="form-label" for="destination">Куди вирушаємо?</label>
+              <input id="destination" class="form-input" type="text" placeholder="Dubai" />
             </div>
-            <div id="iconClose" class="menu-icon-close d-none">
-              <i class="fa-solid fa-xmark"></i>
+            <div class="form-field-wrap">
+              <label class="form-label" for="person">Мандрівників</label>
+              <div class="select-wrapper">
+                <select id="person" class="form-select">
+                  <option>1</option>
+                  <option selected>2</option>
+                  <option>3</option>
+                  <option>4</option>
+                </select>
+                <img class="arrow-book" src="assets/images/icons/arrow-book.svg" alt="" />
+              </div>
             </div>
           </div>
-
-          <ul id="mainMenu" class="main-menu d-flex">
-            <li><a href="#">Головна</a></li>
-            <li><a href="about.html">Про нас</a></li>
-            <li><a href="#">Подорожі</a></li>
-            <li><a href="#">Блог</a></li>
-            <li><a href="#">Пропозиції</a></li>
-            <li class="menu-mobile-btn">
-              <button class="btn btn-outline mobile-login">Увійти</button>
-            </li>
-            <li class="menu-mobile-btn">
-              <button class="btn btn-primary mobile-signup">Зареєструватися</button>
-            </li>
-          </ul>
-
-          <div class="nav-actions d-flex">
-            <button id="loginBtn" class="btn btn-outline">Увійти</button>
-            <button id="signupBtn" class="btn btn-primary">Зареєструватися</button>
+          <div class="form-row">
+            <div class="form-field-wrap">
+              <label class="form-label" for="checkin">Дата заїзду</label>
+              <div class="select-wrapper">
+                <select id="checkin" class="form-select">
+                  <option>Оберіть дату заїзду</option>
+                </select>
+                <img class="arrow-book" src="assets/images/icons/arrow-book.svg" alt="" />
+              </div>
+            </div>
+            <div class="form-field-wrap form-field-last">
+              <label class="form-label" for="checkout">Дата виїзду</label>
+              <div class="select-wrapper">
+                <select id="checkout" class="form-select">
+                  <option>Оберіть дату виїзду</option>
+                </select>
+                <img class="arrow-book" src="assets/images/icons/arrow-book.svg" alt="" />
+              </div>
+            </div>
           </div>
-        </nav>
+        </div>
+
+        <button type="button" class="btn-book">
+          <span>Знайти свою подорож</span>
+          <i class="fa-solid fa-arrow-right-long"></i>
+        </button>
       </div>
+    </div>
+  </header>
 
-      <!-- HERO -->
-      <div class="hero content-wrap">
-        <h1 class="hero-title">Час вирушати назустріч пригодам!</h1>
-        <p class="hero-subtitle">Відкривайте нові місця, знайомтеся з культурами та 
-          створюйте спогади, які залишаться з вами назавжди</p>
-      </div>
-
-      <div class="hero-pagination">
-        <span class="active"></span>
-        <span></span>
-        <span></span>
-        <span></span>
-        <span></span>
-      </div>
-
-      <!-- BOOKING FORM -->
-      <div class="booking-wrap">
-        <div class="booking-form">
-          <div class="form-fields-group">
-            <div class="form-row">
-              <div class="form-field-wrap">
-                <label class="form-label" for="destination">Куди вирушаємо?</label>
-                <input
-                  id="destination"
-                  class="form-input"
-                  type="text"
-                  placeholder="Dubai"
-                />
-              </div>
-              <div class="form-field-wrap">
-                <label class="form-label" for="person">Мандрівників</label>
-                <div class="select-wrapper">
-                  <select id="person" class="form-select">
-                    <option>1</option>
-                    <option selected>2</option>
-                    <option>3</option>
-                    <option>4</option>
-                  </select>
-                  <img
-                    class="arrow-book"
-                    src="assets/images/icons/arrow-book.svg"
-                    alt=""
-                  />
-                </div>
-              </div>
-            </div>
-            <div class="form-row">
-              <div class="form-field-wrap">
-                <label class="form-label" for="checkin">Дата заїзду</label>
-                <div class="select-wrapper">
-                  <select id="checkin" class="form-select">
-                    <option>Оберіть дату заїзду</option>
-                  </select>
-                  <img
-                    class="arrow-book"
-                    src="assets/images/icons/arrow-book.svg"
-                    alt=""
-                  />
-                </div>
-              </div>
-              <div class="form-field-wrap form-field-last">
-                <label class="form-label" for="checkout">Дата виїзду</label>
-                <div class="select-wrapper">
-                  <select id="checkout" class="form-select">
-                    <option>Оберіть дату виїзду</option>
-                  </select>
-                  <img
-                    class="arrow-book"
-                    src="assets/images/icons/arrow-book.svg"
-                    alt=""
-                  />
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <button type="button" class="btn-book">
-            <span>Знайти свою подорож</span>
-            <i class="fa-solid fa-arrow-right-long"></i>
-          </button>
-        </div>
-      </div>
-    </header>
-
-    <main>
-      <!-- DESTINATIONS -->
-      <section class="destinations-section" id="explore">
-        <div class="section-head content-wrap">
-          <div class="section-head-text">
-            <h2 class="section-title">Місця, які варто побачити</h2>
-            <p class="section-subtitle">
-              Від затишних європейських вуличок до величних пам’яток архітектури —
-              обирайте напрямок для своєї наступної пригоди.
-            </p>
-          </div>
-
-          <div class="section-head-arrows arrows-desktop">
-            <button id="dest-prev" class="arrow-btn swiper-btn-prev-dest">
-              <img src="assets/images/icons/slider-left.svg" alt="Prev" />
-            </button>
-            <button id="dest-next" class="arrow-btn swiper-btn-next-dest">
-              <img src="assets/images/icons/slider-right.svg" alt="Next" />
-            </button>
-          </div>
-        </div>
-
-        <div class="destinations-swiper swiper content-wrap">
-          <div class="swiper-wrapper">
-            <div class="swiper-slide">
-              <article class="dest-card">
-                <img
-                  src="assets/images/berlin-col.jpg"
-                  alt="Monument of Berlin"
-                  class="dest-card-img"
-                />
-                <div class="dest-card-info">
-                  <h3 class="dest-card-title">Символ історії Берліна</h3>
-                  <p class="dest-card-location">
-                    <i class="fa-solid fa-location-dot"></i>
-                    <span>Берлін, Німеччина</span>
-                  </p>
-                </div>
-              </article>
-            </div>
-
-            <div class="swiper-slide">
-              <article class="dest-card">
-                <img
-                  src="assets/images/london-col.jpg"
-                  alt="Millennium Bridge"
-                  class="dest-card-img"
-                />
-                <div class="dest-card-info">
-                  <h3 class="dest-card-title">Міст Міленіум</h3>
-                  <p class="dest-card-location">
-                    <i class="fa-solid fa-location-dot"></i>
-                    <span>Лондон, Великобританія</span>
-                  </p>
-                </div>
-              </article>
-            </div>
-
-            <div class="swiper-slide">
-              <article class="dest-card">
-                <img
-                  src="assets/images/venice-col.jpg"
-                  alt="Rialto Bridge"
-                  class="dest-card-img"
-                />
-                <div class="dest-card-info">
-                  <h3 class="dest-card-title">Міст Ріальто</h3>
-                  <p class="dest-card-location">
-                    <i class="fa-solid fa-location-dot"></i>
-                    <span>Венеція, Італія</span>
-                  </p>
-                </div>
-              </article>
-            </div>
-
-            <div class="swiper-slide">
-              <article class="dest-card">
-                <img
-                  src="assets/images/lisbon-col.jpg"
-                  alt="Sea of Orange Tiles"
-                  class="dest-card-img"
-                />
-                <div class="dest-card-info">
-                  <h3 class="dest-card-title">Барви старого міста</h3>
-                  <p class="dest-card-location">
-                    <i class="fa-solid fa-location-dot"></i>
-                    <span>Лісабон, Португалія</span>
-                  </p>
-                </div>
-              </article>
-            </div>
-
-            <div class="swiper-slide">
-              <article class="dest-card">
-                <img
-                  src="assets/images/madrid.jpg"
-                  alt="Madrid"
-                  class="dest-card-img"
-                />
-                <div class="dest-card-info">
-                  <h3 class="dest-card-title">Сонячний Мадрид</h3>
-                  <p class="dest-card-location">
-                    <i class="fa-solid fa-location-dot"></i>
-                    <span>Мадрид, Іспанія</span>
-                  </p>
-                </div>
-              </article>
-            </div>
-          </div>
-
-          <div class="section-head-arrows arrows-mobile">
-            <button id="dest-prev-mob" class="arrow-btn swiper-btn-prev-dest">
-              <img src="assets/images/icons/slider-left.svg" alt="Prev" />
-            </button>
-            <button id="dest-next-mob" class="arrow-btn swiper-btn-next-dest">
-              <img src="assets/images/icons/slider-right.svg" alt="Next" />
-            </button>
-          </div>
-        </div>
-      </section>
-
-      <!-- SPECIAL OFFER -->
-      <section class="offer-section" id="pricing">
-        <div class="section-head content-wrap">
-          <div class="section-head-arrows arrows-desktop">
-            <button id="offer-prev" class="arrow-btn swiper-btn-prev-offer">
-              <img src="assets/images/icons/slider-left.svg" alt="Prev" />
-            </button>
-            <button id="offer-next" class="arrow-btn swiper-btn-next-offer">
-              <img src="assets/images/icons/slider-right.svg" alt="Next" />
-            </button>
-          </div>
-          <div class="section-head-text">
-            <h2 class="section-title section-title--offer">Подорожуйте вигідніше</h2>
-            <p class="section-subtitle section-subtitle--offer">
-              Особливі маршрути, комфортні готелі та приємні ціни для вашої наступної відпустки.
-            </p>
-          </div>
-        </div>
-
-        <div class="offer-swiper content-wrap content-wrap--offer">
-          <div class="swiper-wrapper">
-            <div class="swiper-slide">
-              <article class="offer-card">
-                <img
-                  src="assets/images/lisbon-container.png"
-                  alt="Lisbon"
-                  class="offer-card-img"
-                />
-                <div class="offer-card-body">
-                  <h3 class="offer-card-title">Лісабон, Португалія</h3>
-                  <div class="offer-card-stars">
-                    <img src="assets/images/icons/star.svg" alt="" />
-                    <img src="assets/images/icons/star.svg" alt="" />
-                    <img src="assets/images/icons/star.svg" alt="" />
-                    <img src="assets/images/icons/star.svg" alt="" />
-                    <img src="assets/images/icons/star.svg" alt="" />
-                  </div>
-                  <p class="offer-card-text">
-                    П'ять ночей у п'ятизірковому готелі зі сніданками та обідами.
-                    На вас чекають старовинні квартали, кольорові фасади,
-                    ароматна кава та неймовірні краєвиди Атлантики.
-                  </p>
-                  <div class="offer-card-footer">
-                    <div class="offer-card-price">
-                      <span class="offer-card-from">Від</span>
-                      <span class="offer-card-amount">€500</span>
-                    </div>
-                    <button class="offer-card-btn">Детальніше</button>
-                  </div>
-                </div>
-              </article>
-            </div>
-
-            <div class="swiper-slide">
-              <article class="offer-card">
-                <img
-                  src="assets/images/athens-container.png"
-                  alt="Athens"
-                  class="offer-card-img"
-                />
-                <div class="offer-card-body">
-                  <h3 class="offer-card-title">Афіни, Греція</h3>
-                  <div class="offer-card-stars">
-                    <img src="assets/images/icons/star.svg" alt="" />
-                    <img src="assets/images/icons/star.svg" alt="" />
-                    <img src="assets/images/icons/star.svg" alt="" />
-                    <img src="assets/images/icons/star.svg" alt="" />
-                    <img src="assets/images/icons/star.svg" alt="" />
-                  </div>
-                  <p class="offer-card-text">
-                    Чотири дні серед античних руїн, затишних таверн і сонячних
-                    площ. Проживання в п'ятизірковому готелі, сніданки та обіди
-                    вже включені у вартість.
-                  </p>
-                  <div class="offer-card-footer">
-                    <div class="offer-card-price">
-                      <span class="offer-card-from">Від</span>
-                      <span class="offer-card-amount">€800</span>
-                    </div>
-                    <button class="offer-card-btn">Детальніше</button>
-                  </div>
-                </div>
-              </article>
-            </div>
-
-            <div class="swiper-slide">
-              <article class="offer-card">
-                <img
-                  src="assets/images/rome-container.png"
-                  alt="Rome"
-                  class="offer-card-img"
-                />
-                <div class="offer-card-body">
-                  <h3 class="offer-card-title">Рим, Італія</h3>
-                  <div class="offer-card-stars">
-                    <img src="assets/images/icons/star.svg" alt="" />
-                    <img src="assets/images/icons/star.svg" alt="" />
-                    <img src="assets/images/icons/star.svg" alt="" />
-                    <img src="assets/images/icons/star.svg" alt="" />
-                    <img src="assets/images/icons/star.svg" alt="" />
-                  </div>
-                  <p class="offer-card-text">
-                    Вирушайте до міста, де кожна вулиця має свою історію.
-                    Відвідайте Колізей, скуштуйте справжню італійську пасту
-                    та насолодіться атмосферою вічного міста.
-                  </p>
-                  <div class="offer-card-footer">
-                    <div class="offer-card-price">
-                      <span class="offer-card-from">Від</span>
-                      <span class="offer-card-amount">€750</span>
-                    </div>
-                    <button class="offer-card-btn">Детальніше</button>
-                  </div>
-                </div>
-              </article>
-            </div>
-
-            <div class="swiper-slide">
-              <article class="offer-card">
-                <img
-                  src="assets/images/athens-container.png"
-                  alt="Athens"
-                  class="offer-card-img"
-                />
-                <div class="offer-card-body">
-                  <h3 class="offer-card-title">Афіни: коротка втеча</h3>
-                  <div class="offer-card-stars">
-                    <img src="assets/images/icons/star.svg" alt="" />
-                    <img src="assets/images/icons/star.svg" alt="" />
-                    <img src="assets/images/icons/star.svg" alt="" />
-                    <img src="assets/images/icons/star.svg" alt="" />
-                    <img src="assets/images/icons/star.svg" alt="" />
-                  </div>
-                  <p class="offer-card-text">
-                    Три ночі в комфортному готелі, сніданки та обіди.
-                    Ідеальний варіант, щоб змінити обстановку, побачити
-                    античні пам'ятки й відчути грецький ритм життя.
-                  </p>
-                  <div class="offer-card-footer">
-                    <div class="offer-card-price">
-                      <span class="offer-card-from">Від</span>
-                      <span class="offer-card-amount">€700</span>
-                    </div>
-                    <button class="offer-card-btn">Детальніше</button>
-                  </div>
-                </div>
-              </article>
-            </div>
-
-            <div class="swiper-slide">
-              <article class="offer-card">
-                <img
-                  src="assets/images/rome-container.png"
-                  alt="Rome"
-                  class="offer-card-img"
-                />
-                <div class="offer-card-body">
-                  <h3 class="offer-card-title">Рим: італійські канікули</h3>
-                  <div class="offer-card-stars">
-                    <img src="assets/images/icons/star.svg" alt="" />
-                    <img src="assets/images/icons/star.svg" alt="" />
-                    <img src="assets/images/icons/star.svg" alt="" />
-                    <img src="assets/images/icons/star.svg" alt="" />
-                    <img src="assets/images/icons/star.svg" alt="" />
-                  </div>
-                  <p class="offer-card-text">
-                    Відчуйте справжній смак Італії: ранкова кава, вечірні
-                    прогулянки старим містом і знайомство з культурою,
-                    яка формувалася протягом тисячоліть.
-                  </p>
-                  <div class="offer-card-footer">
-                    <div class="offer-card-price">
-                      <span class="offer-card-from">Від</span>
-                      <span class="offer-card-amount">€700</span>
-                    </div>
-                    <button class="offer-card-btn">Детальніше</button>
-                  </div>
-                </div>
-              </article>
-            </div>
-          </div>
-          <div class="section-head-arrows arrows-mobile arrows-mobile--offer">
-            <button id="offer-prev-mob" class="arrow-btn swiper-btn-prev-offer">
-              <img src="assets/images/icons/slider-left.svg" alt="Prev" />
-            </button>
-            <button id="offer-next-mob" class="arrow-btn swiper-btn-next-offer">
-              <img src="assets/images/icons/slider-right.svg" alt="Next" />
-            </button>
-          </div>
-        </div>
-      </section>
-
-      <!-- BLOG -->
-      <section class="blog-section" id="blog">
-        <div class="section-head content-wrap">
-          <div class="section-head-text">
-            <h2 class="section-title section-title--blog">Історії, що надихають</h2>
-            <p class="section-subtitle section-subtitle--blog">
-              Трохи натхнення, корисних ідей та вражень для вашої наступної мандрівки.
-            </p>
-          </div>
-        </div>
-
-        <div class="blog-card content-wrap">
-          <img
-            src="assets/images/italy-blog-photo.png"
-            alt="Beautiful Italy"
-            class="blog-card-img"
-          />
-          <div class="blog-card-body">
-            <h3 class="blog-card-title">Італія, у яку закохуєшся з першого погляду</h3>
-            <p class="blog-card-text">
-              Вузенькі вулички, аромат свіжої випічки, старовинні площі
-              та неспішні вечори за горнятком кави. Італія вміє дивувати
-              навіть тих, хто вже багато подорожував. Розповідаємо, що варто
-              побачити, спробувати й відчути під час першої подорожі.
-            </p>
-            <a href="#" class="blog-card-link">
-              <span>Читати більше</span>
-              <i class="fa-solid fa-arrow-right-long"></i>
-            </a>
-          </div>
-        </div>
-      </section>
-
-      <!-- TRIP PLANNERS -->
-      <section class="trip-section" id="travel">
-        <div class="section-head content-wrap">
-          <div class="section-head-text">
-            <h2 class="section-title section-title--trip">Маршрути для нових відкриттів</h2>
-            <p class="section-subtitle section-subtitle--trip">
-              Найкращі спогади починаються з рішення вирушити в дорогу.
-              Обирайте місто, плануйте маршрут і залишайте місце для
-              несподіваних пригод.
-            </p>
-            <button class="btn-view-all">Переглянути всі маршрути</button>
-          </div>
-        </div>
-
-        <div class="trip-swiper swiper">
-          <div class="swiper-wrapper">
-            <div class="swiper-slide">
-              <div class="trip-cards content-wrap">
-                <article class="trip-card">
-                  <div class="trip-card-img-wrap">
-                    <img
-                      src="assets/images/colosseum.png"
-                      alt="Rome City Tour"
-                      class="trip-card-img"
-                    />
-                  </div>
-                  <div class="trip-card-body">
-                    <div class="trip-card-top">
-                      <span class="trip-card-type">Оглядова екскурсія</span>
-                      <span class="trip-card-price">€99/День</span>
-                    </div>
-                    <h3 class="trip-card-title">Рим: подорож крізь віки</h3>
-                    <div class="trip-card-bottom">
-                      <div class="trip-card-stars">
-                        <img src="assets/images/icons/star.svg" alt="" />
-                        <img src="assets/images/icons/star.svg" alt="" />
-                        <img src="assets/images/icons/star.svg" alt="" />
-                        <img src="assets/images/icons/star.svg" alt="" />
-                        <img src="assets/images/icons/star.svg" alt="" />
-                      </div>
-                      <span class="trip-card-days">Тур 5 днів</span>
-                    </div>
-                  </div>
-                </article>
-
-                <article class="trip-card">
-                  <div class="trip-card-img-wrap">
-                    <img
-                      src="assets/images/paris.jpg"
-                      alt="Paris City Tour"
-                      class="trip-card-img"
-                    />
-                  </div>
-                  <div class="trip-card-body">
-                    <div class="trip-card-top">
-                      <span class="trip-card-type">Культурний відпочинок</span>
-                      <span class="trip-card-price">€95/День</span>
-                    </div>
-                    <h3 class="trip-card-title">Париж: місто романтики</h3>
-                    <div class="trip-card-bottom">
-                      <div class="trip-card-stars">
-                        <img src="assets/images/icons/star.svg" alt="" />
-                        <img src="assets/images/icons/star.svg" alt="" />
-                        <img src="assets/images/icons/star.svg" alt="" />
-                        <img src="assets/images/icons/star.svg" alt="" />
-                        <img src="assets/images/icons/star.svg" alt="" />
-                      </div>
-                      <span class="trip-card-days">Тур 9 днів</span>
-                    </div>
-                  </div>
-                </article>
-
-                <article class="trip-card">
-                  <div class="trip-card-img-wrap">
-                    <img
-                      src="assets/images/madrid.jpg"
-                      alt="Barcelona City Tour"
-                      class="trip-card-img"
-                    />
-                  </div>
-                  <div class="trip-card-body">
-                    <div class="trip-card-top">
-                      <span class="trip-card-type">Міська пригода</span>
-                      <span class="trip-card-price">€89/День</span>
-                    </div>
-                    <h3 class="trip-card-title">Барселона: сонце й море</h3>
-                    <div class="trip-card-bottom">
-                      <div class="trip-card-stars">
-                        <img src="assets/images/icons/star.svg" alt="" />
-                        <img src="assets/images/icons/star.svg" alt="" />
-                        <img src="assets/images/icons/star.svg" alt="" />
-                        <img src="assets/images/icons/star.svg" alt="" />
-                        <img src="assets/images/icons/star.svg" alt="" />
-                      </div>
-                      <span class="trip-card-days">Тур 7 днів</span>
-                    </div>
-                  </div>
-                </article>
-
-                <article class="trip-card">
-                  <div class="trip-card-img-wrap">
-                    <img
-                      src="assets/images/budapest.jpg"
-                      alt="Budapest City Tour"
-                      class="trip-card-img"
-                    />
-                  </div>
-                  <div class="trip-card-body">
-                    <div class="trip-card-top">
-                      <span class="trip-card-type">Відпочинок у Європі</span>
-                      <span class="trip-card-price">€89/День</span>
-                    </div>
-                    <h3 class="trip-card-title">Будапешт: місто на Дунаї</h3>
-                    <div class="trip-card-bottom">
-                      <div class="trip-card-stars">
-                        <img src="assets/images/icons/star.svg" alt="" />
-                        <img src="assets/images/icons/star.svg" alt="" />
-                        <img src="assets/images/icons/star.svg" alt="" />
-                        <img src="assets/images/icons/star.svg" alt="" />
-                        <img src="assets/images/icons/star.svg" alt="" />
-                      </div>
-                      <span class="trip-card-days">Тур 7 днів</span>
-                    </div>
-                  </div>
-                </article>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <!-- GALLERY -->
-      <section class="gallery-section" id="gallery">
-        <div class="section-head content-wrap">
-          <div class="section-head-text">
-            <h2 class="section-title section-title--gallery">
-              Краса світу в об'єктиві
-            </h2>
-            <p class="section-subtitle section-subtitle--gallery">
-              Вражаючі краєвиди, затишні вулички та моменти, заради яких
-              хочеться знову пакувати валізи.
-            </p> 
-          </div>
-          <div class="section-head-arrows arrows-desktop">
-            <button id="gallery-prev" class="arrow-btn swiper-btn-prev-gallery">
-              <img src="assets/images/icons/slider-left.svg" alt="Prev" />
-            </button>
-            <button id="gallery-next" class="arrow-btn swiper-btn-next-gallery">
-              <img src="assets/images/icons/slider-right.svg" alt="Next" />
-            </button>
-          </div>
-        </div>
-        <div class="gallery-swiper swiper">
-          <div class="swiper-wrapper">
-            <div class="swiper-slide">
-              <div class="gallery-grid">
-                <img
-                  src="assets/images/gallery-first.png"
-                  alt=""
-                  class="gallery-img"
-                />
-                <img
-                  src="assets/images/gallery-second.jpg"
-                  alt=""
-                  class="gallery-img"
-                />
-                <img
-                  src="assets/images/gallery-third.jpg"
-                  alt=""
-                  class="gallery-img"
-                />
-                <img
-                  src="assets/images/gallery-four.jpg"
-                  alt=""
-                  class="gallery-img"
-                />
-              </div>
-            </div>
-            <div class="swiper-slide">
-              <div class="gallery-grid">
-                <img
-                  src="assets/images/gallery-first.png"
-                  alt=""
-                  class="gallery-img"
-                />
-                <img
-                  src="assets/images/gallery-second.jpg"
-                  alt=""
-                  class="gallery-img"
-                />
-                <img
-                  src="assets/images/gallery-third.jpg"
-                  alt=""
-                  class="gallery-img"
-                />
-                <img
-                  src="assets/images/gallery-four.jpg"
-                  alt=""
-                  class="gallery-img"
-                />
-              </div>
-            </div>
-          </div>
-          <div class="section-head-arrows arrows-mobile arrows-mobile--gallery">
-            <button
-              id="gallery-prev-mob"
-              class="arrow-btn swiper-btn-prev-gallery"
-            >
-              <img src="assets/images/icons/slider-left.svg" alt="Prev" />
-            </button>
-            <button
-              id="gallery-next-mob"
-              class="arrow-btn swiper-btn-next-gallery"
-            >
-              <img src="assets/images/icons/slider-right.svg" alt="Next" />
-            </button>
-          </div>
-        </div>
-      </section>
-
-      <!-- EXPERIENCES -->
-      <section class="experiences-section" id="experiences">
-        <div class="section-head content-wrap">
-          <div class="section-head-text">
-            <h2 class="section-title section-title--exp">
-              Враження наших мандрівників
-            </h2>
-            <p class="section-subtitle section-subtitle--exp">
-              Читайте, що думають про свої подорожі ті, хто вже відкрив 
-              для себе нові горизонти разом із нами.
-            </p>
-          </div>
-        </div>
-
-        <div class="experiences-swiper swiper content-wrap">
-          <div class="swiper-wrapper">
-            <div class="swiper-slide">
-              <figure class="exp-card">
-                <img
-                  src="assets/images/avatar-first.png"
-                  alt="John Doe"
-                  class="exp-card-avatar"
-                />
-                <p class="exp-card-text">
-                  Подорож перевершила всі мої очікування! Усе було добре
-                  організовано, а маршрут дозволив побачити не лише відомі
-                  пам'ятки, а й затишні місця, про які не пишуть у звичайних
-                  туристичних путівниках. Обов'язково вирушу знову!
-                </p>
-                <div class="exp-card-stars">
-                  <img src="assets/images/icons/star.svg" alt="" />
-                  <img src="assets/images/icons/star.svg" alt="" />
-                  <img src="assets/images/icons/star.svg" alt="" />
-                  <img src="assets/images/icons/star.svg" alt="" />
-                  <img src="assets/images/icons/star.svg" alt="" />
-                </div>
-                <p class="exp-card-name">Юрій Семеген</p>
-                <p class="exp-card-job">Програміст</p>
-              </figure>
-            </div>
-
-            <div class="swiper-slide">
-              <figure class="exp-card">
-                <img
-                  src="assets/images/avatar-second.png"
-                  alt="John Smith"
-                  class="exp-card-avatar"
-                />
-                <p class="exp-card-text">
-                  Найбільше сподобалося поєднання свободи та продуманого
-                  планування. Ми встигли побачити багато цікавого, спробувати
-                  місцеві страви й просто насолодитися атмосферою міста.
-                  Чудовий спосіб провести відпустку без зайвого клопоту.
-                </p>
-                <div class="exp-card-stars">
-                  <img src="assets/images/icons/star.svg" alt="" />
-                  <img src="assets/images/icons/star.svg" alt="" />
-                  <img src="assets/images/icons/star.svg" alt="" />
-                  <img src="assets/images/icons/star.svg" alt="" />
-                  <img src="assets/images/icons/star.svg" alt="" />
-                </div>
-                <p class="exp-card-name">Влад Карась</p>
-                <p class="exp-card-job">Кіберспортсмен</p>
-              </figure>
-            </div>
-
-            <div class="swiper-slide">
-              <figure class="exp-card">
-                <img
-                  src="assets/images/avatar-third.png"
-                  alt="Tamara Bellis"
-                  class="exp-card-avatar"
-                />
-                <p class="exp-card-text">
-                  Це була саме та відпустка, якої мені давно бракувало.
-                  Нові місця, красиві краєвиди та безліч маленьких відкриттів
-                  щодня. Особливо приємно, що можна було зосередитися на
-                  враженнях, а не на організаційних питаннях.
-                </p>
-                <div class="exp-card-stars">
-                  <img src="assets/images/icons/star.svg" alt="" />
-                  <img src="assets/images/icons/star.svg" alt="" />
-                  <img src="assets/images/icons/star.svg" alt="" />
-                  <img src="assets/images/icons/star.svg" alt="" />
-                  <img src="assets/images/icons/star.svg" alt="" />
-                </div>
-                <p class="exp-card-name">Ірина Арабчук</p>
-                <p class="exp-card-job">JavaScript розробник</p>
-              </figure>
-            </div>
-          </div>
-          <div class="section-head-arrows section-head-arrows--exp">
-            <button class="arrow-btn swiper-btn-prev-exp">
-              <img src="assets/images/icons/slider-left.svg" alt="Prev" />
-            </button>
-            <button class="arrow-btn swiper-btn-next-exp">
-              <img src="assets/images/icons/slider-right.svg" alt="Next" />
-            </button>
-          </div>
-        </div>
-      </section>
-      <!-- NEWSLETTER -->
-      <section class="newsletter-section">
-        <div class="newsletter content-wrap">
-          <h2 class="newsletter-title">Трохи натхнення у вашій пошті</h2>
-          <form class="newsletter-form">
-            <div class="newsletter-field">
-              <label class="newsletter-label" for="newsletter-email"
-                >Електронна пошта</label
-              >
-              <input
-                type="email"
-                class="newsletter-input"
-                placeholder="Enter your email"
-              />
-            </div>
-            <button class="newsletter-btn">Підписатися</button>
-          </form>
-        </div>
-      </section>
-    </main>
-    <!-- FOOTER -->
-    <footer class="main-footer">
-      <div class="footer-body content-wrap">
-        <div class="footer-col footer-col-logo">
-          <img
-            src="assets/images/icons/logo.svg"
-            alt="Travellian"
-            class="footer-logo"
-          />
-          <p class="footer-copy">
-            Copyright © Travellian, 2026. Подорожуйте з натхненням.
+  <main>
+    <!-- DESTINATIONS -->
+    <section class="destinations-section" id="explore">
+      <div class="section-head content-wrap">
+        <div class="section-head-text">
+          <h2 class="section-title">Місця, які варто побачити</h2>
+          <p class="section-subtitle">
+            Від затишних європейських вуличок до величних пам’яток архітектури —
+            обирайте напрямок для своєї наступної пригоди.
           </p>
         </div>
 
-        <div class="footer-col">
-          <h3 class="footer-col-title">Навігація</h3>
-          <ul class="footer-col-list">
-            <li><a href="#">Головна</a></li>
-            <li><a href="#">Напрямки</a></li>
-            <li><a href="#">Подорожі</a></li>
-            <li><a href="#">Блог</a></li>
-            <li><a href="#">Пропозиції</a></li>
-          </ul>
+        <div class="section-head-arrows arrows-desktop">
+          <button id="dest-prev" class="arrow-btn swiper-btn-prev-dest">
+            <img src="assets/images/icons/slider-left.svg" alt="Prev" />
+          </button>
+          <button id="dest-next" class="arrow-btn swiper-btn-next-dest">
+            <img src="assets/images/icons/slider-right.svg" alt="Next" />
+          </button>
+        </div>
+      </div>
+
+      <div class="destinations-swiper swiper content-wrap">
+        <div class="swiper-wrapper">
+          <div class="swiper-slide">
+            <article class="dest-card">
+              <img src="assets/images/berlin-col.jpg" alt="Monument of Berlin" class="dest-card-img" />
+              <div class="dest-card-info">
+                <h3 class="dest-card-title">Символ історії Берліна</h3>
+                <p class="dest-card-location">
+                  <i class="fa-solid fa-location-dot"></i>
+                  <span>Берлін, Німеччина</span>
+                </p>
+              </div>
+            </article>
+          </div>
+
+          <div class="swiper-slide">
+            <article class="dest-card">
+              <img src="assets/images/london-col.jpg" alt="Millennium Bridge" class="dest-card-img" />
+              <div class="dest-card-info">
+                <h3 class="dest-card-title">Міст Міленіум</h3>
+                <p class="dest-card-location">
+                  <i class="fa-solid fa-location-dot"></i>
+                  <span>Лондон, Великобританія</span>
+                </p>
+              </div>
+            </article>
+          </div>
+
+          <div class="swiper-slide">
+            <article class="dest-card">
+              <img src="assets/images/venice-col.jpg" alt="Rialto Bridge" class="dest-card-img" />
+              <div class="dest-card-info">
+                <h3 class="dest-card-title">Міст Ріальто</h3>
+                <p class="dest-card-location">
+                  <i class="fa-solid fa-location-dot"></i>
+                  <span>Венеція, Італія</span>
+                </p>
+              </div>
+            </article>
+          </div>
+
+          <div class="swiper-slide">
+            <article class="dest-card">
+              <img src="assets/images/lisbon-col.jpg" alt="Sea of Orange Tiles" class="dest-card-img" />
+              <div class="dest-card-info">
+                <h3 class="dest-card-title">Барви старого міста</h3>
+                <p class="dest-card-location">
+                  <i class="fa-solid fa-location-dot"></i>
+                  <span>Лісабон, Португалія</span>
+                </p>
+              </div>
+            </article>
+          </div>
+
+          <div class="swiper-slide">
+            <article class="dest-card">
+              <img src="assets/images/madrid.jpg" alt="Madrid" class="dest-card-img" />
+              <div class="dest-card-info">
+                <h3 class="dest-card-title">Сонячний Мадрид</h3>
+                <p class="dest-card-location">
+                  <i class="fa-solid fa-location-dot"></i>
+                  <span>Мадрид, Іспанія</span>
+                </p>
+              </div>
+            </article>
+          </div>
         </div>
 
-        <div class="footer-col">
-          <h3 class="footer-col-title">Корисна інформація</h3>
-          <ul class="footer-col-list">
-            <li><a href="#">Популярні місця</a></li>
-            <li><a href="#">Підтримка</a></li>
-            <li><a href="#">Умови користування</a></li>
-            <li><a href="#">Політика конфіденційності</a></li>
-          </ul>
+        <div class="section-head-arrows arrows-mobile">
+          <button id="dest-prev-mob" class="arrow-btn swiper-btn-prev-dest">
+            <img src="assets/images/icons/slider-left.svg" alt="Prev" />
+          </button>
+          <button id="dest-next-mob" class="arrow-btn swiper-btn-next-dest">
+            <img src="assets/images/icons/slider-right.svg" alt="Next" />
+          </button>
         </div>
+      </div>
+    </section>
 
-        <div class="footer-col">
-          <h3 class="footer-col-title">Зв'яжіться з нами</h3>
-          <address class="footer-col-list">
-            <p>+380 96 560 42 17</p>
-            <p>travellian@corp.com</p>
-            <p>Вовчинецька 206, Івано-Франківськ, Україна</p>
-          </address>
+    <!-- SPECIAL OFFER -->
+    <section class="offer-section" id="pricing">
+      <div class="section-head content-wrap">
+        <div class="section-head-arrows arrows-desktop">
+          <button id="offer-prev" class="arrow-btn swiper-btn-prev-offer">
+            <img src="assets/images/icons/slider-left.svg" alt="Prev" />
+          </button>
+          <button id="offer-next" class="arrow-btn swiper-btn-next-offer">
+            <img src="assets/images/icons/slider-right.svg" alt="Next" />
+          </button>
         </div>
+        <div class="section-head-text">
+          <h2 class="section-title section-title--offer">Подорожуйте вигідніше</h2>
+          <p class="section-subtitle section-subtitle--offer">
+            Особливі маршрути, комфортні готелі та приємні ціни для вашої наступної відпустки.
+          </p>
+        </div>
+      </div>
 
-        <div class="footer-col">
-          <h3 class="footer-col-title">Ми в соцмережах</h3>
-          <div class="footer-social">
-            <a href="#" class="footer-social-link">
-              <img src="assets/images/icons/facebook.svg" alt="Facebook" />
-            </a>
-            <a href="#" class="footer-social-link">
-              <img src="assets/images/icons/pinterest.svg" alt="Pinterest" />
-            </a>
-            <a href="#" class="footer-social-link">
-              <img src="assets/images/icons/instagram.svg" alt="Instagram" />
-            </a>
-            <a href="#" class="footer-social-link">
-              <img src="assets/images/icons/twitter.svg" alt="Twitter" />
-            </a>
+      <div class="offer-swiper content-wrap content-wrap--offer">
+        <div class="swiper-wrapper">
+          <div class="swiper-slide">
+            <article class="offer-card">
+              <img src="assets/images/lisbon-container.png" alt="Lisbon" class="offer-card-img" />
+              <div class="offer-card-body">
+                <h3 class="offer-card-title">Лісабон, Португалія</h3>
+                <div class="offer-card-stars">
+                  <img src="assets/images/icons/star.svg" alt="" />
+                  <img src="assets/images/icons/star.svg" alt="" />
+                  <img src="assets/images/icons/star.svg" alt="" />
+                  <img src="assets/images/icons/star.svg" alt="" />
+                  <img src="assets/images/icons/star.svg" alt="" />
+                </div>
+                <p class="offer-card-text">
+                  П'ять ночей у п'ятизірковому готелі зі сніданками та обідами.
+                  На вас чекають старовинні квартали, кольорові фасади,
+                  ароматна кава та неймовірні краєвиди Атлантики.
+                </p>
+                <div class="offer-card-footer">
+                  <div class="offer-card-price">
+                    <span class="offer-card-from">Від</span>
+                    <span class="offer-card-amount">€500</span>
+                  </div>
+                  <button class="offer-card-btn">Детальніше</button>
+                </div>
+              </div>
+            </article>
+          </div>
+
+          <div class="swiper-slide">
+            <article class="offer-card">
+              <img src="assets/images/athens-container.png" alt="Athens" class="offer-card-img" />
+              <div class="offer-card-body">
+                <h3 class="offer-card-title">Афіни, Греція</h3>
+                <div class="offer-card-stars">
+                  <img src="assets/images/icons/star.svg" alt="" />
+                  <img src="assets/images/icons/star.svg" alt="" />
+                  <img src="assets/images/icons/star.svg" alt="" />
+                  <img src="assets/images/icons/star.svg" alt="" />
+                  <img src="assets/images/icons/star.svg" alt="" />
+                </div>
+                <p class="offer-card-text">
+                  Чотири дні серед античних руїн, затишних таверн і сонячних
+                  площ. Проживання в п'ятизірковому готелі, сніданки та обіди
+                  вже включені у вартість.
+                </p>
+                <div class="offer-card-footer">
+                  <div class="offer-card-price">
+                    <span class="offer-card-from">Від</span>
+                    <span class="offer-card-amount">€800</span>
+                  </div>
+                  <button class="offer-card-btn">Детальніше</button>
+                </div>
+              </div>
+            </article>
+          </div>
+
+          <div class="swiper-slide">
+            <article class="offer-card">
+              <img src="assets/images/rome-container.png" alt="Rome" class="offer-card-img" />
+              <div class="offer-card-body">
+                <h3 class="offer-card-title">Рим, Італія</h3>
+                <div class="offer-card-stars">
+                  <img src="assets/images/icons/star.svg" alt="" />
+                  <img src="assets/images/icons/star.svg" alt="" />
+                  <img src="assets/images/icons/star.svg" alt="" />
+                  <img src="assets/images/icons/star.svg" alt="" />
+                  <img src="assets/images/icons/star.svg" alt="" />
+                </div>
+                <p class="offer-card-text">
+                  Вирушайте до міста, де кожна вулиця має свою історію.
+                  Відвідайте Колізей, скуштуйте справжню італійську пасту
+                  та насолодіться атмосферою вічного міста.
+                </p>
+                <div class="offer-card-footer">
+                  <div class="offer-card-price">
+                    <span class="offer-card-from">Від</span>
+                    <span class="offer-card-amount">€750</span>
+                  </div>
+                  <button class="offer-card-btn">Детальніше</button>
+                </div>
+              </div>
+            </article>
+          </div>
+
+          <div class="swiper-slide">
+            <article class="offer-card">
+              <img src="assets/images/athens-container.png" alt="Athens" class="offer-card-img" />
+              <div class="offer-card-body">
+                <h3 class="offer-card-title">Афіни: коротка втеча</h3>
+                <div class="offer-card-stars">
+                  <img src="assets/images/icons/star.svg" alt="" />
+                  <img src="assets/images/icons/star.svg" alt="" />
+                  <img src="assets/images/icons/star.svg" alt="" />
+                  <img src="assets/images/icons/star.svg" alt="" />
+                  <img src="assets/images/icons/star.svg" alt="" />
+                </div>
+                <p class="offer-card-text">
+                  Три ночі в комфортному готелі, сніданки та обіди.
+                  Ідеальний варіант, щоб змінити обстановку, побачити
+                  античні пам'ятки й відчути грецький ритм життя.
+                </p>
+                <div class="offer-card-footer">
+                  <div class="offer-card-price">
+                    <span class="offer-card-from">Від</span>
+                    <span class="offer-card-amount">€700</span>
+                  </div>
+                  <button class="offer-card-btn">Детальніше</button>
+                </div>
+              </div>
+            </article>
+          </div>
+
+          <div class="swiper-slide">
+            <article class="offer-card">
+              <img src="assets/images/rome-container.png" alt="Rome" class="offer-card-img" />
+              <div class="offer-card-body">
+                <h3 class="offer-card-title">Рим: італійські канікули</h3>
+                <div class="offer-card-stars">
+                  <img src="assets/images/icons/star.svg" alt="" />
+                  <img src="assets/images/icons/star.svg" alt="" />
+                  <img src="assets/images/icons/star.svg" alt="" />
+                  <img src="assets/images/icons/star.svg" alt="" />
+                  <img src="assets/images/icons/star.svg" alt="" />
+                </div>
+                <p class="offer-card-text">
+                  Відчуйте справжній смак Італії: ранкова кава, вечірні
+                  прогулянки старим містом і знайомство з культурою,
+                  яка формувалася протягом тисячоліть.
+                </p>
+                <div class="offer-card-footer">
+                  <div class="offer-card-price">
+                    <span class="offer-card-from">Від</span>
+                    <span class="offer-card-amount">€700</span>
+                  </div>
+                  <button class="offer-card-btn">Детальніше</button>
+                </div>
+              </div>
+            </article>
+          </div>
+        </div>
+        <div class="section-head-arrows arrows-mobile arrows-mobile--offer">
+          <button id="offer-prev-mob" class="arrow-btn swiper-btn-prev-offer">
+            <img src="assets/images/icons/slider-left.svg" alt="Prev" />
+          </button>
+          <button id="offer-next-mob" class="arrow-btn swiper-btn-next-offer">
+            <img src="assets/images/icons/slider-right.svg" alt="Next" />
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <!-- BLOG -->
+    <section class="blog-section" id="blog">
+      <div class="section-head content-wrap">
+        <div class="section-head-text">
+          <h2 class="section-title section-title--blog">Історії, що надихають</h2>
+          <p class="section-subtitle section-subtitle--blog">
+            Трохи натхнення, корисних ідей та вражень для вашої наступної мандрівки.
+          </p>
+        </div>
+      </div>
+
+      <div class="blog-card content-wrap">
+        <img src="assets/images/italy-blog-photo.png" alt="Beautiful Italy" class="blog-card-img" />
+        <div class="blog-card-body">
+          <h3 class="blog-card-title">Італія, у яку закохуєшся з першого погляду</h3>
+          <p class="blog-card-text">
+            Вузенькі вулички, аромат свіжої випічки, старовинні площі
+            та неспішні вечори за горнятком кави. Італія вміє дивувати
+            навіть тих, хто вже багато подорожував. Розповідаємо, що варто
+            побачити, спробувати й відчути під час першої подорожі.
+          </p>
+          <a href="#" class="blog-card-link">
+            <span>Читати більше</span>
+            <i class="fa-solid fa-arrow-right-long"></i>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- TRIP PLANNERS -->
+    <section class="trip-section" id="travel">
+      <div class="section-head content-wrap">
+        <div class="section-head-text">
+          <h2 class="section-title section-title--trip">Маршрути для нових відкриттів</h2>
+          <p class="section-subtitle section-subtitle--trip">
+            Найкращі спогади починаються з рішення вирушити в дорогу.
+            Обирайте місто, плануйте маршрут і залишайте місце для
+            несподіваних пригод.
+          </p>
+          <button class="btn-view-all">Переглянути всі маршрути</button>
+        </div>
+      </div>
+
+      <div class="trip-swiper swiper">
+        <div class="swiper-wrapper">
+          <div class="swiper-slide">
+            <div class="trip-cards content-wrap">
+              <article class="trip-card">
+                <div class="trip-card-img-wrap">
+                  <img src="assets/images/colosseum.png" alt="Rome City Tour" class="trip-card-img" />
+                </div>
+                <div class="trip-card-body">
+                  <div class="trip-card-top">
+                    <span class="trip-card-type">Оглядова екскурсія</span>
+                    <span class="trip-card-price">€99/День</span>
+                  </div>
+                  <h3 class="trip-card-title">Рим: подорож крізь віки</h3>
+                  <div class="trip-card-bottom">
+                    <div class="trip-card-stars">
+                      <img src="assets/images/icons/star.svg" alt="" />
+                      <img src="assets/images/icons/star.svg" alt="" />
+                      <img src="assets/images/icons/star.svg" alt="" />
+                      <img src="assets/images/icons/star.svg" alt="" />
+                      <img src="assets/images/icons/star.svg" alt="" />
+                    </div>
+                    <span class="trip-card-days">Тур 5 днів</span>
+                  </div>
+                </div>
+              </article>
+
+              <article class="trip-card">
+                <div class="trip-card-img-wrap">
+                  <img src="assets/images/paris.jpg" alt="Paris City Tour" class="trip-card-img" />
+                </div>
+                <div class="trip-card-body">
+                  <div class="trip-card-top">
+                    <span class="trip-card-type">Культурний відпочинок</span>
+                    <span class="trip-card-price">€95/День</span>
+                  </div>
+                  <h3 class="trip-card-title">Париж: місто романтики</h3>
+                  <div class="trip-card-bottom">
+                    <div class="trip-card-stars">
+                      <img src="assets/images/icons/star.svg" alt="" />
+                      <img src="assets/images/icons/star.svg" alt="" />
+                      <img src="assets/images/icons/star.svg" alt="" />
+                      <img src="assets/images/icons/star.svg" alt="" />
+                      <img src="assets/images/icons/star.svg" alt="" />
+                    </div>
+                    <span class="trip-card-days">Тур 9 днів</span>
+                  </div>
+                </div>
+              </article>
+
+              <article class="trip-card">
+                <div class="trip-card-img-wrap">
+                  <img src="assets/images/madrid.jpg" alt="Barcelona City Tour" class="trip-card-img" />
+                </div>
+                <div class="trip-card-body">
+                  <div class="trip-card-top">
+                    <span class="trip-card-type">Міська пригода</span>
+                    <span class="trip-card-price">€89/День</span>
+                  </div>
+                  <h3 class="trip-card-title">Барселона: сонце й море</h3>
+                  <div class="trip-card-bottom">
+                    <div class="trip-card-stars">
+                      <img src="assets/images/icons/star.svg" alt="" />
+                      <img src="assets/images/icons/star.svg" alt="" />
+                      <img src="assets/images/icons/star.svg" alt="" />
+                      <img src="assets/images/icons/star.svg" alt="" />
+                      <img src="assets/images/icons/star.svg" alt="" />
+                    </div>
+                    <span class="trip-card-days">Тур 7 днів</span>
+                  </div>
+                </div>
+              </article>
+
+              <article class="trip-card">
+                <div class="trip-card-img-wrap">
+                  <img src="assets/images/budapest.jpg" alt="Budapest City Tour" class="trip-card-img" />
+                </div>
+                <div class="trip-card-body">
+                  <div class="trip-card-top">
+                    <span class="trip-card-type">Відпочинок у Європі</span>
+                    <span class="trip-card-price">€89/День</span>
+                  </div>
+                  <h3 class="trip-card-title">Будапешт: місто на Дунаї</h3>
+                  <div class="trip-card-bottom">
+                    <div class="trip-card-stars">
+                      <img src="assets/images/icons/star.svg" alt="" />
+                      <img src="assets/images/icons/star.svg" alt="" />
+                      <img src="assets/images/icons/star.svg" alt="" />
+                      <img src="assets/images/icons/star.svg" alt="" />
+                      <img src="assets/images/icons/star.svg" alt="" />
+                    </div>
+                    <span class="trip-card-days">Тур 7 днів</span>
+                  </div>
+                </div>
+              </article>
+            </div>
           </div>
         </div>
       </div>
-    </footer>
+    </section>
 
-    <!-- LOGIN MODAL -->
-    <div id="loginModal" class="modal-overlay d-none">
-      <div class="modal-box">
-        <button id="closeLogin" class="modal-close">
-          <i class="fa-solid fa-xmark"></i>
-        </button>
-        <h2 class="modal-title">З поверненням!</h2>
-        <p class="modal-subtitle">
-          Увійдіть до свого акаунта, щоб продовжити планувати подорожі.
-        </p>
-        <form class="modal-form">
-          <input type="email" placeholder="Введіть ваш Email" />
-          <input type="password" placeholder="Введіть ваш пароль" />
-          <a href="#" class="modal-forgot">Забули пароль?</a>
-          <button type="submit" class="modal-btn modal-btn--primary">
-            Увійти
-          </button>
-          <button
-            type="button"
-            id="toSignUp"
-            class="modal-btn modal-btn--secondary"
-          >
-            Реєстрація
-          </button>
-        </form>
-        <div class="modal-divider">
-          <span>Або продовжити через</span>
+    <!-- GALLERY -->
+    <section class="gallery-section" id="gallery">
+      <div class="section-head content-wrap">
+        <div class="section-head-text">
+          <h2 class="section-title section-title--gallery">
+            Краса світу в об'єктиві
+          </h2>
+          <p class="section-subtitle section-subtitle--gallery">
+            Вражаючі краєвиди, затишні вулички та моменти, заради яких
+            хочеться знову пакувати валізи.
+          </p>
         </div>
-        <div class="modal-socials">
-          <button class="social-btn">
-            <i class="fa-brands fa-google"></i>
+        <div class="section-head-arrows arrows-desktop">
+          <button id="gallery-prev" class="arrow-btn swiper-btn-prev-gallery">
+            <img src="assets/images/icons/slider-left.svg" alt="Prev" />
           </button>
-          <button class="social-btn">
-            <i class="fa-brands fa-facebook"></i>
-          </button>
-          <button class="social-btn">
-            <i class="fa-brands fa-apple"></i>
+          <button id="gallery-next" class="arrow-btn swiper-btn-next-gallery">
+            <img src="assets/images/icons/slider-right.svg" alt="Next" />
           </button>
         </div>
       </div>
-    </div>
-
-    <!-- SIGNUP MODAL -->
-    <div id="signupModal" class="modal-overlay d-none">
-      <div class="modal-box">
-        <button id="closeSignup" class="modal-close">
-          <i class="fa-solid fa-xmark"></i>
-        </button>
-        <h2 class="modal-title">Приєднуйтесь до нас</h2>
-        <p class="modal-subtitle">
-          Створіть акаунт, відкривайте цікаві напрямки та плануйте 
-          свої майбутні пригоди.
-        </p>
-        <form class="modal-form">
-          <input type="text" placeholder="Введіть ваше ім'я" />
-          <input type="text" placeholder="Введіть ваше прізвище" />
-          <input type="email" placeholder="Введіть ваш Email" />
-          <input type="password" placeholder="Введіть ваш пароль" />
-          <button type="submit" class="modal-btn modal-btn--primary">
-            Реєстрація
-          </button>
-          <button
-            type="button"
-            id="toLogin"
-            class="modal-btn modal-btn--secondary"
-          >
-            Увійти
-          </button>
-        </form>
-        <div class="modal-divider">
-          <span>Або продовжити через</span>
+      <div class="gallery-swiper swiper">
+        <div class="swiper-wrapper">
+          <div class="swiper-slide">
+            <div class="gallery-grid">
+              <img src="assets/images/gallery-first.png" alt="" class="gallery-img" />
+              <img src="assets/images/gallery-second.jpg" alt="" class="gallery-img" />
+              <img src="assets/images/gallery-third.jpg" alt="" class="gallery-img" />
+              <img src="assets/images/gallery-four.jpg" alt="" class="gallery-img" />
+            </div>
+          </div>
+          <div class="swiper-slide">
+            <div class="gallery-grid">
+              <img src="assets/images/gallery-first.png" alt="" class="gallery-img" />
+              <img src="assets/images/gallery-second.jpg" alt="" class="gallery-img" />
+              <img src="assets/images/gallery-third.jpg" alt="" class="gallery-img" />
+              <img src="assets/images/gallery-four.jpg" alt="" class="gallery-img" />
+            </div>
+          </div>
         </div>
-        <div class="modal-socials">
-          <button class="social-btn">
-            <i class="fa-brands fa-google"></i>
+        <div class="section-head-arrows arrows-mobile arrows-mobile--gallery">
+          <button id="gallery-prev-mob" class="arrow-btn swiper-btn-prev-gallery">
+            <img src="assets/images/icons/slider-left.svg" alt="Prev" />
           </button>
-          <button class="social-btn">
-            <i class="fa-brands fa-facebook"></i>
-          </button>
-          <button class="social-btn">
-            <i class="fa-brands fa-apple"></i>
+          <button id="gallery-next-mob" class="arrow-btn swiper-btn-next-gallery">
+            <img src="assets/images/icons/slider-right.svg" alt="Next" />
           </button>
         </div>
       </div>
+    </section>
+
+    <!-- EXPERIENCES -->
+    <section class="experiences-section" id="experiences">
+      <div class="section-head content-wrap">
+        <div class="section-head-text">
+          <h2 class="section-title section-title--exp">
+            Враження наших мандрівників
+          </h2>
+          <p class="section-subtitle section-subtitle--exp">
+            Читайте, що думають про свої подорожі ті, хто вже відкрив
+            для себе нові горизонти разом із нами.
+          </p>
+        </div>
+      </div>
+
+      <div class="experiences-swiper swiper content-wrap">
+        <div class="swiper-wrapper">
+          <div class="swiper-slide">
+            <figure class="exp-card">
+              <img src="assets/images/avatar-first.png" alt="John Doe" class="exp-card-avatar" />
+              <p class="exp-card-text">
+                Подорож перевершила всі мої очікування! Усе було добре
+                організовано, а маршрут дозволив побачити не лише відомі
+                пам'ятки, а й затишні місця, про які не пишуть у звичайних
+                туристичних путівниках. Обов'язково вирушу знову!
+              </p>
+              <div class="exp-card-stars">
+                <img src="assets/images/icons/star.svg" alt="" />
+                <img src="assets/images/icons/star.svg" alt="" />
+                <img src="assets/images/icons/star.svg" alt="" />
+                <img src="assets/images/icons/star.svg" alt="" />
+                <img src="assets/images/icons/star.svg" alt="" />
+              </div>
+              <p class="exp-card-name">Юрій Семеген</p>
+              <p class="exp-card-job">Програміст</p>
+            </figure>
+          </div>
+
+          <div class="swiper-slide">
+            <figure class="exp-card">
+              <img src="assets/images/avatar-second.png" alt="John Smith" class="exp-card-avatar" />
+              <p class="exp-card-text">
+                Найбільше сподобалося поєднання свободи та продуманого
+                планування. Ми встигли побачити багато цікавого, спробувати
+                місцеві страви й просто насолодитися атмосферою міста.
+                Чудовий спосіб провести відпустку без зайвого клопоту.
+              </p>
+              <div class="exp-card-stars">
+                <img src="assets/images/icons/star.svg" alt="" />
+                <img src="assets/images/icons/star.svg" alt="" />
+                <img src="assets/images/icons/star.svg" alt="" />
+                <img src="assets/images/icons/star.svg" alt="" />
+                <img src="assets/images/icons/star.svg" alt="" />
+              </div>
+              <p class="exp-card-name">Влад Карась</p>
+              <p class="exp-card-job">Кіберспортсмен</p>
+            </figure>
+          </div>
+
+          <div class="swiper-slide">
+            <figure class="exp-card">
+              <img src="assets/images/avatar-third.png" alt="Tamara Bellis" class="exp-card-avatar" />
+              <p class="exp-card-text">
+                Це була саме та відпустка, якої мені давно бракувало.
+                Нові місця, красиві краєвиди та безліч маленьких відкриттів
+                щодня. Особливо приємно, що можна було зосередитися на
+                враженнях, а не на організаційних питаннях.
+              </p>
+              <div class="exp-card-stars">
+                <img src="assets/images/icons/star.svg" alt="" />
+                <img src="assets/images/icons/star.svg" alt="" />
+                <img src="assets/images/icons/star.svg" alt="" />
+                <img src="assets/images/icons/star.svg" alt="" />
+                <img src="assets/images/icons/star.svg" alt="" />
+              </div>
+              <p class="exp-card-name">Ірина Арабчук</p>
+              <p class="exp-card-job">JavaScript розробник</p>
+            </figure>
+          </div>
+        </div>
+        <div class="section-head-arrows section-head-arrows--exp">
+          <button class="arrow-btn swiper-btn-prev-exp">
+            <img src="assets/images/icons/slider-left.svg" alt="Prev" />
+          </button>
+          <button class="arrow-btn swiper-btn-next-exp">
+            <img src="assets/images/icons/slider-right.svg" alt="Next" />
+          </button>
+        </div>
+      </div>
+    </section>
+    <!-- NEWSLETTER -->
+    <section class="newsletter-section">
+      <div class="newsletter content-wrap">
+        <h2 class="newsletter-title">Трохи натхнення у вашій пошті</h2>
+        <form class="newsletter-form">
+          <div class="newsletter-field">
+            <label class="newsletter-label" for="newsletter-email">Електронна пошта</label>
+            <input type="email" class="newsletter-input" placeholder="Enter your email" />
+          </div>
+          <button class="newsletter-btn">Підписатися</button>
+        </form>
+      </div>
+    </section>
+  </main>
+  <!-- FOOTER -->
+  <footer class="main-footer">
+    <div class="footer-body content-wrap">
+      <div class="footer-col footer-col-logo">
+        <img src="assets/images/icons/logo.svg" alt="Travellian" class="footer-logo" />
+        <p class="footer-copy">
+          Copyright © Travellian, 2026. Подорожуйте з натхненням.
+        </p>
+      </div>
+
+      <div class="footer-col">
+        <h3 class="footer-col-title">Навігація</h3>
+        <ul class="footer-col-list">
+          <li><a href="#">Головна</a></li>
+          <li><a href="#">Напрямки</a></li>
+          <li><a href="#">Подорожі</a></li>
+          <li><a href="#">Блог</a></li>
+          <li><a href="#">Пропозиції</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-col">
+        <h3 class="footer-col-title">Корисна інформація</h3>
+        <ul class="footer-col-list">
+          <li><a href="#">Популярні місця</a></li>
+          <li><a href="#">Підтримка</a></li>
+          <li><a href="#">Умови користування</a></li>
+          <li><a href="#">Політика конфіденційності</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-col">
+        <h3 class="footer-col-title">Зв'яжіться з нами</h3>
+        <address class="footer-col-list">
+          <p>+380 96 560 42 17</p>
+          <p>travellian@corp.com</p>
+          <p>Вовчинецька 206, Івано-Франківськ, Україна</p>
+        </address>
+      </div>
+
+      <div class="footer-col">
+        <h3 class="footer-col-title">Ми в соцмережах</h3>
+        <div class="footer-social">
+          <a href="#" class="footer-social-link">
+            <img src="assets/images/icons/facebook.svg" alt="Facebook" />
+          </a>
+          <a href="#" class="footer-social-link">
+            <img src="assets/images/icons/pinterest.svg" alt="Pinterest" />
+          </a>
+          <a href="#" class="footer-social-link">
+            <img src="assets/images/icons/instagram.svg" alt="Instagram" />
+          </a>
+          <a href="#" class="footer-social-link">
+            <img src="assets/images/icons/twitter.svg" alt="Twitter" />
+          </a>
+        </div>
+      </div>
     </div>
-    <script src="https://cdn.jsdelivr.net/npm/swiper@8/swiper-bundle.min.js"></script>
-    <script src="assets/scripts/main.js"></script>
-  </body>
+  </footer>
+
+  <!-- LOGIN MODAL -->
+  <div id="loginModal" class="modal-overlay d-none">
+    <div class="modal-box">
+      <button id="closeLogin" class="modal-close">
+        <i class="fa-solid fa-xmark"></i>
+      </button>
+      <h2 class="modal-title">З поверненням!</h2>
+      <p class="modal-subtitle">
+        Увійдіть до свого акаунта, щоб продовжити планувати подорожі.
+      </p>
+      <form class="modal-form">
+        <input type="email" placeholder="Введіть ваш Email" />
+        <input type="password" placeholder="Введіть ваш пароль" />
+        <a href="#" class="modal-forgot">Забули пароль?</a>
+        <button type="submit" class="modal-btn modal-btn--primary">
+          Увійти
+        </button>
+        <button type="button" id="toSignUp" class="modal-btn modal-btn--secondary">
+          Реєстрація
+        </button>
+      </form>
+      <div class="modal-divider">
+        <span>Або продовжити через</span>
+      </div>
+      <div class="modal-socials">
+        <button class="social-btn">
+          <i class="fa-brands fa-google"></i>
+        </button>
+        <button class="social-btn">
+          <i class="fa-brands fa-facebook"></i>
+        </button>
+        <button class="social-btn">
+          <i class="fa-brands fa-apple"></i>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- SIGNUP MODAL -->
+  <div id="signupModal" class="modal-overlay d-none">
+    <div class="modal-box">
+      <button id="closeSignup" class="modal-close">
+        <i class="fa-solid fa-xmark"></i>
+      </button>
+      <h2 class="modal-title">Приєднуйтесь до нас</h2>
+      <p class="modal-subtitle">
+        Створіть акаунт, відкривайте цікаві напрямки та плануйте
+        свої майбутні пригоди.
+      </p>
+      <form class="modal-form">
+        <input type="text" placeholder="Введіть ваше ім'я" />
+        <input type="text" placeholder="Введіть ваше прізвище" />
+        <input type="email" placeholder="Введіть ваш Email" />
+        <input type="password" placeholder="Введіть ваш пароль" />
+        <button type="submit" class="modal-btn modal-btn--primary">
+          Реєстрація
+        </button>
+        <button type="button" id="toLogin" class="modal-btn modal-btn--secondary">
+          Увійти
+        </button>
+      </form>
+      <div class="modal-divider">
+        <span>Або продовжити через</span>
+      </div>
+      <div class="modal-socials">
+        <button class="social-btn">
+          <i class="fa-brands fa-google"></i>
+        </button>
+        <button class="social-btn">
+          <i class="fa-brands fa-facebook"></i>
+        </button>
+        <button class="social-btn">
+          <i class="fa-brands fa-apple"></i>
+        </button>
+      </div>
+    </div>
+  </div>
+  <script src="https://cdn.jsdelivr.net/npm/swiper@8/swiper-bundle.min.js"></script>
+  <script src="assets/scripts/main.js"></script>
+</body>
+
 </html>

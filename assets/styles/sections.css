@@ -365,6 +365,7 @@
   font-size: 1.125rem;
   color: var(--text-primary);
 }
+
 .trip-card-type {
   text-transform: uppercase;
 }
@@ -1113,6 +1114,7 @@
     width: 305px;
   }
 }
+
 @media (min-width: 1440px) {
   .section-head {
     padding-top: 140px;
@@ -1197,10 +1199,12 @@
   .newsletter-section {
     padding: 0 90px;
   }
+
   .newsletter-title {
     font-size: 4rem;
   }
 }
+
 @media (min-width: 1920px) {
   .offer-section {
     padding: 120px 0;
