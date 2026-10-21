@@ -65,6 +65,229 @@
         </div>
     </header>
 
+    <main>
+        <section class="page-section">
+            <div class="content-wrap catalog">
+                <form class="filters" aria-label="Фільтри турів">
+                    <div>
+                        <label class="filters-label" for="tour-search">Пошук</label>
+                        <input id="tour-search" class="field-input" type="search" placeholder="Назва туру або місто" />
+                    </div>
+                    <div>
+                        <span class="filters-label">Напрям</span>
+                        <div class="chip-list">
+                            <button class="chip is-active" type="button">Усі</button>
+                            <button class="chip" type="button">Італія</button>
+                            <button class="chip" type="button">Франція</button>
+                            <button class="chip" type="button">Іспанія</button>
+                            <button class="chip" type="button">Греція</button>
+                            <button class="chip" type="button">Португалія</button>
+                            <button class="chip" type="button">Хорватія</button>
+                        </div>
+                    </div>
+                    <div>
+                        <span class="filters-label">Ціна, €</span>
+                        <div class="price-row">
+                            <input class="field-input" type="number" min="0" placeholder="300" aria-label="Ціна від" />
+                            <input class="field-input" type="number" min="0" placeholder="1000" aria-label="Ціна до" />
+                        </div>
+                    </div>
+                    <fieldset class="filters-duration">
+                        <legend class="filters-label">Тривалість</legend>
+                        <label class="check"><input type="checkbox" /> 1–3 дні</label>
+                        <label class="check"><input type="checkbox" /> 4–6 днів</label>
+                        <label class="check"><input type="checkbox" /> 7+ днів</label>
+                    </fieldset>
+                    <button class="btn-line" type="reset">Скинути фільтри</button>
+                </form>
+
+                <div>
+                    <div class="catalog-bar">
+                        <p>Знайдено турів: <strong>9</strong></p>
+                        <div class="chip-list" role="group" aria-label="Сортування">
+                            <button class="chip is-active" type="button">За рейтингом</button>
+                            <button class="chip" type="button">Дешевші</button>
+                            <button class="chip" type="button">Дорожчі</button>
+                        </div>
+                    </div>
+                    <div class="tour-grid">
+                        <article class="tour-card">
+                            <div class="card-img bg-1">
+                                <span class="card-tag">Італія</span>
+                                <button class="fav-btn" type="button" aria-label="Додати в обране"><i
+                                        class="fa-regular fa-heart"></i></button>
+                            </div>
+                            <div class="tour-card-body">
+                                <h3 class="tour-card-title">Вічний Рим</h3>
+                                <p class="tour-card-meta">
+                                    <span class="tour-card-rating"><img src="assets/images/icons/star.svg" alt="" />
+                                        4.9</span>
+                                    <span>7 днів</span>
+                                </p>
+                                <div class="tour-card-foot">
+                                    <p>від <strong>€820</strong></p><a class="btn-sm" href="#">Детальніше</a>
+                                </div>
+                            </div>
+                        </article>
+
+                        <article class="tour-card">
+                            <div class="card-img bg-2">
+                                <span class="card-tag">Франція</span>
+                                <button class="fav-btn" type="button" aria-label="Додати в обране"><i
+                                        class="fa-regular fa-heart"></i></button>
+                            </div>
+                            <div class="tour-card-body">
+                                <h3 class="tour-card-title">Париж за 5 днів</h3>
+                                <p class="tour-card-meta">
+                                    <span class="tour-card-rating"><img src="assets/images/icons/star.svg" alt="" />
+                                        4.8</span>
+                                    <span>5 днів</span>
+                                </p>
+                                <div class="tour-card-foot">
+                                    <p>від <strong>€690</strong></p><a class="btn-sm" href="#">Детальніше</a>
+                                </div>
+                            </div>
+                        </article>
+
+                        <article class="tour-card">
+                            <div class="card-img bg-3">
+                                <span class="card-tag">Італія</span>
+                                <button class="fav-btn" type="button" aria-label="Додати в обране"><i
+                                        class="fa-regular fa-heart"></i></button>
+                            </div>
+                            <div class="tour-card-body">
+                                <h3 class="tour-card-title">Венеціанський карнавал</h3>
+                                <p class="tour-card-meta">
+                                    <span class="tour-card-rating"><img src="assets/images/icons/star.svg" alt="" />
+                                        4.8</span>
+                                    <span>4 дні</span>
+                                </p>
+                                <div class="tour-card-foot">
+                                    <p>від <strong>€720</strong></p><a class="btn-sm" href="#">Детальніше</a>
+                                </div>
+                            </div>
+                        </article>
+
+                        <article class="tour-card">
+                            <div class="card-img bg-4">
+                                <span class="card-tag">Хорватія</span>
+                                <button class="fav-btn" type="button" aria-label="Додати в обране"><i
+                                        class="fa-regular fa-heart"></i></button>
+                            </div>
+                            <div class="tour-card-body">
+                                <h3 class="tour-card-title">Дубровник і Адріатика</h3>
+                                <p class="tour-card-meta">
+                                    <span class="tour-card-rating"><img src="assets/images/icons/star.svg" alt="" />
+                                        4.8</span>
+                                    <span>7 днів</span>
+                                </p>
+                                <div class="tour-card-foot">
+                                    <p>від <strong>€780</strong></p><a class="btn-sm" href="#">Детальніше</a>
+                                </div>
+                            </div>
+                        </article>
+
+                        <article class="tour-card">
+                            <div class="card-img bg-5">
+                                <span class="card-tag">Іспанія</span>
+                                <button class="fav-btn" type="button" aria-label="Додати в обране"><i
+                                        class="fa-regular fa-heart"></i></button>
+                            </div>
+                            <div class="tour-card-body">
+                                <h3 class="tour-card-title">Барселона Гауді</h3>
+                                <p class="tour-card-meta">
+                                    <span class="tour-card-rating"><img src="assets/images/icons/star.svg" alt="" />
+                                        4.7</span>
+                                    <span>6 днів</span>
+                                </p>
+                                <div class="tour-card-foot">
+                                    <p>від <strong>€750</strong></p><a class="btn-sm" href="#">Детальніше</a>
+                                </div>
+                            </div>
+                        </article>
+
+                        <article class="tour-card">
+                            <div class="card-img bg-6">
+                                <span class="card-tag">Португалія</span>
+                                <button class="fav-btn" type="button" aria-label="Додати в обране"><i
+                                        class="fa-regular fa-heart"></i></button>
+                            </div>
+                            <div class="tour-card-body">
+                                <h3 class="tour-card-title">Лісабон і Сінтра</h3>
+                                <p class="tour-card-meta">
+                                    <span class="tour-card-rating"><img src="assets/images/icons/star.svg" alt="" />
+                                        4.7</span>
+                                    <span>6 днів</span>
+                                </p>
+                                <div class="tour-card-foot">
+                                    <p>від <strong>€600</strong></p><a class="btn-sm" href="#">Детальніше</a>
+                                </div>
+                            </div>
+                        </article>
+
+                        <article class="tour-card">
+                            <div class="card-img bg-7">
+                                <span class="card-tag">Іспанія</span>
+                                <button class="fav-btn" type="button" aria-label="Додати в обране"><i
+                                        class="fa-regular fa-heart"></i></button>
+                            </div>
+                            <div class="tour-card-body">
+                                <h3 class="tour-card-title">Мадрид і Толедо</h3>
+                                <p class="tour-card-meta">
+                                    <span class="tour-card-rating"><img src="assets/images/icons/star.svg" alt="" />
+                                        4.6</span>
+                                    <span>5 днів</span>
+                                </p>
+                                <div class="tour-card-foot">
+                                    <p>від <strong>€640</strong></p><a class="btn-sm" href="#">Детальніше</a>
+                                </div>
+                            </div>
+                        </article>
+
+                        <article class="tour-card">
+                            <div class="card-img bg-8">
+                                <span class="card-tag">Хорватія</span>
+                                <button class="fav-btn" type="button" aria-label="Додати в обране"><i
+                                        class="fa-regular fa-heart"></i></button>
+                            </div>
+                            <div class="tour-card-body">
+                                <h3 class="tour-card-title">Спліт і острів Хвар</h3>
+                                <p class="tour-card-meta">
+                                    <span class="tour-card-rating"><img src="assets/images/icons/star.svg" alt="" />
+                                        4.6</span>
+                                    <span>5 днів</span>
+                                </p>
+                                <div class="tour-card-foot">
+                                    <p>від <strong>€590</strong></p><a class="btn-sm" href="#">Детальніше</a>
+                                </div>
+                            </div>
+                        </article>
+
+                        <article class="tour-card">
+                            <div class="card-img bg-1">
+                                <span class="card-tag">Греція</span>
+                                <button class="fav-btn" type="button" aria-label="Додати в обране"><i
+                                        class="fa-regular fa-heart"></i></button>
+                            </div>
+                            <div class="tour-card-body">
+                                <h3 class="tour-card-title">Афіни та острови</h3>
+                                <p class="tour-card-meta">
+                                    <span class="tour-card-rating"><img src="assets/images/icons/star.svg" alt="" />
+                                        4.5</span>
+                                    <span>5 днів</span>
+                                </p>
+                                <div class="tour-card-foot">
+                                    <p>від <strong>€650</strong></p><a class="btn-sm" href="#">Детальніше</a>
+                                </div>
+                            </div>
+                        </article>
+                    </div>
+                    <div class="more-wrap"><button class="btn-line" type="button">Показати ще</button></div>
+                </div>
+            </div>
+        </section>
+    </main>
+
     <!-- FOOTER -->
     <footer class="main-footer main-footer--tours">
         <div class="footer-body content-wrap">
