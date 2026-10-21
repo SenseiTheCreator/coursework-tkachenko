@@ -766,6 +766,211 @@
   border: 1px solid rgba(255, 255, 255, 0.6);
 }
 
+.page-section {
+  padding: 40px 0 64px;
+}
+
+/* кольори-заглушки замість фото */
+.bg-1 { background: #b07d5a; }
+.bg-2 { background: #6f8f9b; }
+.bg-3 { background: #4f6b7a; }
+.bg-4 { background: #7a8c6e; }
+.bg-5 { background: #9c6b5a; }
+.bg-6 { background: #8b6e8c; }
+.bg-7 { background: #7a6655; }
+.bg-8 { background: #c4996a; }
+
+.chip-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.chip {
+  padding: 8px 16px;
+  border: 1px solid #e3e3e3;
+  border-radius: 50px;
+  background: var(--color-white);
+  font: 400 0.875rem var(--font-body);
+  color: var(--text-primary);
+  cursor: pointer;
+}
+
+.chip.is-active {
+  background: var(--color-secondary);
+  border-color: var(--color-secondary);
+  color: var(--color-white);
+}
+
+/* фільтри */
+.catalog {
+  display: grid;
+  gap: 24px;
+}
+
+.filters {
+  display: grid;
+  gap: 20px;
+  align-content: start;
+  padding: 24px;
+  border-radius: 16px;
+  background: var(--color-bg-accent);
+}
+
+.filters-label {
+  display: block;
+  margin-bottom: 8px;
+  font: 600 0.75rem var(--font-body);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.filters-duration {
+  min-width: 0;
+  border: none;
+}
+
+.field-input {
+  width: 100%;
+  padding: 12px;
+  border: 1px solid #e3e3e3;
+  border-radius: 8px;
+  background: var(--color-white);
+  font: 400 0.875rem var(--font-body);
+}
+
+.price-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+}
+
+.check {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 8px;
+  font-size: 0.875rem;
+}
+
+.btn-line {
+  padding: 12px 16px;
+  border: 1px solid #e3e3e3;
+  border-radius: 8px;
+  background: var(--color-white);
+  font: 500 0.875rem var(--font-body);
+  cursor: pointer;
+}
+
+/* панель «Знайдено турів / Сортувати» */
+.catalog-bar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 20px;
+  font-size: 0.9375rem;
+  color: var(--text-secondary);
+}
+
+/* картки турів */
+.tour-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 24px;
+}
+
+.tour-card {
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  border: 1px solid #eee;
+  border-radius: 12px;
+  background: var(--color-white);
+}
+
+.card-img {
+  position: relative;
+  aspect-ratio: 4 / 3;
+}
+
+.card-tag {
+  position: absolute;
+  top: 12px;
+  left: 12px;
+  padding: 4px 10px;
+  border-radius: 50px;
+  background: rgba(23, 36, 50, 0.6);
+  color: var(--color-white);
+  font-size: 0.75rem;
+}
+
+.fav-btn {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  width: 36px;
+  height: 36px;
+  border: none;
+  border-radius: 50%;
+  background: var(--color-white);
+  color: var(--color-primary);
+  cursor: pointer;
+}
+
+.tour-card-body {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  gap: 8px;
+  padding: 16px;
+}
+
+.tour-card-title {
+  font-size: 1.0625rem;
+  font-weight: 500;
+  color: var(--text-primary);
+  overflow-wrap: anywhere;
+}
+
+.tour-card-meta {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.875rem;
+  color: var(--text-secondary);
+}
+
+.tour-card-foot {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-top: auto;
+  padding-top: 8px;
+  font-size: 0.875rem;
+  color: var(--text-secondary);
+}
+
+.tour-card-foot strong {
+  font-size: 1.25rem;
+  color: var(--color-primary);
+}
+
+.btn-sm {
+  padding: 10px 16px;
+  border-radius: 8px;
+  background: var(--color-primary);
+  color: var(--color-white);
+  font-size: 0.875rem;
+  font-weight: 500;
+}
+
+.more-wrap {
+  margin-top: 32px;
+  text-align: center;
+}
+
 @media (min-width: 768px) {
   .section-title {
     font-size: 3.375rem;
