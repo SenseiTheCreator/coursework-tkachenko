@@ -771,14 +771,37 @@
 }
 
 /* кольори-заглушки замість фото */
-.bg-1 { background: #b07d5a; }
-.bg-2 { background: #6f8f9b; }
-.bg-3 { background: #4f6b7a; }
-.bg-4 { background: #7a8c6e; }
-.bg-5 { background: #9c6b5a; }
-.bg-6 { background: #8b6e8c; }
-.bg-7 { background: #7a6655; }
-.bg-8 { background: #c4996a; }
+.bg-1 {
+  background: #b07d5a;
+}
+
+.bg-2 {
+  background: #6f8f9b;
+}
+
+.bg-3 {
+  background: #4f6b7a;
+}
+
+.bg-4 {
+  background: #7a8c6e;
+}
+
+.bg-5 {
+  background: #9c6b5a;
+}
+
+.bg-6 {
+  background: #8b6e8c;
+}
+
+.bg-7 {
+  background: #7a6655;
+}
+
+.bg-8 {
+  background: #c4996a;
+}
 
 .chip-list {
   display: flex;
@@ -1174,6 +1197,10 @@
   .error-title {
     font-size: 2.5rem;
   }
+
+  .tour-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
 }
 
 @media (min-width: 1152px) {
@@ -1372,6 +1399,10 @@
     padding: 240px 0 140px 0;
   }
 
+  .main-footer--tours {
+    padding: 80px 0;
+  }
+
   .footer-body {
     display: grid;
     grid-template-columns: 2fr 1fr 1fr 1fr 1fr;
@@ -1381,6 +1412,19 @@
 
   .footer-copy {
     width: 305px;
+  }
+
+  .page-section {
+    padding: 64px 0 100px;
+  }
+
+  .catalog {
+    grid-template-columns: 280px 1fr;
+    gap: 32px;
+  }
+
+  .tour-grid {
+    grid-template-columns: repeat(3, 1fr);
   }
 }
 
@@ -1517,4 +1561,4 @@
   .footer-body.content-wrap {
     padding: 0 182px;
   }
-} 
+}
