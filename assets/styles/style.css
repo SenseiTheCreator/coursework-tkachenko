@@ -490,7 +490,6 @@ ul {
   .hero-subtitle {
     font-size: 1.25rem;
     line-height: 2;
-    max-width: 500px;
   }
 
   .hero-pagination {
@@ -698,7 +697,7 @@ ul {
   }
 
   .form-field-last {
-    padding-right: 100px;
+    padding-right: 50px;
   }
 
   .form-label {
@@ -717,7 +716,7 @@ ul {
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
-    min-width: 170px;
+    min-width: 200px;
     height: 100%;
     padding: 0 24px;
     font-size: 1.75rem;
@@ -777,6 +776,10 @@ ul {
     padding: 0 24px 0 32px;
   }
 
+  .form-field-last {
+    padding-right: 100px;
+  }
+
   .btn-book {
     height: 216px;
     font-size: 1.75rem;
@@ -828,7 +831,7 @@ ul {
   }
 
   .btn-book {
-    width: 170px;
+    width: 200px;
     font-size: 1.75rem;
   }
 

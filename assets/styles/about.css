@@ -1,5 +1,4 @@
 /* ABOUT HEADER */
-/* Подвійний клас, щоб перебити .main-header зі style.css */
 .main-header.main-header--inner {
   background-image:
     linear-gradient(rgba(23, 36, 50, 0.7), rgba(23, 36, 50, 0.7)),
@@ -47,7 +46,7 @@
 .page-hero-title::after {
   content: "";
   display: block;
-  width: 120px;
+  width: 250px;
   height: 3px;
   margin-top: 20px;
   background: var(--color-primary);
