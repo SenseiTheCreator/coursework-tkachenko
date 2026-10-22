@@ -1000,6 +1000,338 @@
   text-align: center;
 }
 
+/* ===== TOUR PAGE ===== */
+.tour-hero-meta {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px 20px;
+  font-family: var(--font-body);
+  font-size: 1rem;
+  opacity: 0.9;
+}
+
+.tour-hero-rating {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.tour-hero-rating img,
+.stars img {
+  width: 16px;
+  height: 16px;
+}
+
+.tour-layout {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 32px;
+}
+
+/* gallery */
+.tour-photo {
+  position: relative;
+  overflow: hidden;
+  aspect-ratio: 16 / 10;
+  border-radius: 16px;
+}
+
+.tour-photo img,
+.tour-thumb img,
+.similar-card-img img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.tour-photo-label,
+.similar-card-label,
+.tour-thumb-label {
+  position: absolute;
+  left: 16px;
+  bottom: 16px;
+  color: var(--color-white);
+  font-family: var(--font-body);
+  font-weight: 600;
+  text-shadow: 0 1px 4px rgba(0, 0, 0, 0.5);
+}
+
+.tour-thumbs {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 8px;
+  margin-top: 8px;
+}
+
+.tour-thumb {
+  position: relative;
+  overflow: hidden;
+  aspect-ratio: 4 / 3;
+  border-radius: 8px;
+}
+
+.tour-thumb.is-active {
+  outline: 2px solid var(--color-primary);
+  outline-offset: -2px;
+}
+
+.tour-thumb-label {
+  display: none;
+  left: 8px;
+  bottom: 8px;
+  font-size: 0.75rem;
+}
+
+/* booking card */
+.tour-aside {
+  padding: 24px;
+  border: 1px solid #eee;
+  border-radius: 16px;
+  background: var(--color-white);
+  box-shadow: 0 8px 40px rgba(0, 0, 0, 0.08);
+}
+
+.tour-aside-label {
+  font-size: 0.875rem;
+  color: var(--text-secondary);
+}
+
+.tour-aside-price {
+  margin: 4px 0 20px;
+  font-size: 2.25rem;
+  font-weight: 600;
+  color: var(--color-primary);
+}
+
+.tour-facts {
+  display: grid;
+  gap: 12px;
+  margin-bottom: 24px;
+}
+
+.tour-facts div {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  font-size: 0.9375rem;
+}
+
+.tour-facts dt {
+  color: var(--text-secondary);
+}
+
+.tour-facts dd {
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+.tour-aside .btn,
+.tour-aside .btn-line {
+  display: block;
+  width: 100%;
+  text-align: center;
+}
+
+.tour-aside .btn-primary {
+  margin-bottom: 12px;
+  padding: 16px 24px;
+  font-size: 1.125rem;
+}
+
+.tour-aside .btn-line i {
+  color: var(--color-primary);
+}
+
+/* tabs and sections */
+.tour-tabs {
+  display: flex;
+  gap: 24px;
+  margin-bottom: 32px;
+  overflow-x: auto;
+  border-bottom: 1px solid #eee;
+}
+
+.tour-tabs a {
+  padding-bottom: 12px;
+  border-bottom: 2px solid transparent;
+  white-space: nowrap;
+  font: 500 0.9375rem var(--font-body);
+  color: var(--text-secondary);
+}
+
+.tour-tabs a:hover,
+.tour-tabs a.is-active {
+  border-bottom-color: var(--color-primary);
+  color: var(--text-primary);
+}
+
+.tour-section {
+  scroll-margin-top: 24px;
+}
+
+.tour-section+.tour-section {
+  margin-top: 48px;
+}
+
+.tour-section-title {
+  margin-bottom: 20px;
+  font-family: var(--font-heading);
+  font-size: 1.75rem;
+  font-weight: 400;
+  color: var(--color-secondary);
+}
+
+.tour-text {
+  margin-bottom: 16px;
+  font: 400 1rem/1.7 var(--font-body);
+  color: var(--text-primary);
+}
+
+.tour-note {
+  margin-top: 24px;
+  color: var(--text-secondary);
+}
+
+.tour-list {
+  display: grid;
+  gap: 8px;
+}
+
+.tour-list li {
+  position: relative;
+  padding-left: 20px;
+  font: 400 1rem/1.6 var(--font-body);
+  color: var(--text-secondary);
+}
+
+.tour-list li::before {
+  content: "";
+  position: absolute;
+  top: 0.65em;
+  left: 0;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--color-primary);
+}
+
+.tour-program {
+  display: grid;
+  gap: 20px;
+  list-style: none;
+}
+
+.tour-program li {
+  padding-left: 20px;
+  border-left: 3px solid var(--color-primary);
+}
+
+.tour-program .tour-text {
+  margin-bottom: 0;
+}
+
+.program-day {
+  margin-bottom: 4px;
+  font: 600 1rem var(--font-body);
+  color: var(--color-secondary);
+}
+
+.tour-info-grid {
+  display: grid;
+  gap: 24px;
+}
+
+.tour-info-title {
+  margin-bottom: 12px;
+  font: 600 1.0625rem var(--font-body);
+  color: var(--color-secondary);
+}
+
+/* reviews */
+.review-list {
+  display: grid;
+  gap: 16px;
+}
+
+.review-card {
+  display: grid;
+  grid-template-columns: 48px 1fr;
+  gap: 16px;
+  padding: 20px;
+  border-radius: 12px;
+  background: rgba(245, 246, 247, 1);
+}
+
+.review-avatar {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  font: 600 0.875rem var(--font-body);
+  color: var(--color-white);
+}
+
+.review-head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 4px 12px;
+  margin-bottom: 6px;
+}
+
+.review-name {
+  font: 600 1rem var(--font-body);
+  color: var(--text-primary);
+}
+
+.stars {
+  display: inline-flex;
+  gap: 2px;
+}
+
+.review-text {
+  font: 400 0.9375rem/1.6 var(--font-body);
+  color: var(--text-secondary);
+  overflow-wrap: anywhere;
+}
+
+/* similar tours */
+.similar-section {
+  margin-top: 64px;
+}
+
+.similar-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 24px;
+}
+
+.similar-card {
+  display: block;
+}
+
+.similar-card-img {
+  position: relative;
+  overflow: hidden;
+  aspect-ratio: 16 / 10;
+  margin-bottom: 12px;
+  border-radius: 16px;
+}
+
+.similar-card-title {
+  font: 500 1.0625rem var(--font-body);
+  color: var(--text-primary);
+  overflow-wrap: anywhere;
+}
+
+.similar-card-meta {
+  font-size: 0.875rem;
+  color: var(--text-secondary);
+}
+
 @media (min-width: 768px) {
   .section-title {
     font-size: 3.375rem;
@@ -1206,6 +1538,26 @@
 
   .tour-grid {
     grid-template-columns: repeat(2, 1fr);
+  }
+
+  .tour-hero-meta {
+    font-size: 1.125rem;
+  }
+
+  .tour-thumb-label {
+    display: block;
+  }
+
+  .tour-section-title {
+    font-size: 2.25rem;
+  }
+
+  .tour-info-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .similar-grid {
+    grid-template-columns: repeat(3, 1fr);
   }
 }
 
@@ -1431,6 +1783,37 @@
 
   .tour-grid {
     grid-template-columns: repeat(3, 1fr);
+  }
+
+  .tour-hero-meta {
+    font-size: 1.25rem;
+  }
+
+  .tour-layout {
+    grid-template-columns: minmax(0, 1fr) 340px;
+    grid-template-areas:
+      "gallery aside"
+      "content aside";
+    align-items: start;
+    gap: 40px;
+  }
+
+  .tour-gallery {
+    grid-area: gallery;
+  }
+
+  .tour-content {
+    grid-area: content;
+  }
+
+  .tour-aside {
+    grid-area: aside;
+    position: sticky;
+    top: 24px;
+  }
+
+  .similar-section {
+    margin-top: 100px;
   }
 }
 
