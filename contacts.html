@@ -1,0 +1,210 @@
+<!doctype html>
+<html lang="uk">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Контакти — зв'яжіться з Travellian</title>
+    <meta name="description"
+        content="Зв'яжіться з Travellian: телефон, email та адреса офісу в Івано-Франківську. Залиште повідомлення, і ми допоможемо підібрати тур." />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css"
+        integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="icon" type="image/png" href="assets/images/favicon.png" />
+    <link rel="stylesheet" href="assets/styles/contactpage.css" />
+    <link rel="stylesheet" href="assets/styles/_variables.css" />
+    <link rel="stylesheet" href="assets/styles/style.css" />
+</head>
+
+<body>
+    <header class="main-header main-header--inner">
+        <!-- NAVBAR -->
+        <div class="navbar d-flex vertical-center">
+            <nav class="d-flex vertical-center">
+                <div class="logo d-flex">
+                    <img src="assets/images/icons/logo.svg" alt="Travellian" />
+                </div>
+
+                <!-- MENU -->
+
+                <div id="iconBlock" class="menu-icon">
+                    <div id="iconOpen" class="menu-icon-open">
+                        <img src="assets/images/icons/burger-menu.svg" alt="Меню" />
+                    </div>
+                    <div id="iconClose" class="menu-icon-close d-none">
+                        <i class="fa-solid fa-xmark"></i>
+                    </div>
+                </div>
+
+                <ul id="mainMenu" class="main-menu d-flex">
+                    <li><a href="index.html">Головна</a></li>
+                    <li><a href="about.html">Про нас</a></li>
+                    <li><a href="tours.html">Тури</a></li>
+                    <li><a href="404.html">Напрями</a></li>
+                    <li><a href="404.html">Блог</a></li>
+                    <li class="menu-mobile-btn">
+                        <button class="btn btn-outline mobile-login">Увійти</button>
+                    </li>
+                    <li class="menu-mobile-btn">
+                        <button class="btn btn-primary mobile-signup">Зареєструватися</button>
+                    </li>
+                </ul>
+
+                <div class="nav-actions d-flex">
+                    <button id="loginBtn" class="btn btn-outline">Увійти</button>
+                    <button id="signupBtn" class="btn btn-primary">Зареєструватися</button>
+                </div>
+            </nav>
+        </div>
+
+
+        <div class="page-hero">
+            <div class="content-wrap">
+                <h1 class="page-hero-title">Зв'яжіться з нами</h1>
+                <p class="page-hero-subtitle">Є питання щодо туру чи бронювання? Напишіть — відповімо протягом робочого
+                    дня.</p>
+            </div>
+        </div>
+    </header>
+
+    <!-- FOOTER -->
+    <footer class="main-footer main-footer--tours">
+        <div class="footer-body content-wrap">
+            <div class="footer-col footer-col-logo">
+                <img src="assets/images/icons/logo.svg" alt="Travellian" class="footer-logo" />
+                <p class="footer-copy">
+                    Copyright © Travellian, 2026. Подорожуйте з натхненням.
+                </p>
+            </div>
+
+            <div class="footer-col">
+                <h3 class="footer-col-title">Навігація</h3>
+                <ul class="footer-col-list">
+                    <li><a href="index.html">Головна</a></li>
+                    <li><a href="about.html">Про нас</a></li>
+                    <li><a href="tours.html">Подорожі</a></li>
+                    <li><a href="blog.html">Блог</a></li>
+                    <li><a href="tours.html">Пропозиції</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-col">
+                <h3 class="footer-col-title">Інформація</h3>
+                <ul class="footer-col-list">
+                    <li><a href="about.html">Про нас</a></li>
+                    <li><a href="contacts.html">Контакти</a></li>
+                    <li><a href="#">Політика приватності</a></li>
+                    <li><a href="#">Умови використання</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-col">
+                <h3 class="footer-col-title">Контакти</h3>
+                <address class="footer-col-list">
+                    <p>+380 96 560 42 17</p>
+                    <p>travellian@corp.com</p>
+                    <p>Вовчинецька 206, Івано-Франківськ, Україна</p>
+                </address>
+            </div>
+
+            <div class="footer-col">
+                <h3 class="footer-col-title">Підпишіться на наші новини</h3>
+                <div class="footer-social">
+                    <a href="#" class="footer-social-link">
+                        <img src="assets/images/icons/facebook.svg" alt="Facebook" />
+                    </a>
+                    <a href="#" class="footer-social-link">
+                        <img src="assets/images/icons/pinterest.svg" alt="Pinterest" />
+                    </a>
+                    <a href="#" class="footer-social-link">
+                        <img src="assets/images/icons/instagram.svg" alt="Instagram" />
+                    </a>
+                    <a href="#" class="footer-social-link">
+                        <img src="assets/images/icons/twitter.svg" alt="Twitter" />
+                    </a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- LOGIN MODAL -->
+    <div id="loginModal" class="modal-overlay d-none">
+        <div class="modal-box">
+            <button id="closeLogin" class="modal-close">
+                <i class="fa-solid fa-xmark"></i>
+            </button>
+            <h2 class="modal-title">З поверненням!</h2>
+            <p class="modal-subtitle">
+                Увійдіть до свого акаунта, щоб продовжити планувати подорожі.
+            </p>
+            <form class="modal-form">
+                <input type="email" placeholder="Введіть ваш Email" />
+                <input type="password" placeholder="Введіть ваш пароль" />
+                <a href="#" class="modal-forgot">Забули пароль?</a>
+                <button type="submit" class="modal-btn modal-btn--primary">
+                    Увійти
+                </button>
+                <button type="button" id="toSignUp" class="modal-btn modal-btn--secondary">
+                    Реєстрація
+                </button>
+            </form>
+            <div class="modal-divider">
+                <span>Або продовжити через</span>
+            </div>
+            <div class="modal-socials">
+                <button class="social-btn">
+                    <i class="fa-brands fa-google"></i>
+                </button>
+                <button class="social-btn">
+                    <i class="fa-brands fa-facebook"></i>
+                </button>
+                <button class="social-btn">
+                    <i class="fa-brands fa-apple"></i>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- SIGNUP MODAL -->
+    <div id="signupModal" class="modal-overlay d-none">
+        <div class="modal-box">
+            <button id="closeSignup" class="modal-close">
+                <i class="fa-solid fa-xmark"></i>
+            </button>
+            <h2 class="modal-title">Приєднуйтесь до нас</h2>
+            <p class="modal-subtitle">
+                Створіть акаунт, відкривайте цікаві напрямки та плануйте
+                свої майбутні пригоди.
+            </p>
+            <form class="modal-form">
+                <input type="text" placeholder="Введіть ваше ім'я" />
+                <input type="text" placeholder="Введіть ваше прізвище" />
+                <input type="email" placeholder="Введіть ваш Email" />
+                <input type="password" placeholder="Введіть ваш пароль" />
+                <button type="submit" class="modal-btn modal-btn--primary">
+                    Реєстрація
+                </button>
+                <button type="button" id="toLogin" class="modal-btn modal-btn--secondary">
+                    Увійти
+                </button>
+            </form>
+            <div class="modal-divider">
+                <span>Або продовжити через</span>
+            </div>
+            <div class="modal-socials">
+                <button class="social-btn">
+                    <i class="fa-brands fa-google"></i>
+                </button>
+                <button class="social-btn">
+                    <i class="fa-brands fa-facebook"></i>
+                </button>
+                <button class="social-btn">
+                    <i class="fa-brands fa-apple"></i>
+                </button>
+            </div>
+        </div>
+    </div>
+    <script src="assets/scripts/common.js" defer></script>
+</body>
+
+</html>

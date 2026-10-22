@@ -10,31 +10,6 @@
   padding: 24px 0 56px;
 }
 
-.breadcrumbs {
-  list-style: none;
-  display: flex;
-  flex-wrap: wrap;
-  gap: 8px;
-  margin-bottom: 20px;
-  font-family: var(--font-body);
-  font-size: 0.875rem;
-  color: rgba(255, 255, 255, 0.8);
-}
-
-.breadcrumbs li+li::before {
-  content: "/";
-  margin-right: 8px;
-}
-
-.breadcrumbs a {
-  color: inherit;
-  text-decoration: underline;
-}
-
-.breadcrumbs a:hover {
-  color: var(--color-white);
-}
-
 .page-hero-title {
   font-family: var(--font-heading);
   font-size: 2.5rem;
