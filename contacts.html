@@ -68,6 +68,111 @@
         </div>
     </header>
 
+    <main>
+        <section class="page-section">
+            <div class="content-wrap">
+                <div class="contact-layout">
+                    <ul class="contact-cards">
+                        <li class="contact-card">
+                            <span class="contact-card-icon" aria-hidden="true"><i class="fa-solid fa-phone"></i></span>
+                            <div>
+                                <p class="contact-card-label">Телефон</p>
+                                <p class="contact-card-value"><a href="tel:+380965604217">+380 96 560 42 17</a></p>
+                            </div>
+                        </li>
+                        <li class="contact-card">
+                            <span class="contact-card-icon" aria-hidden="true"><i
+                                    class="fa-solid fa-envelope"></i></span>
+                            <div>
+                                <p class="contact-card-label">Email</p>
+                                <p class="contact-card-value"><a
+                                        href="mailto:travellian@corp.com">travellian@corp.com</a></p>
+                            </div>
+                        </li>
+                        <li class="contact-card">
+                            <span class="contact-card-icon" aria-hidden="true"><i
+                                    class="fa-solid fa-location-dot"></i></span>
+                            <div>
+                                <p class="contact-card-label">Адреса офісу</p>
+                                <p class="contact-card-value">Вовчинецька 206, Івано-Франківськ, Україна</p>
+                            </div>
+                        </li>
+                        <li class="contact-card">
+                            <span class="contact-card-icon" aria-hidden="true"><i class="fa-solid fa-clock"></i></span>
+                            <div>
+                                <p class="contact-card-label">Графік роботи</p>
+                                <p class="contact-card-value">Пн–Пт: 9:00–18:00<br />Сб: 10:00–15:00</p>
+                            </div>
+                        </li>
+                    </ul>
+
+                    <form class="contact-form" action="#" method="post">
+                        <h2 class="contact-title">Напишіть нам</h2>
+                        <div class="contact-row">
+                            <div class="contact-field">
+                                <label class="contact-label" for="contact-name">Ім'я</label>
+                                <input id="contact-name" class="field-input" type="text" name="name" autocomplete="name"
+                                    minlength="2" maxlength="60" placeholder="Ваше ім'я" required />
+                            </div>
+                            <div class="contact-field">
+                                <label class="contact-label" for="contact-email">Email</label>
+                                <input id="contact-email" class="field-input" type="email" name="email"
+                                    autocomplete="email" placeholder="name@mail.com" required />
+                            </div>
+                        </div>
+                        <div class="contact-row">
+                            <div class="contact-field">
+                                <label class="contact-label" for="contact-phone">Телефон</label>
+                                <input id="contact-phone" class="field-input" type="tel" name="phone" autocomplete="tel"
+                                    pattern="[+]?[0-9 \(\)\-]{10,18}" placeholder="+380 00 000 00 00" />
+                            </div>
+                            <div class="contact-field">
+                                <label class="contact-label" for="contact-topic">Тема</label>
+                                <select id="contact-topic" class="field-input" name="topic">
+                                    <option>Підбір туру</option>
+                                    <option>Бронювання</option>
+                                    <option>Індивідуальний маршрут</option>
+                                    <option>Інше</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="contact-field">
+                            <label class="contact-label" for="contact-message">Повідомлення</label>
+                            <textarea id="contact-message" class="field-input" name="message" minlength="10"
+                                maxlength="1000" placeholder="Розкажіть, куди хочете поїхати" required></textarea>
+                        </div>
+                        <label class="check"><input type="checkbox" name="consent" required /> Погоджуюсь на обробку
+                            персональних даних</label>
+                        <button class="btn btn-primary contact-submit" type="submit">Надіслати</button>
+                    </form>
+                </div>
+
+                <section class="faq" aria-labelledby="faq-title">
+                    <h2 class="contact-title" id="faq-title">Часті запитання</h2>
+                    <details class="faq-item">
+                        <summary class="faq-question">Як забронювати тур?</summary>
+                        <p class="faq-answer">Оберіть тур у каталозі, натисніть «Забронювати» та залиште дані. Менеджер
+                            зв'яжеться з вами для підтвердження.</p>
+                    </details>
+                    <details class="faq-item">
+                        <summary class="faq-question">Яка передоплата?</summary>
+                        <p class="faq-answer">Зазвичай 30% від вартості туру. Решту сплачують за 14 днів до виїзду.</p>
+                    </details>
+                    <details class="faq-item">
+                        <summary class="faq-question">Чи можна скасувати поїздку?</summary>
+                        <p class="faq-answer">Так. Безкоштовне скасування діє за 30 днів до виїзду, далі — за умовами
+                            конкретного туру.</p>
+                    </details>
+                    <details class="faq-item">
+                        <summary class="faq-question">Чи складаєте ви індивідуальні маршрути?</summary>
+                        <p class="faq-answer">Так. Опишіть побажання у формі вище, і ми запропонуємо маршрут під ваш
+                            бюджет та дати.</p>
+                    </details>
+                </section>
+            </div>
+        </section>
+    </main>
+    
     <!-- FOOTER -->
     <footer class="main-footer main-footer--tours">
         <div class="footer-body content-wrap">
