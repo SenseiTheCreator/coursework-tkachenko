@@ -127,7 +127,7 @@ ul {
 }
 
 .main-menu li a {
-  color: var(--color-dark, #172432);
+  color: var( --color-secondary);
 }
 
 .menu-icon {
