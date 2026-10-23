@@ -20,6 +20,11 @@ img {
   height: auto;
 }
 
+svg {
+  display: block;
+  flex-shrink: 0;
+}
+
 a {
   text-decoration: none;
 }

@@ -87,9 +87,10 @@
   background: var(--color-primary);
 }
 
-.arrow-btn img {
+.arrow-btn svg {
   width: 10px;
-  height: auto;
+  height: 18px;
+  color: var(--color-white);
 }
 
 /* DESTINATIONS */
@@ -198,10 +199,11 @@
   gap: 4px;
 }
 
-.offer-card-stars img {
+.offer-card-stars svg {
   width: 24px;
   height: 24px;
   margin-top: -8px;
+  color: var(--color-star);
 }
 
 .offer-card-text {
@@ -394,9 +396,10 @@
   gap: 2px;
 }
 
-.trip-card-stars img {
+.trip-card-stars svg {
   width: 24px;
   height: 24px;
+  color: var(--color-star);
 }
 
 .trip-card-days {
@@ -525,9 +528,10 @@
   gap: 4px;
 }
 
-.exp-card-stars img {
+.exp-card-stars svg {
   width: 24px;
   height: 24px;
+  color: var(--color-star);
 }
 
 .exp-card-name {
@@ -704,9 +708,10 @@
   justify-content: center;
 }
 
-.footer-social-link img {
+.footer-social-link svg {
   width: 32px;
   height: 32px;
+  color: var(--color-white);
 }
 
 .footer-social-link:hover {
@@ -981,10 +986,11 @@
   gap: 6px;
 }
 
-.tour-hero-rating img,
-.stars img {
+.tour-hero-rating svg,
+.stars svg {
   width: 16px;
   height: 16px;
+  color: var(--color-star);
 }
 
 .tour-card-rating {
@@ -993,9 +999,10 @@
   gap: 4px;
 }
 
-.tour-card-rating img {
+.tour-card-rating svg {
   width: 16px;
   height: 16px;
+  color: var(--color-star);
 }
 
 .tour-layout {
