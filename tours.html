@@ -5,7 +5,8 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Каталог турів Європою</title>
-    <meta name="description" content="Каталог турів Європою від Travellian: Греція, Франція, Іспанія, Португалія, Хорватія. Фільтруйте за напрямом, ціною та тривалістю." />
+    <meta name="description"
+        content="Каталог турів Європою від Travellian: Греція, Франція, Іспанія, Португалія, Хорватія. Фільтруйте за напрямом, ціною та тривалістю." />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css"
         integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw=="
         crossorigin="anonymous" referrerpolicy="no-referrer" />
@@ -25,14 +26,16 @@
 
                 <!-- MENU -->
 
-                <div id="iconBlock" class="menu-icon">
-                    <div id="iconOpen" class="menu-icon-open">
-                        <svg width="38" height="23" role="img" aria-label="Меню"><use href="assets/images/icons/sprite.svg#menu"></use></svg>
-                    </div>
-                    <div id="iconClose" class="menu-icon-close d-none">
+                <button type="button" id="iconBlock" class="menu-icon" aria-label="Меню" aria-expanded="false">
+                    <span id="iconOpen" class="menu-icon-open">
+                        <svg width="38" height="23" role="img" aria-label="Меню">
+                            <use href="assets/images/icons/sprite.svg#menu"></use>
+                        </svg>
+                    </span>
+                    <span id="iconClose" class="menu-icon-close d-none">
                         <i class="fa-solid fa-xmark"></i>
-                    </div>
-                </div>
+                    </span>
+                </button>
 
                 <ul id="mainMenu" class="main-menu d-flex">
                     <li><a href="index.html">Головна</a></li>
@@ -67,230 +70,66 @@
     <main>
         <section class="page-section">
             <div class="content-wrap catalog">
-                <form class="filters" aria-label="Фільтри турів">
+                <form id="tourFilters" class="filters" aria-label="Фільтри турів">
                     <div>
                         <label class="filters-label" for="tour-search">Пошук</label>
-                        <input id="tour-search" class="field-input" type="search" placeholder="Назва туру або місто" />
+                        <input id="tour-search" name="query" class="field-input" type="search"
+                            placeholder="Назва туру або країна" />
                     </div>
                     <div>
                         <span class="filters-label">Напрям</span>
                         <div class="chip-list">
-                            <button class="chip is-active" type="button">Усі</button>
-                            <button class="chip" type="button">Італія</button>
-                            <button class="chip" type="button">Франція</button>
-                            <button class="chip" type="button">Іспанія</button>
-                            <button class="chip" type="button">Греція</button>
-                            <button class="chip" type="button">Португалія</button>
-                            <button class="chip" type="button">Хорватія</button>
+                            <button class="chip is-active" type="button" data-country="all"
+                                aria-pressed="true">Усі</button>
+                            <button class="chip" type="button" data-country="Італія"
+                                aria-pressed="false">Італія</button>
+                            <button class="chip" type="button" data-country="Франція"
+                                aria-pressed="false">Франція</button>
+                            <button class="chip" type="button" data-country="Іспанія"
+                                aria-pressed="false">Іспанія</button>
+                            <button class="chip" type="button" data-country="Хорватія"
+                                aria-pressed="false">Хорватія</button>
+                            <button class="chip" type="button" data-country="Португалія"
+                                aria-pressed="false">Португалія</button>
+                            <button class="chip" type="button" data-country="Греція"
+                                aria-pressed="false">Греція</button>
                         </div>
                     </div>
                     <div>
                         <span class="filters-label">Ціна, €</span>
                         <div class="price-row">
-                            <input class="field-input" type="number" min="0" placeholder="300" aria-label="Ціна від" />
-                            <input class="field-input" type="number" min="0" placeholder="1000" aria-label="Ціна до" />
+                            <input class="field-input" name="priceMin" type="number" min="0" placeholder="300"
+                                aria-label="Ціна від" />
+                            <input class="field-input" name="priceMax" type="number" min="0" placeholder="1000"
+                                aria-label="Ціна до" />
                         </div>
                     </div>
                     <fieldset class="filters-duration">
                         <legend class="filters-label">Тривалість</legend>
-                        <label class="check"><input type="checkbox" /> 1–3 дні</label>
-                        <label class="check"><input type="checkbox" /> 4–6 днів</label>
-                        <label class="check"><input type="checkbox" /> 7+ днів</label>
+                        <label class="check"><input type="checkbox" name="duration" value="1-3" /> 1–3 дні</label>
+                        <label class="check"><input type="checkbox" name="duration" value="4-6" /> 4–6 днів</label>
+                        <label class="check"><input type="checkbox" name="duration" value="7-99" /> 7+ днів</label>
                     </fieldset>
                     <button class="btn-line" type="reset">Скинути фільтри</button>
                 </form>
 
                 <div>
                     <div class="catalog-bar">
-                        <p>Знайдено турів: <strong>9</strong></p>
+                        <p>Знайдено турів: <strong id="tourCount">9</strong></p>
                         <div class="chip-list" role="group" aria-label="Сортування">
-                            <button class="chip is-active" type="button">За рейтингом</button>
-                            <button class="chip" type="button">Дешевші</button>
-                            <button class="chip" type="button">Дорожчі</button>
+                            <button class="chip is-active" type="button" data-sort="rating" aria-pressed="true">За
+                                рейтингом</button>
+                            <button class="chip" type="button" data-sort="price-asc"
+                                aria-pressed="false">Дешевші</button>
+                            <button class="chip" type="button" data-sort="price-desc"
+                                aria-pressed="false">Дорожчі</button>
                         </div>
                     </div>
-                    <div class="tour-grid">
-                        <article class="tour-card">
-                            <div class="card-img">
-                                <img src="assets/images/tours/tours-rome.jpg" alt="Вид на Колізей у Римі" width="400" height="300" loading="lazy" />
-                                <span class="card-tag">Італія</span>
-                                <button class="fav-btn" type="button" aria-label="Додати в обране"><i
-                                        class="fa-regular fa-heart"></i></button>
-                            </div>
-                            <div class="tour-card-body">
-                                <h2 class="tour-card-title">Вічний Рим</h2>
-                                <p class="tour-card-meta">
-                                    <span class="tour-card-rating"><svg width="20" height="19" aria-hidden="true"><use href="assets/images/icons/sprite.svg#star"></use></svg>
-                                        4.9</span>
-                                    <span>7 днів</span>
-                                </p>
-                                <div class="tour-card-foot">
-                                    <p>від <strong>€820</strong></p><a class="btn-sm" href="tour.html">Детальніше</a>
-                                </div>
-                            </div>
-                        </article>
-
-                        <article class="tour-card">
-                            <div class="card-img">
-                                <img src="assets/images/tours/tours-paris.jpg" alt="Вид на Ейфелеву вежу в Парижі" width="400" height="300" loading="lazy" />
-                                <span class="card-tag">Франція</span>
-                                <button class="fav-btn" type="button" aria-label="Додати в обране"><i
-                                        class="fa-regular fa-heart"></i></button>
-                            </div>
-                            <div class="tour-card-body">
-                                <h2 class="tour-card-title">Париж за 5 днів</h2>
-                                <p class="tour-card-meta">
-                                    <span class="tour-card-rating"><svg width="20" height="19" aria-hidden="true"><use href="assets/images/icons/sprite.svg#star"></use></svg>
-                                        4.8</span>
-                                    <span>5 днів</span>
-                                </p>
-                                <div class="tour-card-foot">
-                                    <p>від <strong>€690</strong></p><a class="btn-sm" href="tour.html">Детальніше</a>
-                                </div>
-                            </div>
-                        </article>
-
-                        <article class="tour-card">
-                            <div class="card-img">
-                            <img src="assets/images/tours/tours-italy-carnaval.jpg" alt="Венеціанський карнавал у Італії" width="400" height="300" loading="lazy" />
-                                <span class="card-tag">Італія</span>
-                                <button class="fav-btn" type="button" aria-label="Додати в обране"><i
-                                        class="fa-regular fa-heart"></i></button>
-                            </div>
-                            <div class="tour-card-body">
-                                <h2 class="tour-card-title">Венеціанський карнавал</h2>
-                                <p class="tour-card-meta">
-                                    <span class="tour-card-rating"><svg width="20" height="19" aria-hidden="true"><use href="assets/images/icons/sprite.svg#star"></use></svg>
-                                        4.8</span>
-                                    <span>4 дні</span>
-                                </p>
-                                <div class="tour-card-foot">
-                                    <p>від <strong>€720</strong></p><a class="btn-sm" href="tour.html">Детальніше</a>
-                                </div>
-                            </div>
-                        </article>
-
-                        <article class="tour-card">
-                            <div class="card-img">
-                                <img src="assets/images/tours/tours-croatia-dubrovnik.jpg" alt="Вид на Дубровник у Хорватії" width="400" height="300" loading="lazy" />
-                                <span class="card-tag">Хорватія</span>
-                                <button class="fav-btn" type="button" aria-label="Додати в обране"><i
-                                        class="fa-regular fa-heart"></i></button>
-                            </div>
-                            <div class="tour-card-body">
-                                <h2 class="tour-card-title">Дубровник і Адріатика</h2>
-                                <p class="tour-card-meta">
-                                    <span class="tour-card-rating"><svg width="20" height="19" aria-hidden="true"><use href="assets/images/icons/sprite.svg#star"></use></svg>
-                                        4.8</span>
-                                    <span>7 днів</span>
-                                </p>
-                                <div class="tour-card-foot">
-                                    <p>від <strong>€780</strong></p><a class="btn-sm" href="tour.html">Детальніше</a>
-                                </div>
-                            </div>
-                        </article>
-
-                        <article class="tour-card">
-                            <div class="card-img">
-                                <span class="card-tag">Іспанія</span>
-                                <img src="assets/images/tours/tours-spain-barcelona.jpg" alt="Вид на Барселону" width="400" height="300" loading="lazy" />
-                                <button class="fav-btn" type="button" aria-label="Додати в обране"><i
-                                        class="fa-regular fa-heart"></i></button>
-                            </div>
-                            <div class="tour-card-body">
-                                <h2 class="tour-card-title">Барселона Гауді</h2>
-                                <p class="tour-card-meta">
-                                    <span class="tour-card-rating"><svg width="20" height="19" aria-hidden="true"><use href="assets/images/icons/sprite.svg#star"></use></svg>
-                                        4.7</span>
-                                    <span>6 днів</span>
-                                </p>
-                                <div class="tour-card-foot">
-                                    <p>від <strong>€750</strong></p><a class="btn-sm" href="tour.html">Детальніше</a>
-                                </div>
-                            </div>
-                        </article>
-
-                        <article class="tour-card">
-                            <div class="card-img">
-                                <img src="assets/images/tours/tours-portugal.jpg" alt="Вид на Лісабон у Португалії" width="400" height="300" loading="lazy" />
-                                <span class="card-tag">Португалія</span>
-                                <button class="fav-btn" type="button" aria-label="Додати в обране"><i
-                                        class="fa-regular fa-heart"></i></button>
-                            </div>
-                            <div class="tour-card-body">
-                                <h2 class="tour-card-title">Лісабон і Сінтра</h2>
-                                <p class="tour-card-meta">
-                                    <span class="tour-card-rating"><svg width="20" height="19" aria-hidden="true"><use href="assets/images/icons/sprite.svg#star"></use></svg>
-                                        4.7</span>
-                                    <span>6 днів</span>
-                                </p>
-                                <div class="tour-card-foot">
-                                    <p>від <strong>€600</strong></p><a class="btn-sm" href="tour.html">Детальніше</a>
-                                </div>
-                            </div>
-                        </article>
-
-                        <article class="tour-card">
-                            <div class="card-img">
-                                <img src="assets/images/tours/tours-spain-madrid.jpg" alt="Вид на Мадрид" width="400" height="300" loading="lazy" />
-                                <span class="card-tag">Іспанія</span>
-                                <button class="fav-btn" type="button" aria-label="Додати в обране"><i
-                                        class="fa-regular fa-heart"></i></button>
-                            </div>
-                            <div class="tour-card-body">
-                                <h2 class="tour-card-title">Мадрид і Толедо</h2>
-                                <p class="tour-card-meta">
-                                    <span class="tour-card-rating"><svg width="20" height="19" aria-hidden="true"><use href="assets/images/icons/sprite.svg#star"></use></svg>
-                                        4.6</span>
-                                    <span>5 днів</span>
-                                </p>
-                                <div class="tour-card-foot">
-                                    <p>від <strong>€640</strong></p><a class="btn-sm" href="tour.html">Детальніше</a>
-                                </div>
-                            </div>
-                        </article>
-
-                        <article class="tour-card">
-                            <div class="card-img">
-                                <img src="assets/images/tours/tours-croatia-split.jpg" alt="Вид на Спліт у Хорватії" width="400" height="300" loading="lazy" />
-                                <span class="card-tag">Хорватія</span>
-                                <button class="fav-btn" type="button" aria-label="Додати в обране"><i
-                                        class="fa-regular fa-heart"></i></button>
-                            </div>
-                            <div class="tour-card-body">
-                                <h2 class="tour-card-title">Спліт і острів Хвар</h2>
-                                <p class="tour-card-meta">
-                                    <span class="tour-card-rating"><svg width="20" height="19" aria-hidden="true"><use href="assets/images/icons/sprite.svg#star"></use></svg>
-                                        4.6</span>
-                                    <span>5 днів</span>
-                                </p>
-                                <div class="tour-card-foot">
-                                    <p>від <strong>€590</strong></p><a class="btn-sm" href="tour.html">Детальніше</a>
-                                </div>
-                            </div>
-                        </article>
-
-                        <article class="tour-card">
-                            <div class="card-img">
-                                <img src="assets/images/tours/tours-greece.jpg" alt="Вид на Афіни у Греції" width="400" height="300" loading="lazy" />
-                                <span class="card-tag">Греція</span>
-                                <button class="fav-btn" type="button" aria-label="Додати в обране"><i
-                                        class="fa-regular fa-heart"></i></button>
-                            </div>
-                            <div class="tour-card-body">
-                                <h2 class="tour-card-title">Афіни та острови</h2>
-                                <p class="tour-card-meta">
-                                    <span class="tour-card-rating"><svg width="20" height="19" aria-hidden="true"><use href="assets/images/icons/sprite.svg#star"></use></svg>
-                                        4.5</span>
-                                    <span>5 днів</span>
-                                </p>
-                                <div class="tour-card-foot">
-                                    <p>від <strong>€650</strong></p><a class="btn-sm" href="tour.html">Детальніше</a>
-                                </div>
-                            </div>
-                        </article>
+                    <div class="tour-grid" id="tourGrid"></div>
+                    <p class="tours-empty" id="toursEmpty" hidden>За вашими фільтрами турів не знайдено. Змініть
+                        критерії пошуку.</p>
+                    <div class="more-wrap"><button id="loadMore" class="btn-line" type="button">Показати ще</button>
                     </div>
-                    <div class="more-wrap"><button class="btn-line" type="button">Показати ще</button></div>
                 </div>
             </div>
         </section>
@@ -311,9 +150,9 @@
                 <ul class="footer-col-list">
                     <li><a href="index.html">Головна</a></li>
                     <li><a href="about.html">Про нас</a></li>
-                    <li><a href="tours.html">Подорожі</a></li>
+                    <li><a href="tours.html">Тури</a></li>
                     <li><a href="404.html">Блог</a></li>
-                    <li><a href="404.html">Пропозиції</a></li>
+                    <li><a href="contacts.html">Зв'язатися</a></li>
                 </ul>
             </div>
 
@@ -340,16 +179,24 @@
                 <h3 class="footer-col-title">Підпишіться на наші новини</h3>
                 <div class="footer-social">
                     <a href="#" class="footer-social-link">
-                        <svg width="31" height="31" role="img" aria-label="Facebook"><use href="assets/images/icons/sprite.svg#facebook"></use></svg>
+                        <svg width="31" height="31" role="img" aria-label="Facebook">
+                            <use href="assets/images/icons/sprite.svg#facebook"></use>
+                        </svg>
                     </a>
                     <a href="#" class="footer-social-link">
-                        <svg width="32" height="32" role="img" aria-label="Pinterest"><use href="assets/images/icons/sprite.svg#pinterest"></use></svg>
+                        <svg width="32" height="32" role="img" aria-label="Pinterest">
+                            <use href="assets/images/icons/sprite.svg#pinterest"></use>
+                        </svg>
                     </a>
                     <a href="#" class="footer-social-link">
-                        <svg width="32" height="32" role="img" aria-label="Instagram"><use href="assets/images/icons/sprite.svg#instagram"></use></svg>
+                        <svg width="32" height="32" role="img" aria-label="Instagram">
+                            <use href="assets/images/icons/sprite.svg#instagram"></use>
+                        </svg>
                     </a>
                     <a href="#" class="footer-social-link">
-                        <svg width="26" height="21" role="img" aria-label="Twitter"><use href="assets/images/icons/sprite.svg#twitter"></use></svg>
+                        <svg width="26" height="21" role="img" aria-label="Twitter">
+                            <use href="assets/images/icons/sprite.svg#twitter"></use>
+                        </svg>
                     </a>
                 </div>
             </div>
@@ -358,17 +205,21 @@
 
     <!-- LOGIN MODAL -->
     <div id="loginModal" class="modal-overlay d-none">
-        <div class="modal-box">
-            <button id="closeLogin" class="modal-close">
+        <div class="modal-box" role="dialog" aria-modal="true" aria-labelledby="loginModalTitle">
+            <button id="closeLogin" class="modal-close" type="button" aria-label="Закрити">
                 <i class="fa-solid fa-xmark"></i>
             </button>
-            <h3 class="modal-title">З поверненням!</h3>
+            <h3 class="modal-title" id="loginModalTitle">З поверненням!</h3>
             <p class="modal-subtitle">
                 Увійдіть до свого акаунта, щоб продовжити планувати подорожі.
             </p>
-            <form class="modal-form">
-                <input type="email" placeholder="Введіть ваш Email" />
-                <input type="password" placeholder="Введіть ваш пароль" />
+            <form class="modal-form" data-validate>
+                <label class="visually-hidden" for="login-email">Email</label>
+                <input id="login-email" name="email" type="email" autocomplete="email" placeholder="Введіть ваш Email"
+                    required />
+                <label class="visually-hidden" for="login-password">Пароль</label>
+                <input id="login-password" name="password" type="password" autocomplete="current-password"
+                    placeholder="Введіть ваш пароль" minlength="8" required />
                 <a href="#" class="modal-forgot">Забули пароль?</a>
                 <button type="submit" class="modal-btn modal-btn--primary">
                     Увійти
@@ -381,13 +232,13 @@
                 <span>Або продовжити через</span>
             </div>
             <div class="modal-socials">
-                <button class="social-btn">
+                <button class="social-btn" type="button" aria-label="Увійти через Google">
                     <i class="fa-brands fa-google"></i>
                 </button>
-                <button class="social-btn">
+                <button class="social-btn" type="button" aria-label="Увійти через Facebook">
                     <i class="fa-brands fa-facebook"></i>
                 </button>
-                <button class="social-btn">
+                <button class="social-btn" type="button" aria-label="Увійти через Apple">
                     <i class="fa-brands fa-apple"></i>
                 </button>
             </div>
@@ -396,20 +247,28 @@
 
     <!-- SIGNUP MODAL -->
     <div id="signupModal" class="modal-overlay d-none">
-        <div class="modal-box">
-            <button id="closeSignup" class="modal-close">
+        <div class="modal-box" role="dialog" aria-modal="true" aria-labelledby="signupModalTitle">
+            <button id="closeSignup" class="modal-close" type="button" aria-label="Закрити">
                 <i class="fa-solid fa-xmark"></i>
             </button>
-            <h3 class="modal-title">Приєднуйтесь до нас</h3>
+            <h3 class="modal-title" id="signupModalTitle">Приєднуйтесь до нас</h3>
             <p class="modal-subtitle">
                 Створіть акаунт, відкривайте цікаві напрямки та плануйте
                 свої майбутні пригоди.
             </p>
-            <form class="modal-form">
-                <input type="text" placeholder="Введіть ваше ім'я" />
-                <input type="text" placeholder="Введіть ваше прізвище" />
-                <input type="email" placeholder="Введіть ваш Email" />
-                <input type="password" placeholder="Введіть ваш пароль" />
+            <form class="modal-form" data-validate>
+                <label class="visually-hidden" for="signup-name">Ім'я</label>
+                <input id="signup-name" name="name" type="text" autocomplete="given-name"
+                    placeholder="Введіть ваше ім'я" minlength="2" required />
+                <label class="visually-hidden" for="signup-surname">Прізвище</label>
+                <input id="signup-surname" name="surname" type="text" autocomplete="family-name"
+                    placeholder="Введіть ваше прізвище" minlength="2" required />
+                <label class="visually-hidden" for="signup-email">Email</label>
+                <input id="signup-email" name="email" type="email" autocomplete="email" placeholder="Введіть ваш Email"
+                    required />
+                <label class="visually-hidden" for="signup-password">Пароль</label>
+                <input id="signup-password" name="password" type="password" autocomplete="new-password"
+                    placeholder="Введіть ваш пароль" minlength="8" required />
                 <button type="submit" class="modal-btn modal-btn--primary">
                     Реєстрація
                 </button>
@@ -421,19 +280,19 @@
                 <span>Або продовжити через</span>
             </div>
             <div class="modal-socials">
-                <button class="social-btn">
+                <button class="social-btn" type="button" aria-label="Увійти через Google">
                     <i class="fa-brands fa-google"></i>
                 </button>
-                <button class="social-btn">
+                <button class="social-btn" type="button" aria-label="Увійти через Facebook">
                     <i class="fa-brands fa-facebook"></i>
                 </button>
-                <button class="social-btn">
+                <button class="social-btn" type="button" aria-label="Увійти через Apple">
                     <i class="fa-brands fa-apple"></i>
                 </button>
             </div>
         </div>
     </div>
-    <script src="assets/scripts/common.js" defer></script>
+    <script src="assets/scripts/main.js" defer></script>
 </body>
 
 </html>
