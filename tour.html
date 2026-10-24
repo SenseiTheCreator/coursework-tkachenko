@@ -26,14 +26,16 @@
 
         <!-- MENU -->
 
-        <div id="iconBlock" class="menu-icon">
-          <div id="iconOpen" class="menu-icon-open">
-            <svg width="38" height="23" role="img" aria-label="Меню"><use href="assets/images/icons/sprite.svg#menu"></use></svg>
-          </div>
-          <div id="iconClose" class="menu-icon-close d-none">
+        <button type="button" id="iconBlock" class="menu-icon" aria-label="Меню" aria-expanded="false">
+          <span id="iconOpen" class="menu-icon-open">
+            <svg width="38" height="23" role="img" aria-label="Меню">
+              <use href="assets/images/icons/sprite.svg#menu"></use>
+            </svg>
+          </span>
+          <span id="iconClose" class="menu-icon-close d-none">
             <i class="fa-solid fa-xmark"></i>
-          </div>
-        </div>
+          </span>
+        </button>
 
         <ul id="mainMenu" class="main-menu d-flex">
           <li><a href="index.html">Головна</a></li>
@@ -62,7 +64,9 @@
         <h1 class="page-hero-title">Тур «Вічний Рим»</h1>
         <p class="tour-hero-meta">
           <span>Рим, Італія</span>
-          <span class="tour-hero-rating"><svg width="20" height="19" aria-hidden="true"><use href="assets/images/icons/sprite.svg#star"></use></svg> 4.9 (128 відгуків)</span>
+          <span class="tour-hero-rating"><svg width="20" height="19" aria-hidden="true">
+              <use href="assets/images/icons/sprite.svg#star"></use>
+            </svg> 4.9 (128 відгуків)</span>
           <span>7 днів / 6 ночей</span>
         </p>
       </div>
@@ -79,26 +83,26 @@
               <span class="tour-photo-label">Колізей</span>
             </div>
             <div class="tour-thumbs">
-              <div class="tour-thumb">
+              <button type="button" class="tour-thumb is-active">
                 <img src="assets/images/tours/rome-colosseum.jpg" alt="Колізей, Рим" width="200" height="150"
                   loading="lazy" />
                 <span class="tour-thumb-label">Колізей</span>
-              </div>
-              <div class="tour-thumb">
+              </button>
+              <button type="button" class="tour-thumb">
                 <img src="assets/images/tours/rome-vatican.jpg" alt="Ватикан, Рим" width="200" height="150"
                   loading="lazy" />
                 <span class="tour-thumb-label">Ватикан</span>
-              </div>
-              <div class="tour-thumb">
+              </button>
+              <button type="button" class="tour-thumb">
                 <img src="assets/images/tours/rome-trevi.jpg" alt="Фонтан Треві, Рим" width="200" height="150"
                   loading="lazy" />
                 <span class="tour-thumb-label">Фонтан Треві</span>
-              </div>
-              <div class="tour-thumb">
+              </button>
+              <button type="button" class="tour-thumb">
                 <img src="assets/images/tours/rome-trastevere.jpg" alt="Трастевере, Рим" width="200" height="150"
                   loading="lazy" />
                 <span class="tour-thumb-label">Трастевере</span>
-              </div>
+              </button>
             </div>
           </div>
 
@@ -124,14 +128,16 @@
           </aside>
 
           <div class="tour-content">
-            <nav class="tour-tabs" aria-label="Розділи туру">
-              <a class="is-active" href="#description">Опис</a>
-              <a href="#program">Програма</a>
-              <a href="#conditions">Умови</a>
-              <a href="#reviews">Відгуки</a>
-            </nav>
+            <div class="tour-tabs" role="tablist" aria-label="Розділи туру">
+              <button class="is-active" role="tab" id="tab-description" aria-controls="description" aria-selected="true"
+                type="button">Опис</button>
+              <button role="tab" id="tab-program" aria-controls="program" aria-selected="false" tabindex="-1"
+                type="button">Програма</button>
+              <button role="tab" id="tab-conditions" aria-controls="conditions" aria-selected="false" tabindex="-1"
+                type="button">Умови</button>
+            </div>
 
-            <section class="tour-section" id="description">
+            <section class="tour-section" id="description" role="tabpanel" aria-labelledby="tab-description">
               <h2 class="tour-section-title">Опис</h2>
               <p class="tour-text">Сім днів у місті, де кожна вулиця — музей просто неба. Ви побачите Колізей і Римський
                 форум, проведете день у Ватикані, скуштуєте справжню карбонару в Трастевере та кинете монетку у фонтан
@@ -144,7 +150,7 @@
               </ul>
             </section>
 
-            <section class="tour-section" id="program">
+            <section class="tour-section" id="program" role="tabpanel" aria-labelledby="tab-program" hidden>
               <h2 class="tour-section-title">Програма</h2>
               <ol class="tour-program">
                 <li>
@@ -179,7 +185,7 @@
               </ol>
             </section>
 
-            <section class="tour-section" id="conditions">
+            <section class="tour-section" id="conditions" role="tabpanel" aria-labelledby="tab-conditions" hidden>
               <h2 class="tour-section-title">Умови</h2>
               <div class="tour-info-grid">
                 <div>
@@ -211,7 +217,18 @@
                   <div class="review-avatar" aria-hidden="true">ОК</div>
                   <div>
                     <div class="review-head">
-                      <p class="review-name">Олена К.</p><span class="stars" aria-label="Оцінка 5 з 5"><svg width="20" height="19" aria-hidden="true"><use href="assets/images/icons/sprite.svg#star"></use></svg><svg width="20" height="19" aria-hidden="true"><use href="assets/images/icons/sprite.svg#star"></use></svg><svg width="20" height="19" aria-hidden="true"><use href="assets/images/icons/sprite.svg#star"></use></svg><svg width="20" height="19" aria-hidden="true"><use href="assets/images/icons/sprite.svg#star"></use></svg><svg width="20" height="19" aria-hidden="true"><use href="assets/images/icons/sprite.svg#star"></use></svg></span>
+                      <p class="review-name">Олена К.</p><span class="stars" aria-label="Оцінка 5 з 5"><svg width="20"
+                          height="19" aria-hidden="true">
+                          <use href="assets/images/icons/sprite.svg#star"></use>
+                        </svg><svg width="20" height="19" aria-hidden="true">
+                          <use href="assets/images/icons/sprite.svg#star"></use>
+                        </svg><svg width="20" height="19" aria-hidden="true">
+                          <use href="assets/images/icons/sprite.svg#star"></use>
+                        </svg><svg width="20" height="19" aria-hidden="true">
+                          <use href="assets/images/icons/sprite.svg#star"></use>
+                        </svg><svg width="20" height="19" aria-hidden="true">
+                          <use href="assets/images/icons/sprite.svg#star"></use>
+                        </svg></span>
                     </div>
                     <p class="review-text">Гід розповідав так цікаво, що час у Ватикані пролетів непомітно.</p>
                   </div>
@@ -220,7 +237,18 @@
                   <div class="review-avatar" aria-hidden="true">МД</div>
                   <div>
                     <div class="review-head">
-                      <p class="review-name">Максим Д.</p><span class="stars" aria-label="Оцінка 5 з 5"><svg width="20" height="19" aria-hidden="true"><use href="assets/images/icons/sprite.svg#star"></use></svg><svg width="20" height="19" aria-hidden="true"><use href="assets/images/icons/sprite.svg#star"></use></svg><svg width="20" height="19" aria-hidden="true"><use href="assets/images/icons/sprite.svg#star"></use></svg><svg width="20" height="19" aria-hidden="true"><use href="assets/images/icons/sprite.svg#star"></use></svg><svg width="20" height="19" aria-hidden="true"><use href="assets/images/icons/sprite.svg#star"></use></svg></span>
+                      <p class="review-name">Максим Д.</p><span class="stars" aria-label="Оцінка 5 з 5"><svg width="20"
+                          height="19" aria-hidden="true">
+                          <use href="assets/images/icons/sprite.svg#star"></use>
+                        </svg><svg width="20" height="19" aria-hidden="true">
+                          <use href="assets/images/icons/sprite.svg#star"></use>
+                        </svg><svg width="20" height="19" aria-hidden="true">
+                          <use href="assets/images/icons/sprite.svg#star"></use>
+                        </svg><svg width="20" height="19" aria-hidden="true">
+                          <use href="assets/images/icons/sprite.svg#star"></use>
+                        </svg><svg width="20" height="19" aria-hidden="true">
+                          <use href="assets/images/icons/sprite.svg#star"></use>
+                        </svg></span>
                     </div>
                     <p class="review-text">Готель справді в центрі — до Колізею пішки 10 хвилин.</p>
                   </div>
@@ -229,7 +257,18 @@
                   <div class="review-avatar" aria-hidden="true">ІС</div>
                   <div>
                     <div class="review-head">
-                      <p class="review-name">Ірина С.</p><span class="stars" aria-label="Оцінка 5 з 5"><svg width="20" height="19" aria-hidden="true"><use href="assets/images/icons/sprite.svg#star"></use></svg><svg width="20" height="19" aria-hidden="true"><use href="assets/images/icons/sprite.svg#star"></use></svg><svg width="20" height="19" aria-hidden="true"><use href="assets/images/icons/sprite.svg#star"></use></svg><svg width="20" height="19" aria-hidden="true"><use href="assets/images/icons/sprite.svg#star"></use></svg><svg width="20" height="19" aria-hidden="true"><use href="assets/images/icons/sprite.svg#star"></use></svg></span>
+                      <p class="review-name">Ірина С.</p><span class="stars" aria-label="Оцінка 5 з 5"><svg width="20"
+                          height="19" aria-hidden="true">
+                          <use href="assets/images/icons/sprite.svg#star"></use>
+                        </svg><svg width="20" height="19" aria-hidden="true">
+                          <use href="assets/images/icons/sprite.svg#star"></use>
+                        </svg><svg width="20" height="19" aria-hidden="true">
+                          <use href="assets/images/icons/sprite.svg#star"></use>
+                        </svg><svg width="20" height="19" aria-hidden="true">
+                          <use href="assets/images/icons/sprite.svg#star"></use>
+                        </svg><svg width="20" height="19" aria-hidden="true">
+                          <use href="assets/images/icons/sprite.svg#star"></use>
+                        </svg></span>
                     </div>
                     <p class="review-text">Програма насичена, але без поспіху. Група невелика, всі питання вирішували
                       миттєво.</p>
@@ -320,16 +359,24 @@
         <h3 class="footer-col-title">Підпишіться на наші новини</h3>
         <div class="footer-social">
           <a href="#" class="footer-social-link">
-            <svg width="31" height="31" role="img" aria-label="Facebook"><use href="assets/images/icons/sprite.svg#facebook"></use></svg>
+            <svg width="31" height="31" role="img" aria-label="Facebook">
+              <use href="assets/images/icons/sprite.svg#facebook"></use>
+            </svg>
           </a>
           <a href="#" class="footer-social-link">
-            <svg width="32" height="32" role="img" aria-label="Pinterest"><use href="assets/images/icons/sprite.svg#pinterest"></use></svg>
+            <svg width="32" height="32" role="img" aria-label="Pinterest">
+              <use href="assets/images/icons/sprite.svg#pinterest"></use>
+            </svg>
           </a>
           <a href="#" class="footer-social-link">
-            <svg width="32" height="32" role="img" aria-label="Instagram"><use href="assets/images/icons/sprite.svg#instagram"></use></svg>
+            <svg width="32" height="32" role="img" aria-label="Instagram">
+              <use href="assets/images/icons/sprite.svg#instagram"></use>
+            </svg>
           </a>
           <a href="#" class="footer-social-link">
-            <svg width="26" height="21" role="img" aria-label="Twitter"><use href="assets/images/icons/sprite.svg#twitter"></use></svg>
+            <svg width="26" height="21" role="img" aria-label="Twitter">
+              <use href="assets/images/icons/sprite.svg#twitter"></use>
+            </svg>
           </a>
         </div>
       </div>
@@ -338,17 +385,21 @@
 
   <!-- LOGIN MODAL -->
   <div id="loginModal" class="modal-overlay d-none">
-    <div class="modal-box">
-      <button id="closeLogin" class="modal-close">
+    <div class="modal-box" role="dialog" aria-modal="true" aria-labelledby="loginModalTitle">
+      <button id="closeLogin" class="modal-close" type="button" aria-label="Закрити">
         <i class="fa-solid fa-xmark"></i>
       </button>
-      <h2 class="modal-title">З поверненням!</h2>
+      <h2 class="modal-title" id="loginModalTitle">З поверненням!</h2>
       <p class="modal-subtitle">
         Увійдіть до свого акаунта, щоб продовжити планувати подорожі.
       </p>
-      <form class="modal-form">
-        <input type="email" placeholder="Введіть ваш Email" />
-        <input type="password" placeholder="Введіть ваш пароль" />
+      <form class="modal-form" data-validate>
+        <label class="visually-hidden" for="login-email">Email</label>
+        <input id="login-email" name="email" type="email" autocomplete="email" placeholder="Введіть ваш Email"
+          required />
+        <label class="visually-hidden" for="login-password">Пароль</label>
+        <input id="login-password" name="password" type="password" autocomplete="current-password"
+          placeholder="Введіть ваш пароль" minlength="8" required />
         <a href="#" class="modal-forgot">Забули пароль?</a>
         <button type="submit" class="modal-btn modal-btn--primary">
           Увійти
@@ -361,13 +412,13 @@
         <span>Або продовжити через</span>
       </div>
       <div class="modal-socials">
-        <button class="social-btn">
+        <button class="social-btn" type="button" aria-label="Увійти через Google">
           <i class="fa-brands fa-google"></i>
         </button>
-        <button class="social-btn">
+        <button class="social-btn" type="button" aria-label="Увійти через Facebook">
           <i class="fa-brands fa-facebook"></i>
         </button>
-        <button class="social-btn">
+        <button class="social-btn" type="button" aria-label="Увійти через Apple">
           <i class="fa-brands fa-apple"></i>
         </button>
       </div>
@@ -376,20 +427,28 @@
 
   <!-- SIGNUP MODAL -->
   <div id="signupModal" class="modal-overlay d-none">
-    <div class="modal-box">
-      <button id="closeSignup" class="modal-close">
+    <div class="modal-box" role="dialog" aria-modal="true" aria-labelledby="signupModalTitle">
+      <button id="closeSignup" class="modal-close" type="button" aria-label="Закрити">
         <i class="fa-solid fa-xmark"></i>
       </button>
-      <h2 class="modal-title">Приєднуйтесь до нас</h2>
+      <h2 class="modal-title" id="signupModalTitle">Приєднуйтесь до нас</h2>
       <p class="modal-subtitle">
         Створіть акаунт, відкривайте цікаві напрямки та плануйте
         свої майбутні пригоди.
       </p>
-      <form class="modal-form">
-        <input type="text" placeholder="Введіть ваше ім'я" />
-        <input type="text" placeholder="Введіть ваше прізвище" />
-        <input type="email" placeholder="Введіть ваш Email" />
-        <input type="password" placeholder="Введіть ваш пароль" />
+      <form class="modal-form" data-validate>
+        <label class="visually-hidden" for="signup-name">Ім'я</label>
+        <input id="signup-name" name="name" type="text" autocomplete="given-name" placeholder="Введіть ваше ім'я"
+          minlength="2" required />
+        <label class="visually-hidden" for="signup-surname">Прізвище</label>
+        <input id="signup-surname" name="surname" type="text" autocomplete="family-name"
+          placeholder="Введіть ваше прізвище" minlength="2" required />
+        <label class="visually-hidden" for="signup-email">Email</label>
+        <input id="signup-email" name="email" type="email" autocomplete="email" placeholder="Введіть ваш Email"
+          required />
+        <label class="visually-hidden" for="signup-password">Пароль</label>
+        <input id="signup-password" name="password" type="password" autocomplete="new-password"
+          placeholder="Введіть ваш пароль" minlength="8" required />
         <button type="submit" class="modal-btn modal-btn--primary">
           Реєстрація
         </button>
@@ -401,19 +460,19 @@
         <span>Або продовжити через</span>
       </div>
       <div class="modal-socials">
-        <button class="social-btn">
+        <button class="social-btn" type="button" aria-label="Увійти через Google">
           <i class="fa-brands fa-google"></i>
         </button>
-        <button class="social-btn">
+        <button class="social-btn" type="button" aria-label="Увійти через Facebook">
           <i class="fa-brands fa-facebook"></i>
         </button>
-        <button class="social-btn">
+        <button class="social-btn" type="button" aria-label="Увійти через Apple">
           <i class="fa-brands fa-apple"></i>
         </button>
       </div>
     </div>
   </div>
-  <script src="assets/scripts/common.js" defer></script>
+  <script src="assets/scripts/main.js" defer></script>
 </body>
 
 </html>
