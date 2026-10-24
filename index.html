@@ -4,8 +4,8 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Travellian</title>
-  <meta name="description" content="Travellian — тури Європою з Івано-Франківська" />
+  <title>Travellian — тури Європою з Івано-Франківська</title>
+  <meta name="description" content="Подорожі Європою з Travellian: Рим, Париж, Барселона, Лісабон. Обирайте напрям, дати та бронюйте тур онлайн." />
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@8/swiper-bundle.min.css" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css"
     integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw=="
@@ -26,14 +26,14 @@
 
         <!-- MENU -->
 
-        <div id="iconBlock" class="menu-icon">
-          <div id="iconOpen" class="menu-icon-open">
+        <button type="button" id="iconBlock" class="menu-icon" aria-label="Меню" aria-expanded="false">
+          <span id="iconOpen" class="menu-icon-open">
             <svg width="38" height="23" role="img" aria-label="Menu"><use href="assets/images/icons/sprite.svg#menu"></use></svg>
-          </div>
-          <div id="iconClose" class="menu-icon-close d-none">
+          </span>
+          <span id="iconClose" class="menu-icon-close d-none">
             <i class="fa-solid fa-xmark"></i>
-          </div>
-        </div>
+          </span>
+        </button>
 
         <ul id="mainMenu" class="main-menu d-flex">
           <li><a href="index.html" class="is-active">Головна</a></li>
@@ -149,7 +149,7 @@
         <div class="swiper-wrapper">
           <div class="swiper-slide">
             <article class="dest-card">
-              <img src="assets/images/berlin-col.jpg" alt="Monument of Berlin" class="dest-card-img" />
+              <img src="assets/images/berlin-col.jpg" alt="Пам'ятник у Берліні" class="dest-card-img" />
               <div class="dest-card-info">
                 <h3 class="dest-card-title">Символ історії Берліна</h3>
                 <p class="dest-card-location">
@@ -162,7 +162,7 @@
 
           <div class="swiper-slide">
             <article class="dest-card">
-              <img src="assets/images/london-col.jpg" alt="Millennium Bridge" class="dest-card-img" />
+              <img src="assets/images/london-col.jpg" alt="Міст Міленіум у Лондоні" class="dest-card-img" />
               <div class="dest-card-info">
                 <h3 class="dest-card-title">Міст Міленіум</h3>
                 <p class="dest-card-location">
@@ -175,7 +175,7 @@
 
           <div class="swiper-slide">
             <article class="dest-card">
-              <img src="assets/images/venice-col.jpg" alt="Rialto Bridge" class="dest-card-img" />
+              <img src="assets/images/venice-col.jpg" alt="Міст Ріальто у Венеції" class="dest-card-img" />
               <div class="dest-card-info">
                 <h3 class="dest-card-title">Міст Ріальто</h3>
                 <p class="dest-card-location">
@@ -188,7 +188,7 @@
 
           <div class="swiper-slide">
             <article class="dest-card">
-              <img src="assets/images/lisbon-col.jpg" alt="Sea of Orange Tiles" class="dest-card-img" />
+              <img src="assets/images/lisbon-col.jpg" alt="Червоні дахи старого Лісабона" class="dest-card-img" />
               <div class="dest-card-info">
                 <h3 class="dest-card-title">Барви старого міста</h3>
                 <p class="dest-card-location">
@@ -201,7 +201,7 @@
 
           <div class="swiper-slide">
             <article class="dest-card">
-              <img src="assets/images/madrid.jpg" alt="Madrid" class="dest-card-img" />
+              <img src="assets/images/madrid.jpg" alt="Вид на Мадрид" class="dest-card-img" />
               <div class="dest-card-info">
                 <h3 class="dest-card-title">Сонячний Мадрид</h3>
                 <p class="dest-card-location">
@@ -247,7 +247,7 @@
         <div class="swiper-wrapper">
           <div class="swiper-slide">
             <article class="offer-card">
-              <img src="assets/images/lisbon-container.png" alt="Lisbon" class="offer-card-img" />
+              <img src="assets/images/lisbon-container.png" alt="Лісабон" class="offer-card-img" />
               <div class="offer-card-body">
                 <h3 class="offer-card-title">Лісабон, Португалія</h3>
                 <div class="offer-card-stars">
@@ -275,7 +275,7 @@
 
           <div class="swiper-slide">
             <article class="offer-card">
-              <img src="assets/images/athens-container.png" alt="Athens" class="offer-card-img" />
+              <img src="assets/images/athens-container.png" alt="Афіни" class="offer-card-img" />
               <div class="offer-card-body">
                 <h3 class="offer-card-title">Афіни, Греція</h3>
                 <div class="offer-card-stars">
@@ -303,7 +303,7 @@
 
           <div class="swiper-slide">
             <article class="offer-card">
-              <img src="assets/images/rome-container.png" alt="Rome" class="offer-card-img" />
+              <img src="assets/images/rome-container.png" alt="Рим" class="offer-card-img" />
               <div class="offer-card-body">
                 <h3 class="offer-card-title">Рим, Італія</h3>
                 <div class="offer-card-stars">
@@ -331,7 +331,7 @@
 
           <div class="swiper-slide">
             <article class="offer-card">
-              <img src="assets/images/athens-container.png" alt="Athens" class="offer-card-img" />
+              <img src="assets/images/athens-container.png" alt="Афіни" class="offer-card-img" />
               <div class="offer-card-body">
                 <h3 class="offer-card-title">Афіни: коротка втеча</h3>
                 <div class="offer-card-stars">
@@ -359,7 +359,7 @@
 
           <div class="swiper-slide">
             <article class="offer-card">
-              <img src="assets/images/rome-container.png" alt="Rome" class="offer-card-img" />
+              <img src="assets/images/rome-container.png" alt="Рим" class="offer-card-img" />
               <div class="offer-card-body">
                 <h3 class="offer-card-title">Рим: італійські канікули</h3>
                 <div class="offer-card-stars">
@@ -408,7 +408,7 @@
       </div>
 
       <div class="blog-card content-wrap">
-        <img src="assets/images/italy-blog-photo.png" alt="Beautiful Italy" class="blog-card-img" />
+        <img src="assets/images/italy-blog-photo.png" alt="Італійське узбережжя" class="blog-card-img" />
         <div class="blog-card-body">
           <h3 class="blog-card-title">Італія, у яку закохуєшся з першого погляду</h3>
           <p class="blog-card-text">
@@ -445,7 +445,7 @@
             <div class="trip-cards content-wrap">
               <article class="trip-card">
                 <div class="trip-card-img-wrap">
-                  <img src="assets/images/colosseum.png" alt="Rome City Tour" class="trip-card-img" />
+                  <img src="assets/images/colosseum.png" alt="Колізей у Римі" class="trip-card-img" />
                 </div>
                 <div class="trip-card-body">
                   <div class="trip-card-top">
@@ -468,7 +468,7 @@
 
               <article class="trip-card">
                 <div class="trip-card-img-wrap">
-                  <img src="assets/images/paris.jpg" alt="Paris City Tour" class="trip-card-img" />
+                  <img src="assets/images/paris.jpg" alt="Париж" class="trip-card-img" />
                 </div>
                 <div class="trip-card-body">
                   <div class="trip-card-top">
@@ -491,7 +491,7 @@
 
               <article class="trip-card">
                 <div class="trip-card-img-wrap">
-                  <img src="assets/images/madrid.jpg" alt="Barcelona City Tour" class="trip-card-img" />
+                  <img src="assets/images/madrid.jpg" alt="Барселона" class="trip-card-img" />
                 </div>
                 <div class="trip-card-body">
                   <div class="trip-card-top">
@@ -514,7 +514,7 @@
 
               <article class="trip-card">
                 <div class="trip-card-img-wrap">
-                  <img src="assets/images/budapest.jpg" alt="Budapest City Tour" class="trip-card-img" />
+                  <img src="assets/images/budapest.jpg" alt="Будапешт" class="trip-card-img" />
                 </div>
                 <div class="trip-card-body">
                   <div class="trip-card-top">
@@ -565,18 +565,18 @@
         <div class="swiper-wrapper">
           <div class="swiper-slide">
             <div class="gallery-grid">
-              <img src="assets/images/gallery-first.png" alt="" class="gallery-img" />
-              <img src="assets/images/gallery-second.jpg" alt="" class="gallery-img" />
-              <img src="assets/images/gallery-third.jpg" alt="" class="gallery-img" />
-              <img src="assets/images/gallery-four.jpg" alt="" class="gallery-img" />
+              <img src="assets/images/gallery-first.png" alt="Світлина з подорожі, 1" class="gallery-img" />
+              <img src="assets/images/gallery-second.jpg" alt="Світлина з подорожі, 2" class="gallery-img" />
+              <img src="assets/images/gallery-third.jpg" alt="Світлина з подорожі, 3" class="gallery-img" />
+              <img src="assets/images/gallery-four.jpg" alt="Світлина з подорожі, 4" class="gallery-img" />
             </div>
           </div>
           <div class="swiper-slide">
             <div class="gallery-grid">
-              <img src="assets/images/gallery-first.png" alt="" class="gallery-img" />
-              <img src="assets/images/gallery-second.jpg" alt="" class="gallery-img" />
-              <img src="assets/images/gallery-third.jpg" alt="" class="gallery-img" />
-              <img src="assets/images/gallery-four.jpg" alt="" class="gallery-img" />
+              <img src="assets/images/gallery-first.png" alt="Світлина з подорожі, 5" class="gallery-img" />
+              <img src="assets/images/gallery-second.jpg" alt="Світлина з подорожі, 6" class="gallery-img" />
+              <img src="assets/images/gallery-third.jpg" alt="Світлина з подорожі, 7" class="gallery-img" />
+              <img src="assets/images/gallery-four.jpg" alt="Світлина з подорожі, 8" class="gallery-img" />
             </div>
           </div>
         </div>
@@ -609,7 +609,7 @@
         <div class="swiper-wrapper">
           <div class="swiper-slide">
             <figure class="exp-card">
-              <img src="assets/images/avatar-first.png" alt="John Doe" class="exp-card-avatar" />
+              <img src="assets/images/avatar-first.png" alt="Юрій Семеген" class="exp-card-avatar" />
               <p class="exp-card-text">
                 Подорож перевершила всі мої очікування! Усе було добре
                 організовано, а маршрут дозволив побачити не лише відомі
@@ -630,7 +630,7 @@
 
           <div class="swiper-slide">
             <figure class="exp-card">
-              <img src="assets/images/avatar-second.png" alt="John Smith" class="exp-card-avatar" />
+              <img src="assets/images/avatar-second.png" alt="Влад Карась" class="exp-card-avatar" />
               <p class="exp-card-text">
                 Найбільше сподобалося поєднання свободи та продуманого
                 планування. Ми встигли побачити багато цікавого, спробувати
@@ -651,7 +651,7 @@
 
           <div class="swiper-slide">
             <figure class="exp-card">
-              <img src="assets/images/avatar-third.png" alt="Tamara Bellis" class="exp-card-avatar" />
+              <img src="assets/images/avatar-third.png" alt="Ірина Арабчук" class="exp-card-avatar" />
               <p class="exp-card-text">
                 Це була саме та відпустка, якої мені давно бракувало.
                 Нові місця, красиві краєвиди та безліч маленьких відкриттів
@@ -709,17 +709,18 @@
         <ul class="footer-col-list">
           <li><a href="index.html">Головна</a></li>
           <li><a href="about.html">Про нас</a></li>
-          <li><a href="tours.html">Напрямки</a></li>
+          <li><a href="tours.html">Тури</a></li>
           <li><a href="404.html">Блог</a></li>
-          <li><a href="404.html">Пропозиції</a></li>
+          <li><a href="contacts.html">Зв'язатися</a></li>
+          
         </ul>
       </div>
 
       <div class="footer-col">
         <h3 class="footer-col-title">Корисна інформація</h3>
         <ul class="footer-col-list">
-          <li><a href="404.html">Популярні місця</a></li>
-          <li><a href="404.html">Підтримка</a></li>
+          <li><a href="about.html">Про нас</a></li>
+          <li><a href="contacts.html">Підтримка</a></li>
           <li><a href="404.html">Умови користування</a></li>
           <li><a href="404.html">Політика конфіденційності</a></li>
         </ul>
@@ -756,17 +757,19 @@
 
   <!-- LOGIN MODAL -->
   <div id="loginModal" class="modal-overlay d-none">
-    <div class="modal-box">
-      <button id="closeLogin" class="modal-close">
+    <div class="modal-box" role="dialog" aria-modal="true" aria-labelledby="loginModalTitle">
+      <button id="closeLogin" class="modal-close" type="button" aria-label="Закрити">
         <i class="fa-solid fa-xmark"></i>
       </button>
-      <h2 class="modal-title">З поверненням!</h2>
+      <h2 class="modal-title" id="loginModalTitle">З поверненням!</h2>
       <p class="modal-subtitle">
         Увійдіть до свого акаунта, щоб продовжити планувати подорожі.
       </p>
-      <form class="modal-form">
-        <input type="email" placeholder="Введіть ваш Email" />
-        <input type="password" placeholder="Введіть ваш пароль" />
+      <form class="modal-form" data-validate>
+        <label class="visually-hidden" for="login-email">Email</label>
+        <input id="login-email" name="email" type="email" autocomplete="email" placeholder="Введіть ваш Email" required />
+        <label class="visually-hidden" for="login-password">Пароль</label>
+        <input id="login-password" name="password" type="password" autocomplete="current-password" placeholder="Введіть ваш пароль" minlength="8" required />
         <a href="#" class="modal-forgot">Забули пароль?</a>
         <button type="submit" class="modal-btn modal-btn--primary">
           Увійти
@@ -779,13 +782,13 @@
         <span>Або продовжити через</span>
       </div>
       <div class="modal-socials">
-        <button class="social-btn">
+        <button class="social-btn" type="button" aria-label="Увійти через Google">
           <i class="fa-brands fa-google"></i>
         </button>
-        <button class="social-btn">
+        <button class="social-btn" type="button" aria-label="Увійти через Facebook">
           <i class="fa-brands fa-facebook"></i>
         </button>
-        <button class="social-btn">
+        <button class="social-btn" type="button" aria-label="Увійти через Apple">
           <i class="fa-brands fa-apple"></i>
         </button>
       </div>
@@ -794,20 +797,24 @@
 
   <!-- SIGNUP MODAL -->
   <div id="signupModal" class="modal-overlay d-none">
-    <div class="modal-box">
-      <button id="closeSignup" class="modal-close">
+    <div class="modal-box" role="dialog" aria-modal="true" aria-labelledby="signupModalTitle">
+      <button id="closeSignup" class="modal-close" type="button" aria-label="Закрити">
         <i class="fa-solid fa-xmark"></i>
       </button>
-      <h2 class="modal-title">Приєднуйтесь до нас</h2>
+      <h2 class="modal-title" id="signupModalTitle">Приєднуйтесь до нас</h2>
       <p class="modal-subtitle">
         Створіть акаунт, відкривайте цікаві напрямки та плануйте
         свої майбутні пригоди.
       </p>
-      <form class="modal-form">
-        <input type="text" placeholder="Введіть ваше ім'я" />
-        <input type="text" placeholder="Введіть ваше прізвище" />
-        <input type="email" placeholder="Введіть ваш Email" />
-        <input type="password" placeholder="Введіть ваш пароль" />
+      <form class="modal-form" data-validate>
+        <label class="visually-hidden" for="signup-name">Ім'я</label>
+        <input id="signup-name" name="name" type="text" autocomplete="given-name" placeholder="Введіть ваше ім'я" minlength="2" required />
+        <label class="visually-hidden" for="signup-surname">Прізвище</label>
+        <input id="signup-surname" name="surname" type="text" autocomplete="family-name" placeholder="Введіть ваше прізвище" minlength="2" required />
+        <label class="visually-hidden" for="signup-email">Email</label>
+        <input id="signup-email" name="email" type="email" autocomplete="email" placeholder="Введіть ваш Email" required />
+        <label class="visually-hidden" for="signup-password">Пароль</label>
+        <input id="signup-password" name="password" type="password" autocomplete="new-password" placeholder="Введіть ваш пароль" minlength="8" required />
         <button type="submit" class="modal-btn modal-btn--primary">
           Реєстрація
         </button>
@@ -819,20 +826,20 @@
         <span>Або продовжити через</span>
       </div>
       <div class="modal-socials">
-        <button class="social-btn">
+        <button class="social-btn" type="button" aria-label="Увійти через Google">
           <i class="fa-brands fa-google"></i>
         </button>
-        <button class="social-btn">
+        <button class="social-btn" type="button" aria-label="Увійти через Facebook">
           <i class="fa-brands fa-facebook"></i>
         </button>
-        <button class="social-btn">
+        <button class="social-btn" type="button" aria-label="Увійти через Apple">
           <i class="fa-brands fa-apple"></i>
         </button>
       </div>
     </div>
   </div>
   <script src="https://cdn.jsdelivr.net/npm/swiper@8/swiper-bundle.min.js"></script>
-  <script src="assets/scripts/main.js"></script>
+  <script src="assets/scripts/main.js" defer></script>
 </body>
 
 </html>
