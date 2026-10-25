@@ -142,3 +142,69 @@ function initFormValidation() {
 }
 
 initFormValidation();
+
+/* tablist */
+function initTabs() {
+  qsa('[role="tablist"]').forEach((list) => {
+    const tabs = qsa('[role="tab"]', list);
+
+    const activate = (active) => {
+      tabs.forEach((tab) => {
+        const isActive = tab === active;
+        tab.classList.toggle("is-active", isActive);
+        tab.setAttribute("aria-selected", String(isActive));
+        tab.tabIndex = isActive ? 0 : -1;
+        const panel = document.getElementById(tab.getAttribute("aria-controls"));
+        if (panel) panel.hidden = !isActive;
+      });
+    };
+
+    tabs.forEach((tab, index) => {
+      tab.addEventListener("click", () => activate(tab));
+      tab.addEventListener("keydown", (e) => {
+        const step = { ArrowRight: 1, ArrowLeft: -1 }[e.key];
+        if (!step) return;
+        const next = tabs[(index + step + tabs.length) % tabs.length];
+        activate(next);
+        next.focus();
+      });
+    });
+  });
+}
+
+initTabs();
+
+/* Tour gallery */
+function initGallery() {
+  const mainImage = qs(".tour-photo img");
+  const caption = qs(".tour-photo-label");
+  const thumbs = qsa(".tour-thumb");
+  if (!mainImage || !thumbs.length) return;
+
+  thumbs.forEach((thumb) =>
+    thumb.addEventListener("click", () => {
+      const image = qs("img", thumb);
+      mainImage.src = image.src;
+      mainImage.alt = image.alt;
+      if (caption) caption.textContent = qs(".tour-thumb-label", thumb)?.textContent ?? "";
+      thumbs.forEach((t) => t.classList.toggle("is-active", t === thumb));
+    }),
+  );
+}
+
+initGallery();
+
+/* Accordion */
+function initAccordion() {
+  qsa(".faq").forEach((faq) => {
+    const items = qsa("details", faq);
+    items.forEach((item) =>
+      item.addEventListener("toggle", () => {
+        if (!item.open) return;
+        items.filter((other) => other !== item).forEach((other) => (other.open = false));
+      }),
+    );
+  });
+}
+
+initAccordion();
