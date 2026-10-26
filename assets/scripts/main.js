@@ -134,9 +134,6 @@ function initFormValidation() {
         firstInvalid.focus();
         return;
       }
-      // // Тут пізніше буде запит до Supabase
-      // showStatus(form, "Дякуємо! Дані пройшли перевірку.");
-      // form.reset();
     });
   });
 }
