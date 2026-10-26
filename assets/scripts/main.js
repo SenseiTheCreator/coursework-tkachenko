@@ -205,3 +205,46 @@ function initAccordion() {
 }
 
 initAccordion();
+
+/* Sliders */
+function initSliders() {
+  if (typeof Swiper === "undefined") return;
+
+  const make = (selector, name, options) => {
+    if (!qs(selector)) return;
+    new Swiper(selector, {
+      spaceBetween: 32,
+      navigation: {
+        prevEl: `.swiper-btn-prev-${name}`,
+        nextEl: `.swiper-btn-next-${name}`,
+        uniqueNavElements: false,
+      },
+      a11y: { prevSlideMessage: "Попередній слайд", nextSlideMessage: "Наступний слайд" },
+      ...options,
+    });
+  };
+
+  make(".destinations-swiper", "dest", {
+    slidesPerView: 1,
+    breakpoints: {
+      1152: { slidesPerView: 2.1 },
+      1440: { slidesPerView: 2.6 },
+      1920: { slidesPerView: 3.1 },
+    },
+  });
+  make(".offer-swiper", "offer", {
+    slidesPerView: 1,
+    breakpoints: { 1152: { slidesPerView: 3 } },
+  });
+  make(".gallery-swiper", "gallery", { slidesPerView: 1, spaceBetween: 20 });
+  make(".experiences-swiper", "exp", {
+    slidesPerView: 1,
+    breakpoints: {
+      768: { slidesPerView: 1.4 },
+      1152: { slidesPerView: 2.1 },
+      1440: { slidesPerView: 2.3 },
+    },
+  });
+}
+
+initSliders();
