@@ -134,6 +134,8 @@ function initFormValidation() {
         firstInvalid.focus();
         return;
       }
+      form.reset();
+      showStatus(form, form.dataset.success || "Дякуємо! Дані надіслано.");
     });
   });
 }

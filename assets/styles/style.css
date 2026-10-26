@@ -126,7 +126,6 @@ ul {
 }
 
 /* MOBILE MENU */
-/* hidden with visibility, so links of a closed menu are not reachable with Tab */
 .main-menu {
   position: absolute;
   top: 100%;
