@@ -21,20 +21,18 @@
     <!-- NAVBAR -->
     <div class="navbar d-flex vertical-center">
       <nav class="d-flex vertical-center">
-        <a class="logo d-flex" href="index.html">
-          <img src="assets/images/icons/logo.svg" alt="Travellian" />
-        </a>
+        <a class="logo d-flex" href="index.html"><img src="assets/images/icons/logo.svg" alt="Travellian" /></a>
 
         <!-- MENU -->
 
         <button type="button" id="iconBlock" class="menu-icon" aria-label="Меню" aria-expanded="false">
           <span id="iconOpen" class="menu-icon-open">
-            <svg width="38" height="23" role="img" aria-label="Menu">
+            <svg width="38" height="23" aria-hidden="true">
               <use href="assets/images/icons/sprite.svg#menu"></use>
             </svg>
           </span>
           <span id="iconClose" class="menu-icon-close d-none">
-            <i class="fa-solid fa-xmark"></i>
+            <i class="fa-solid fa-xmark" aria-hidden="true"></i>
           </span>
         </button>
 
@@ -45,16 +43,16 @@
           <li><a href="404.html">Блог</a></li>
           <li><a href="contacts.html">Зв'язатись</a></li>
           <li class="menu-mobile-btn">
-            <button class="btn btn-outline mobile-login">Увійти</button>
+            <button type="button" class="btn btn-outline mobile-login">Увійти</button>
           </li>
           <li class="menu-mobile-btn">
-            <button class="btn btn-primary mobile-signup">Зареєструватися</button>
+            <button type="button" class="btn btn-primary mobile-signup">Зареєструватися</button>
           </li>
         </ul>
 
         <div class="nav-actions d-flex">
-          <button id="loginBtn" class="btn btn-outline">Увійти</button>
-          <button id="signupBtn" class="btn btn-primary">Зареєструватися</button>
+          <button type="button" id="loginBtn" class="btn btn-outline">Увійти</button>
+          <button type="button" id="signupBtn" class="btn btn-primary">Зареєструватися</button>
         </div>
       </nav>
     </div>
@@ -76,17 +74,17 @@
 
     <!-- BOOKING FORM -->
     <div class="booking-wrap">
-      <div class="booking-form">
+      <form class="booking-form" action="tours.html" method="get" aria-label="Пошук туру">
         <div class="form-fields-group">
           <div class="form-row">
             <div class="form-field-wrap">
               <label class="form-label" for="destination">Куди вирушаємо?</label>
-              <input id="destination" class="form-input" type="text" placeholder="Греція" />
+              <input id="destination" name="query" class="form-input" type="search" placeholder="Греція" />
             </div>
             <div class="form-field-wrap">
               <label class="form-label" for="person">Мандрівників</label>
               <div class="select-wrapper">
-                <select id="person" class="form-select">
+                <select id="person" name="guests" class="form-select">
                   <option>1</option>
                   <option selected>2</option>
                   <option>3</option>
@@ -101,34 +99,20 @@
           <div class="form-row">
             <div class="form-field-wrap">
               <label class="form-label" for="checkin">Дата заїзду</label>
-              <div class="select-wrapper">
-                <select id="checkin" class="form-select">
-                  <option>Оберіть дату заїзду</option>
-                </select>
-                <svg class="arrow-book" width="13" height="7" aria-hidden="true">
-                  <use href="assets/images/icons/sprite.svg#arrow-book"></use>
-                </svg>
-              </div>
+              <input id="checkin" name="checkin" class="form-input" type="date" />
             </div>
             <div class="form-field-wrap form-field-last">
               <label class="form-label" for="checkout">Дата виїзду</label>
-              <div class="select-wrapper">
-                <select id="checkout" class="form-select">
-                  <option>Оберіть дату виїзду</option>
-                </select>
-                <svg class="arrow-book" width="13" height="7" aria-hidden="true">
-                  <use href="assets/images/icons/sprite.svg#arrow-book"></use>
-                </svg>
-              </div>
+              <input id="checkout" name="checkout" class="form-input" type="date" />
             </div>
           </div>
         </div>
 
-        <button type="button" class="btn-book">
+        <button type="submit" class="btn-book">
           <span>Знайти свою подорож</span>
-          <i class="fa-solid fa-arrow-right-long"></i>
+          <i class="fa-solid fa-arrow-right-long" aria-hidden="true"></i>
         </button>
-      </div>
+      </form>
     </div>
   </header>
 
@@ -145,13 +129,13 @@
         </div>
 
         <div class="section-head-arrows arrows-desktop">
-          <button id="dest-prev" class="arrow-btn swiper-btn-prev-dest">
-            <svg width="12" height="22" role="img" aria-label="Prev">
+          <button id="dest-prev" class="arrow-btn swiper-btn-prev-dest" type="button" aria-label="Попередній слайд">
+            <svg width="12" height="22" aria-hidden="true">
               <use href="assets/images/icons/sprite.svg#slider-left"></use>
             </svg>
           </button>
-          <button id="dest-next" class="arrow-btn swiper-btn-next-dest">
-            <svg width="12" height="22" role="img" aria-label="Next">
+          <button id="dest-next" class="arrow-btn swiper-btn-next-dest" type="button" aria-label="Наступний слайд">
+            <svg width="12" height="22" aria-hidden="true">
               <use href="assets/images/icons/sprite.svg#slider-right"></use>
             </svg>
           </button>
@@ -162,11 +146,11 @@
         <div class="swiper-wrapper">
           <div class="swiper-slide">
             <article class="dest-card">
-              <img src="assets/images/berlin-col.webp" alt="Пам'ятник у Берліні" class="dest-card-img" />
+              <img src="assets/images/berlin-col.webp" alt="Пам'ятник у Берліні" class="dest-card-img" loading="lazy" />
               <div class="dest-card-info">
                 <h3 class="dest-card-title">Символ історії Берліна</h3>
                 <p class="dest-card-location">
-                  <i class="fa-solid fa-location-dot"></i>
+                  <i class="fa-solid fa-location-dot" aria-hidden="true"></i>
                   <span>Берлін, Німеччина</span>
                 </p>
               </div>
@@ -175,11 +159,12 @@
 
           <div class="swiper-slide">
             <article class="dest-card">
-              <img src="assets/images/london-col.webp" alt="Міст Міленіум у Лондоні" class="dest-card-img" />
+              <img src="assets/images/london-col.webp" alt="Міст Міленіум у Лондоні" class="dest-card-img"
+                loading="lazy" />
               <div class="dest-card-info">
                 <h3 class="dest-card-title">Міст Міленіум</h3>
                 <p class="dest-card-location">
-                  <i class="fa-solid fa-location-dot"></i>
+                  <i class="fa-solid fa-location-dot" aria-hidden="true"></i>
                   <span>Лондон, Великобританія</span>
                 </p>
               </div>
@@ -188,11 +173,12 @@
 
           <div class="swiper-slide">
             <article class="dest-card">
-              <img src="assets/images/venice-col.webp" alt="Міст Ріальто у Венеції" class="dest-card-img" />
+              <img src="assets/images/venice-col.webp" alt="Міст Ріальто у Венеції" class="dest-card-img"
+                loading="lazy" />
               <div class="dest-card-info">
                 <h3 class="dest-card-title">Міст Ріальто</h3>
                 <p class="dest-card-location">
-                  <i class="fa-solid fa-location-dot"></i>
+                  <i class="fa-solid fa-location-dot" aria-hidden="true"></i>
                   <span>Венеція, Італія</span>
                 </p>
               </div>
@@ -201,11 +187,12 @@
 
           <div class="swiper-slide">
             <article class="dest-card">
-              <img src="assets/images/lisbon-col.webp" alt="Червоні дахи старого Лісабона" class="dest-card-img" />
+              <img src="assets/images/lisbon-col.webp" alt="Червоні дахи старого Лісабона" class="dest-card-img"
+                loading="lazy" />
               <div class="dest-card-info">
                 <h3 class="dest-card-title">Барви старого міста</h3>
                 <p class="dest-card-location">
-                  <i class="fa-solid fa-location-dot"></i>
+                  <i class="fa-solid fa-location-dot" aria-hidden="true"></i>
                   <span>Лісабон, Португалія</span>
                 </p>
               </div>
@@ -214,11 +201,11 @@
 
           <div class="swiper-slide">
             <article class="dest-card">
-              <img src="assets/images/madrid.webp" alt="Вид на Мадрид" class="dest-card-img" />
+              <img src="assets/images/madrid.webp" alt="Вид на Мадрид" class="dest-card-img" loading="lazy" />
               <div class="dest-card-info">
                 <h3 class="dest-card-title">Сонячний Мадрид</h3>
                 <p class="dest-card-location">
-                  <i class="fa-solid fa-location-dot"></i>
+                  <i class="fa-solid fa-location-dot" aria-hidden="true"></i>
                   <span>Мадрид, Іспанія</span>
                 </p>
               </div>
@@ -227,13 +214,13 @@
         </div>
 
         <div class="section-head-arrows arrows-mobile">
-          <button id="dest-prev-mob" class="arrow-btn swiper-btn-prev-dest">
-            <svg width="12" height="22" role="img" aria-label="Prev">
+          <button id="dest-prev-mob" class="arrow-btn swiper-btn-prev-dest" type="button" aria-label="Попередній слайд">
+            <svg width="12" height="22" aria-hidden="true">
               <use href="assets/images/icons/sprite.svg#slider-left"></use>
             </svg>
           </button>
-          <button id="dest-next-mob" class="arrow-btn swiper-btn-next-dest">
-            <svg width="12" height="22" role="img" aria-label="Next">
+          <button id="dest-next-mob" class="arrow-btn swiper-btn-next-dest" type="button" aria-label="Наступний слайд">
+            <svg width="12" height="22" aria-hidden="true">
               <use href="assets/images/icons/sprite.svg#slider-right"></use>
             </svg>
           </button>
@@ -245,13 +232,13 @@
     <section class="offer-section" id="pricing">
       <div class="section-head content-wrap">
         <div class="section-head-arrows arrows-desktop">
-          <button id="offer-prev" class="arrow-btn swiper-btn-prev-offer">
-            <svg width="12" height="22" role="img" aria-label="Prev">
+          <button id="offer-prev" class="arrow-btn swiper-btn-prev-offer" type="button" aria-label="Попередній слайд">
+            <svg width="12" height="22" aria-hidden="true">
               <use href="assets/images/icons/sprite.svg#slider-left"></use>
             </svg>
           </button>
-          <button id="offer-next" class="arrow-btn swiper-btn-next-offer">
-            <svg width="12" height="22" role="img" aria-label="Next">
+          <button id="offer-next" class="arrow-btn swiper-btn-next-offer" type="button" aria-label="Наступний слайд">
+            <svg width="12" height="22" aria-hidden="true">
               <use href="assets/images/icons/sprite.svg#slider-right"></use>
             </svg>
           </button>
@@ -264,14 +251,14 @@
         </div>
       </div>
 
-      <div class="offer-swiper content-wrap content-wrap--offer">
+      <div class="offer-swiper swiper content-wrap content-wrap--offer">
         <div class="swiper-wrapper">
           <div class="swiper-slide">
             <article class="offer-card">
-              <img src="assets/images/lisbon-container.png" alt="Лісабон" class="offer-card-img" />
+              <img src="assets/images/lisbon-container.webp" alt="Лісабон" class="offer-card-img" loading="lazy" />
               <div class="offer-card-body">
                 <h3 class="offer-card-title">Лісабон, Португалія</h3>
-                <div class="offer-card-stars">
+                <div class="offer-card-stars" role="img" aria-label="Оцінка 5 з 5">
                   <svg width="20" height="19" aria-hidden="true">
                     <use href="assets/images/icons/sprite.svg#star"></use>
                   </svg>
@@ -298,7 +285,7 @@
                     <span class="offer-card-from">Від</span>
                     <span class="offer-card-amount">€500</span>
                   </div>
-                  <button class="offer-card-btn">Детальніше</button>
+                  <a class="offer-card-btn" href="tour.html">Детальніше</a>
                 </div>
               </div>
             </article>
@@ -306,10 +293,10 @@
 
           <div class="swiper-slide">
             <article class="offer-card">
-              <img src="assets/images/athens-container.png" alt="Афіни" class="offer-card-img" />
+              <img src="assets/images/athens-container.webp" alt="Афіни" class="offer-card-img" loading="lazy" />
               <div class="offer-card-body">
                 <h3 class="offer-card-title">Афіни, Греція</h3>
-                <div class="offer-card-stars">
+                <div class="offer-card-stars" role="img" aria-label="Оцінка 5 з 5">
                   <svg width="20" height="19" aria-hidden="true">
                     <use href="assets/images/icons/sprite.svg#star"></use>
                   </svg>
@@ -336,7 +323,7 @@
                     <span class="offer-card-from">Від</span>
                     <span class="offer-card-amount">€800</span>
                   </div>
-                  <button class="offer-card-btn">Детальніше</button>
+                  <a class="offer-card-btn" href="tour.html">Детальніше</a>
                 </div>
               </div>
             </article>
@@ -344,10 +331,10 @@
 
           <div class="swiper-slide">
             <article class="offer-card">
-              <img src="assets/images/rome-container.png" alt="Рим" class="offer-card-img" />
+              <img src="assets/images/rome-container.webp" alt="Рим" class="offer-card-img" loading="lazy" />
               <div class="offer-card-body">
                 <h3 class="offer-card-title">Рим, Італія</h3>
-                <div class="offer-card-stars">
+                <div class="offer-card-stars" role="img" aria-label="Оцінка 5 з 5">
                   <svg width="20" height="19" aria-hidden="true">
                     <use href="assets/images/icons/sprite.svg#star"></use>
                   </svg>
@@ -374,7 +361,7 @@
                     <span class="offer-card-from">Від</span>
                     <span class="offer-card-amount">€750</span>
                   </div>
-                  <button class="offer-card-btn">Детальніше</button>
+                  <a class="offer-card-btn" href="tour.html">Детальніше</a>
                 </div>
               </div>
             </article>
@@ -382,10 +369,10 @@
 
           <div class="swiper-slide">
             <article class="offer-card">
-              <img src="assets/images/athens-container.png" alt="Афіни" class="offer-card-img" />
+              <img src="assets/images/athens-container.webp" alt="Афіни" class="offer-card-img" loading="lazy" />
               <div class="offer-card-body">
                 <h3 class="offer-card-title">Афіни: коротка втеча</h3>
-                <div class="offer-card-stars">
+                <div class="offer-card-stars" role="img" aria-label="Оцінка 5 з 5">
                   <svg width="20" height="19" aria-hidden="true">
                     <use href="assets/images/icons/sprite.svg#star"></use>
                   </svg>
@@ -412,7 +399,7 @@
                     <span class="offer-card-from">Від</span>
                     <span class="offer-card-amount">€700</span>
                   </div>
-                  <button class="offer-card-btn">Детальніше</button>
+                  <a class="offer-card-btn" href="tour.html">Детальніше</a>
                 </div>
               </div>
             </article>
@@ -420,10 +407,10 @@
 
           <div class="swiper-slide">
             <article class="offer-card">
-              <img src="assets/images/rome-container.png" alt="Рим" class="offer-card-img" />
+              <img src="assets/images/rome-container.webp" alt="Рим" class="offer-card-img" loading="lazy" />
               <div class="offer-card-body">
                 <h3 class="offer-card-title">Рим: італійські канікули</h3>
-                <div class="offer-card-stars">
+                <div class="offer-card-stars" role="img" aria-label="Оцінка 5 з 5">
                   <svg width="20" height="19" aria-hidden="true">
                     <use href="assets/images/icons/sprite.svg#star"></use>
                   </svg>
@@ -450,20 +437,22 @@
                     <span class="offer-card-from">Від</span>
                     <span class="offer-card-amount">€700</span>
                   </div>
-                  <button class="offer-card-btn">Детальніше</button>
+                  <a class="offer-card-btn" href="tour.html">Детальніше</a>
                 </div>
               </div>
             </article>
           </div>
         </div>
         <div class="section-head-arrows arrows-mobile arrows-mobile--offer">
-          <button id="offer-prev-mob" class="arrow-btn swiper-btn-prev-offer">
-            <svg width="12" height="22" role="img" aria-label="Prev">
+          <button id="offer-prev-mob" class="arrow-btn swiper-btn-prev-offer" type="button"
+            aria-label="Попередній слайд">
+            <svg width="12" height="22" aria-hidden="true">
               <use href="assets/images/icons/sprite.svg#slider-left"></use>
             </svg>
           </button>
-          <button id="offer-next-mob" class="arrow-btn swiper-btn-next-offer">
-            <svg width="12" height="22" role="img" aria-label="Next">
+          <button id="offer-next-mob" class="arrow-btn swiper-btn-next-offer" type="button"
+            aria-label="Наступний слайд">
+            <svg width="12" height="22" aria-hidden="true">
               <use href="assets/images/icons/sprite.svg#slider-right"></use>
             </svg>
           </button>
@@ -483,7 +472,8 @@
       </div>
 
       <div class="blog-card content-wrap">
-        <img src="assets/images/italy-blog-photo.png" alt="Італійське узбережжя" class="blog-card-img" />
+        <img src="assets/images/italy-blog-photo.webp" alt="Італійське узбережжя" class="blog-card-img"
+          loading="lazy" />
         <div class="blog-card-body">
           <h3 class="blog-card-title">Італія, у яку закохуєшся з першого погляду</h3>
           <p class="blog-card-text">
@@ -492,9 +482,9 @@
             навіть тих, хто вже багато подорожував. Розповідаємо, що варто
             побачити, спробувати й відчути під час першої подорожі.
           </p>
-          <a href="#" class="blog-card-link">
-            <span>Читати більше</span>
-            <i class="fa-solid fa-arrow-right-long"></i>
+          <a href="tours.html?country=Італія" class="blog-card-link">
+            <span>Тури до Італії</span>
+            <i class="fa-solid fa-arrow-right-long" aria-hidden="true"></i>
           </a>
         </div>
       </div>
@@ -510,7 +500,7 @@
             Обирайте місто, плануйте маршрут і залишайте місце для
             несподіваних пригод.
           </p>
-          <button class="btn-view-all">Переглянути всі маршрути</button>
+          <a class="btn-view-all" href="tours.html">Переглянути всі маршрути</a>
         </div>
       </div>
 
@@ -520,7 +510,7 @@
             <div class="trip-cards content-wrap">
               <article class="trip-card">
                 <div class="trip-card-img-wrap">
-                  <img src="assets/images/colosseum.png" alt="Колізей у Римі" class="trip-card-img" />
+                  <img src="assets/images/colosseum.webp" alt="Колізей у Римі" class="trip-card-img" loading="lazy" />
                 </div>
                 <div class="trip-card-body">
                   <div class="trip-card-top">
@@ -529,7 +519,7 @@
                   </div>
                   <h3 class="trip-card-title">Рим: подорож крізь віки</h3>
                   <div class="trip-card-bottom">
-                    <div class="trip-card-stars">
+                    <div class="trip-card-stars" role="img" aria-label="Оцінка 5 з 5">
                       <svg width="20" height="19" aria-hidden="true">
                         <use href="assets/images/icons/sprite.svg#star"></use>
                       </svg>
@@ -553,7 +543,7 @@
 
               <article class="trip-card">
                 <div class="trip-card-img-wrap">
-                  <img src="assets/images/paris.webp" alt="Париж" class="trip-card-img" />
+                  <img src="assets/images/paris.webp" alt="Париж" class="trip-card-img" loading="lazy" />
                 </div>
                 <div class="trip-card-body">
                   <div class="trip-card-top">
@@ -562,7 +552,7 @@
                   </div>
                   <h3 class="trip-card-title">Париж: місто романтики</h3>
                   <div class="trip-card-bottom">
-                    <div class="trip-card-stars">
+                    <div class="trip-card-stars" role="img" aria-label="Оцінка 5 з 5">
                       <svg width="20" height="19" aria-hidden="true">
                         <use href="assets/images/icons/sprite.svg#star"></use>
                       </svg>
@@ -586,7 +576,8 @@
 
               <article class="trip-card">
                 <div class="trip-card-img-wrap">
-                  <img src="assets/images/madrid.webp" alt="Барселона" class="trip-card-img" />
+                  <img src="assets/images/tours/tours-spain-barcelona.webp" alt="Барселона, Саграда Фамілія"
+                    class="trip-card-img" loading="lazy" />
                 </div>
                 <div class="trip-card-body">
                   <div class="trip-card-top">
@@ -595,7 +586,7 @@
                   </div>
                   <h3 class="trip-card-title">Барселона: сонце й море</h3>
                   <div class="trip-card-bottom">
-                    <div class="trip-card-stars">
+                    <div class="trip-card-stars" role="img" aria-label="Оцінка 5 з 5">
                       <svg width="20" height="19" aria-hidden="true">
                         <use href="assets/images/icons/sprite.svg#star"></use>
                       </svg>
@@ -619,7 +610,7 @@
 
               <article class="trip-card">
                 <div class="trip-card-img-wrap">
-                  <img src="assets/images/budapest.webp" alt="Будапешт" class="trip-card-img" />
+                  <img src="assets/images/budapest.webp" alt="Будапешт" class="trip-card-img" loading="lazy" />
                 </div>
                 <div class="trip-card-body">
                   <div class="trip-card-top">
@@ -628,7 +619,7 @@
                   </div>
                   <h3 class="trip-card-title">Будапешт: місто на Дунаї</h3>
                   <div class="trip-card-bottom">
-                    <div class="trip-card-stars">
+                    <div class="trip-card-stars" role="img" aria-label="Оцінка 5 з 5">
                       <svg width="20" height="19" aria-hidden="true">
                         <use href="assets/images/icons/sprite.svg#star"></use>
                       </svg>
@@ -668,13 +659,15 @@
           </p>
         </div>
         <div class="section-head-arrows arrows-desktop">
-          <button id="gallery-prev" class="arrow-btn swiper-btn-prev-gallery">
-            <svg width="12" height="22" role="img" aria-label="Prev">
+          <button id="gallery-prev" class="arrow-btn swiper-btn-prev-gallery" type="button"
+            aria-label="Попередній слайд">
+            <svg width="12" height="22" aria-hidden="true">
               <use href="assets/images/icons/sprite.svg#slider-left"></use>
             </svg>
           </button>
-          <button id="gallery-next" class="arrow-btn swiper-btn-next-gallery">
-            <svg width="12" height="22" role="img" aria-label="Next">
+          <button id="gallery-next" class="arrow-btn swiper-btn-next-gallery" type="button"
+            aria-label="Наступний слайд">
+            <svg width="12" height="22" aria-hidden="true">
               <use href="assets/images/icons/sprite.svg#slider-right"></use>
             </svg>
           </button>
@@ -684,29 +677,39 @@
         <div class="swiper-wrapper">
           <div class="swiper-slide">
             <div class="gallery-grid">
-              <img src="assets/images/gallery-first.png" alt="Світлина з подорожі, 1" class="gallery-img" />
-              <img src="assets/images/gallery-second.webp" alt="Світлина з подорожі, 2" class="gallery-img" />
-              <img src="assets/images/gallery-third.webp" alt="Світлина з подорожі, 3" class="gallery-img" />
-              <img src="assets/images/gallery-four.webp" alt="Світлина з подорожі, 4" class="gallery-img" />
+              <img src="assets/images/gallery-first.webp" alt="Світлина з подорожі, 1" class="gallery-img"
+                loading="lazy" />
+              <img src="assets/images/gallery-second.webp" alt="Світлина з подорожі, 2" class="gallery-img"
+                loading="lazy" />
+              <img src="assets/images/gallery-third.webp" alt="Світлина з подорожі, 3" class="gallery-img"
+                loading="lazy" />
+              <img src="assets/images/gallery-four.webp" alt="Світлина з подорожі, 4" class="gallery-img"
+                loading="lazy" />
             </div>
           </div>
           <div class="swiper-slide">
             <div class="gallery-grid">
-              <img src="assets/images/gallery-first.png" alt="Світлина з подорожі, 5" class="gallery-img" />
-              <img src="assets/images/gallery-second.webp" alt="Світлина з подорожі, 6" class="gallery-img" />
-              <img src="assets/images/gallery-third.webp" alt="Світлина з подорожі, 7" class="gallery-img" />
-              <img src="assets/images/gallery-four.webp" alt="Світлина з подорожі, 8" class="gallery-img" />
+              <img src="assets/images/gallery-first.webp" alt="Світлина з подорожі, 5" class="gallery-img"
+                loading="lazy" />
+              <img src="assets/images/gallery-second.webp" alt="Світлина з подорожі, 6" class="gallery-img"
+                loading="lazy" />
+              <img src="assets/images/gallery-third.webp" alt="Світлина з подорожі, 7" class="gallery-img"
+                loading="lazy" />
+              <img src="assets/images/gallery-four.webp" alt="Світлина з подорожі, 8" class="gallery-img"
+                loading="lazy" />
             </div>
           </div>
         </div>
         <div class="section-head-arrows arrows-mobile arrows-mobile--gallery">
-          <button id="gallery-prev-mob" class="arrow-btn swiper-btn-prev-gallery">
-            <svg width="12" height="22" role="img" aria-label="Prev">
+          <button id="gallery-prev-mob" class="arrow-btn swiper-btn-prev-gallery" type="button"
+            aria-label="Попередній слайд">
+            <svg width="12" height="22" aria-hidden="true">
               <use href="assets/images/icons/sprite.svg#slider-left"></use>
             </svg>
           </button>
-          <button id="gallery-next-mob" class="arrow-btn swiper-btn-next-gallery">
-            <svg width="12" height="22" role="img" aria-label="Next">
+          <button id="gallery-next-mob" class="arrow-btn swiper-btn-next-gallery" type="button"
+            aria-label="Наступний слайд">
+            <svg width="12" height="22" aria-hidden="true">
               <use href="assets/images/icons/sprite.svg#slider-right"></use>
             </svg>
           </button>
@@ -732,14 +735,14 @@
         <div class="swiper-wrapper">
           <div class="swiper-slide">
             <figure class="exp-card">
-              <img src="assets/images/avatar-first.png" alt="Юрій Семеген" class="exp-card-avatar" />
+              <img src="assets/images/avatar-first.png" alt="Юрій Семеген" class="exp-card-avatar" loading="lazy" />
               <p class="exp-card-text">
                 Подорож перевершила всі мої очікування! Усе було добре
                 організовано, а маршрут дозволив побачити не лише відомі
                 пам'ятки, а й затишні місця, про які не пишуть у звичайних
                 туристичних путівниках. Обов'язково вирушу знову!
               </p>
-              <div class="exp-card-stars">
+              <div class="exp-card-stars" role="img" aria-label="Оцінка 5 з 5">
                 <svg width="20" height="19" aria-hidden="true">
                   <use href="assets/images/icons/sprite.svg#star"></use>
                 </svg>
@@ -763,14 +766,14 @@
 
           <div class="swiper-slide">
             <figure class="exp-card">
-              <img src="assets/images/avatar-second.png" alt="Влад Карась" class="exp-card-avatar" />
+              <img src="assets/images/avatar-second.png" alt="Влад Карась" class="exp-card-avatar" loading="lazy" />
               <p class="exp-card-text">
                 Найбільше сподобалося поєднання свободи та продуманого
                 планування. Ми встигли побачити багато цікавого, спробувати
                 місцеві страви й просто насолодитися атмосферою міста.
                 Чудовий спосіб провести відпустку без зайвого клопоту.
               </p>
-              <div class="exp-card-stars">
+              <div class="exp-card-stars" role="img" aria-label="Оцінка 5 з 5">
                 <svg width="20" height="19" aria-hidden="true">
                   <use href="assets/images/icons/sprite.svg#star"></use>
                 </svg>
@@ -794,14 +797,14 @@
 
           <div class="swiper-slide">
             <figure class="exp-card">
-              <img src="assets/images/avatar-third.png" alt="Ірина Арабчук" class="exp-card-avatar" />
+              <img src="assets/images/avatar-third.png" alt="Ірина Арабчук" class="exp-card-avatar" loading="lazy" />
               <p class="exp-card-text">
                 Це була саме та відпустка, якої мені давно бракувало.
                 Нові місця, красиві краєвиди та безліч маленьких відкриттів
                 щодня. Особливо приємно, що можна було зосередитися на
                 враженнях, а не на організаційних питаннях.
               </p>
-              <div class="exp-card-stars">
+              <div class="exp-card-stars" role="img" aria-label="Оцінка 5 з 5">
                 <svg width="20" height="19" aria-hidden="true">
                   <use href="assets/images/icons/sprite.svg#star"></use>
                 </svg>
@@ -824,13 +827,13 @@
           </div>
         </div>
         <div class="section-head-arrows section-head-arrows--exp">
-          <button class="arrow-btn swiper-btn-prev-exp">
-            <svg width="12" height="22" role="img" aria-label="Prev">
+          <button class="arrow-btn swiper-btn-prev-exp" type="button" aria-label="Попередній слайд">
+            <svg width="12" height="22" aria-hidden="true">
               <use href="assets/images/icons/sprite.svg#slider-left"></use>
             </svg>
           </button>
-          <button class="arrow-btn swiper-btn-next-exp">
-            <svg width="12" height="22" role="img" aria-label="Next">
+          <button class="arrow-btn swiper-btn-next-exp" type="button" aria-label="Наступний слайд">
+            <svg width="12" height="22" aria-hidden="true">
               <use href="assets/images/icons/sprite.svg#slider-right"></use>
             </svg>
           </button>
@@ -841,12 +844,13 @@
     <section class="newsletter-section">
       <div class="newsletter content-wrap">
         <h2 class="newsletter-title">Трохи натхнення у вашій пошті</h2>
-        <form class="newsletter-form">
+        <form class="newsletter-form" data-validate data-success="Дякуємо! Ви підписалися на розсилку.">
           <div class="newsletter-field">
             <label class="newsletter-label" for="newsletter-email">Електронна пошта</label>
-            <input type="email" class="newsletter-input" placeholder="Ваш email" />
+            <input id="newsletter-email" name="email" type="email" class="newsletter-input" placeholder="Ваш email"
+              autocomplete="email" required />
           </div>
-          <button class="newsletter-btn">Підписатися</button>
+          <button type="submit" class="newsletter-btn">Підписатися</button>
         </form>
       </div>
     </section>
@@ -862,7 +866,7 @@
       </div>
 
       <div class="footer-col">
-        <h3 class="footer-col-title">Навігація</h3>
+        <h2 class="footer-col-title">Навігація</h2>
         <ul class="footer-col-list">
           <li><a href="index.html">Головна</a></li>
           <li><a href="about.html">Про нас</a></li>
@@ -874,7 +878,7 @@
       </div>
 
       <div class="footer-col">
-        <h3 class="footer-col-title">Корисна інформація</h3>
+        <h2 class="footer-col-title">Корисна інформація</h2>
         <ul class="footer-col-list">
           <li><a href="about.html">Про нас</a></li>
           <li><a href="contacts.html">Підтримка</a></li>
@@ -884,7 +888,7 @@
       </div>
 
       <div class="footer-col">
-        <h3 class="footer-col-title">Зв'яжіться з нами</h3>
+        <h2 class="footer-col-title">Зв'яжіться з нами</h2>
         <address class="footer-col-list">
           <p>+380 96 560 42 17</p>
           <p>travellian@corp.com</p>
@@ -893,25 +897,28 @@
       </div>
 
       <div class="footer-col">
-        <h3 class="footer-col-title">Ми в соцмережах</h3>
+        <h2 class="footer-col-title">Ми в соцмережах</h2>
         <div class="footer-social">
-          <a href="#" class="footer-social-link">
-            <svg width="31" height="31" role="img" aria-label="Facebook">
+          <a href="https://www.facebook.com/" class="footer-social-link" target="_blank" rel="noopener"
+            aria-label="Facebook">
+            <svg width="31" height="31" aria-hidden="true">
               <use href="assets/images/icons/sprite.svg#facebook"></use>
             </svg>
           </a>
-          <a href="#" class="footer-social-link">
-            <svg width="32" height="32" role="img" aria-label="Pinterest">
+          <a href="https://www.pinterest.com/" class="footer-social-link" target="_blank" rel="noopener"
+            aria-label="Pinterest">
+            <svg width="32" height="32" aria-hidden="true">
               <use href="assets/images/icons/sprite.svg#pinterest"></use>
             </svg>
           </a>
-          <a href="#" class="footer-social-link">
-            <svg width="32" height="32" role="img" aria-label="Instagram">
+          <a href="https://www.instagram.com/" class="footer-social-link" target="_blank" rel="noopener"
+            aria-label="Instagram">
+            <svg width="32" height="32" aria-hidden="true">
               <use href="assets/images/icons/sprite.svg#instagram"></use>
             </svg>
           </a>
-          <a href="#" class="footer-social-link">
-            <svg width="26" height="21" role="img" aria-label="Twitter">
+          <a href="https://x.com/" class="footer-social-link" target="_blank" rel="noopener" aria-label="Twitter">
+            <svg width="26" height="21" aria-hidden="true">
               <use href="assets/images/icons/sprite.svg#twitter"></use>
             </svg>
           </a>
@@ -924,7 +931,7 @@
   <div id="loginModal" class="modal-overlay d-none">
     <div class="modal-box" role="dialog" aria-modal="true" aria-labelledby="loginModalTitle">
       <button id="closeLogin" class="modal-close" type="button" aria-label="Закрити">
-        <i class="fa-solid fa-xmark"></i>
+        <i class="fa-solid fa-xmark" aria-hidden="true"></i>
       </button>
       <h2 class="modal-title" id="loginModalTitle">З поверненням!</h2>
       <p class="modal-subtitle">
@@ -937,7 +944,7 @@
         <label class="visually-hidden" for="login-password">Пароль</label>
         <input id="login-password" name="password" type="password" autocomplete="current-password"
           placeholder="Введіть ваш пароль" minlength="8" required />
-        <a href="#" class="modal-forgot">Забули пароль?</a>
+        <a href="contacts.html" class="modal-forgot">Забули пароль?</a>
         <button type="submit" class="modal-btn modal-btn--primary">
           Увійти
         </button>
@@ -950,13 +957,13 @@
       </div>
       <div class="modal-socials">
         <button class="social-btn" type="button" aria-label="Увійти через Google">
-          <i class="fa-brands fa-google"></i>
+          <i class="fa-brands fa-google" aria-hidden="true"></i>
         </button>
         <button class="social-btn" type="button" aria-label="Увійти через Facebook">
-          <i class="fa-brands fa-facebook"></i>
+          <i class="fa-brands fa-facebook" aria-hidden="true"></i>
         </button>
         <button class="social-btn" type="button" aria-label="Увійти через Apple">
-          <i class="fa-brands fa-apple"></i>
+          <i class="fa-brands fa-apple" aria-hidden="true"></i>
         </button>
       </div>
     </div>
@@ -966,7 +973,7 @@
   <div id="signupModal" class="modal-overlay d-none">
     <div class="modal-box" role="dialog" aria-modal="true" aria-labelledby="signupModalTitle">
       <button id="closeSignup" class="modal-close" type="button" aria-label="Закрити">
-        <i class="fa-solid fa-xmark"></i>
+        <i class="fa-solid fa-xmark" aria-hidden="true"></i>
       </button>
       <h2 class="modal-title" id="signupModalTitle">Приєднуйтесь до нас</h2>
       <p class="modal-subtitle">
@@ -998,13 +1005,13 @@
       </div>
       <div class="modal-socials">
         <button class="social-btn" type="button" aria-label="Увійти через Google">
-          <i class="fa-brands fa-google"></i>
+          <i class="fa-brands fa-google" aria-hidden="true"></i>
         </button>
         <button class="social-btn" type="button" aria-label="Увійти через Facebook">
-          <i class="fa-brands fa-facebook"></i>
+          <i class="fa-brands fa-facebook" aria-hidden="true"></i>
         </button>
         <button class="social-btn" type="button" aria-label="Увійти через Apple">
-          <i class="fa-brands fa-apple"></i>
+          <i class="fa-brands fa-apple" aria-hidden="true"></i>
         </button>
       </div>
     </div>
