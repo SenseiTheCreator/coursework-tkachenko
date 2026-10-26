@@ -44,6 +44,42 @@ ul {
   align-items: center;
 }
 
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+}
+
+.no-scroll {
+  overflow: hidden;
+}
+
+/* FORM MESSAGES */
+.field-error {
+  margin-top: 4px;
+  font-size: 0.8125rem;
+  color: #c62828;
+  text-align: left;
+}
+
+.field-error:empty {
+  display: none;
+}
+
+[aria-invalid="true"] {
+  border-color: #c62828;
+}
+
+.form-status {
+  margin-top: 12px;
+  font-weight: 500;
+  color: #1e6b2e;
+}
+
 /* CONTAINER */
 .content-wrap {
   width: 100%;
@@ -60,7 +96,7 @@ ul {
   min-height: auto;
   background-image:
     linear-gradient(rgba(0, 0, 0, 0.35), rgba(0, 0, 0, 0.35)),
-    url("../images/header-photo.jpg");
+    url("../images/header-photo.webp");
   background-size: cover;
   background-position: top left;
   color: var(--color-white);
@@ -89,30 +125,13 @@ ul {
   margin: 0 0 0 16px;
 }
 
-/* burger-menu */
-.burger {
-  background-color: transparent;
-  border: none;
-  cursor: pointer;
-  padding: 4px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin-left: auto;
-}
-
-.menu-open-btn {
-  width: 50px;
-  height: 50px;
-  position: relative;
-}
-
 /* MOBILE MENU */
+/* hidden with visibility, so links of a closed menu are not reachable with Tab */
 .main-menu {
   position: absolute;
-  top: 98px;
-  right: 1500px;
-  width: 100vw;
+  top: 100%;
+  left: 0;
+  width: 100%;
   height: calc(100dvh - 98px);
   background-color: var(--color-contacts);
   flex-direction: column;
@@ -121,17 +140,19 @@ ul {
   gap: 40px;
   font-size: 1.5rem;
   font-weight: 500;
-  transition: all 0.35s ease;
+  transform: translateX(-100%);
+  visibility: hidden;
+  transition: transform 0.35s ease, visibility 0.35s;
   z-index: 200;
 }
 
 .main-menu.menu-open {
-  left: 0;
-  right: 0;
+  transform: none;
+  visibility: visible;
 }
 
 .main-menu li a {
-  color: var( --color-secondary);
+  color: var(--color-secondary);
 }
 
 .menu-icon {
@@ -140,15 +161,16 @@ ul {
   margin-right: 16px;
   font-size: 1.5rem;
   color: var(--color-white);
+  background: transparent;
+  border: none;
   cursor: pointer;
 }
 
 .modal-overlay {
   position: fixed;
-  top: 0;
-  left: 0;
-  width: 100vw;
-  height: 100vh;
+  inset: 0;
+  padding: 16px;
+  overflow-y: auto;
   background: rgba(0, 0, 0, 0.6);
   z-index: 1000;
   display: flex;
@@ -167,7 +189,18 @@ ul {
   width: 90%;
   max-width: 440px;
   position: relative;
+  margin: auto;
   text-align: center;
+}
+
+.modal-box--wide {
+  max-width: 600px;
+  text-align: left;
+}
+
+.booking-modal-form {
+  display: grid;
+  gap: 16px;
 }
 
 .modal-close {
@@ -298,7 +331,7 @@ ul {
   cursor: pointer;
   font-family: var(--font-body);
   font-weight: 400;
-  transition: all 0.3s;
+  transition: background-color 0.3s, opacity 0.3s;
 }
 
 .btn-outline {
@@ -348,7 +381,6 @@ ul {
 .hero-title {
   font-family: var(--font-heading);
   font-size: 2.5rem;
-  /* line-height: 1.2; */
   margin-bottom: 16px;
   font-weight: 400;
 }
@@ -471,6 +503,10 @@ ul {
   .navbar {
     height: 114px;
     padding: 0 20px;
+  }
+
+  .main-menu {
+    height: calc(100dvh - 114px);
   }
 
   .menu-icon {
@@ -620,6 +656,8 @@ ul {
   .main-menu {
     position: static;
     transform: none;
+    visibility: visible;
+    transition: none;
     width: auto;
     height: auto;
     background: transparent;
