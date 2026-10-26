@@ -12,6 +12,7 @@ function initMenu() {
     qs("#iconOpen")?.classList.toggle("d-none", open);
     qs("#iconClose")?.classList.toggle("d-none", !open);
     toggle.setAttribute("aria-expanded", String(open));
+    toggle.setAttribute("aria-label", open ? "Закрити меню" : "Відкрити меню");
   };
 
   toggle.addEventListener("click", () =>
@@ -31,16 +32,20 @@ const closeMenu = initMenu();
 /* Modal windows */
 function initModals(setMenu) {
   const modals = qsa(".modal-overlay");
+  let lastFocus = null;
 
   const close = (modal) => {
+    if (modal.classList.contains("d-none")) return;
     modal.classList.add("d-none");
     if (!qs(".modal-overlay:not(.d-none)")) {
       document.body.classList.remove("no-scroll");
+      lastFocus?.focus();
     }
   };
   const open = (id) => {
     const modal = document.getElementById(id);
     if (!modal) return;
+    if (!qs(".modal-overlay:not(.d-none)")) lastFocus = document.activeElement;
     modals.forEach(close);
     setMenu?.(false);
     modal.classList.remove("d-none");
@@ -52,6 +57,7 @@ function initModals(setMenu) {
 
   on("#loginBtn, .mobile-login, #toLogin", () => open("loginModal"));
   on("#signupBtn, .mobile-signup, #toSignUp", () => open("signupModal"));
+  on("[data-modal]", (e) => open(e.currentTarget.dataset.modal));
   on(".modal-close", (e) => close(e.currentTarget.closest(".modal-overlay")));
 
   modals.forEach((modal) =>
