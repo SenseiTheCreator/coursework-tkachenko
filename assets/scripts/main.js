@@ -256,3 +256,45 @@ function initSliders() {
 }
 
 initSliders();
+
+/* Favorites */
+const FAV_KEY = "travellian-favorites";
+
+function readFavorites() {
+  try {
+    return new Set(JSON.parse(localStorage.getItem(FAV_KEY)) || []);
+  } catch {
+    return new Set();
+  }
+}
+
+function toggleFavorite(id) {
+  const favorites = readFavorites();
+  if (favorites.has(id)) favorites.delete(id);
+  else favorites.add(id);
+  try {
+    localStorage.setItem(FAV_KEY, JSON.stringify([...favorites]));
+  } catch {
+    // storage is unavailable: the button still toggles for this visit
+  }
+  return favorites.has(id);
+}
+
+function paintFavorite(button, isFav) {
+  button.setAttribute("aria-pressed", String(isFav));
+  button.classList.toggle("is-active", isFav);
+  const icon = qs("i", button);
+  icon?.classList.toggle("fa-solid", isFav);
+  icon?.classList.toggle("fa-regular", !isFav);
+}
+
+function initFavoriteButtons() {
+  const favorites = readFavorites();
+  qsa(".fav-toggle[data-fav]").forEach((button) => {
+    const id = Number(button.dataset.fav);
+    paintFavorite(button, favorites.has(id));
+    button.addEventListener("click", () => paintFavorite(button, toggleFavorite(id)));
+  });
+}
+
+initFavoriteButtons();

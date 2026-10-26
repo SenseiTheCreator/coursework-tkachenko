@@ -979,6 +979,11 @@
   font-size: 0.75rem;
 }
 
+.fav-btn.is-active {
+  background: var(--color-primary);
+  color: var(--color-white);
+}
+
 .fav-btn {
   position: absolute;
   top: 12px;
