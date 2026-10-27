@@ -473,6 +473,57 @@
       </div>
     </div>
   </div>
+   <!-- BOOKING MODAL -->
+  <div id="bookingModal" class="modal-overlay d-none">
+    <div class="modal-box modal-box--wide" role="dialog" aria-modal="true" aria-labelledby="bookingModalTitle">
+      <button class="modal-close" type="button" aria-label="Закрити">
+        <i class="fa-solid fa-xmark" aria-hidden="true"></i>
+      </button>
+      <h2 class="modal-title" id="bookingModalTitle">Бронювання туру</h2>
+      <p class="modal-subtitle">Вічний Рим · 7 днів · €820 за особу</p>
+      <form class="booking-modal-form" data-validate
+        data-success="Заявку надіслано! Менеджер зв'яжеться з вами протягом години.">
+        <div class="contact-field">
+          <label class="contact-label" for="booking-name">Ім'я та прізвище</label>
+          <input id="booking-name" class="field-input" type="text" name="name" autocomplete="name" minlength="2"
+            required />
+        </div>
+        <div class="contact-row">
+          <div class="contact-field">
+            <label class="contact-label" for="booking-phone">Телефон</label>
+            <input id="booking-phone" class="field-input" type="tel" name="phone" autocomplete="tel"
+              pattern="\+380[0-9]{9}" data-error="Формат: +380XXXXXXXXX" placeholder="+380" required />
+          </div>
+          <div class="contact-field">
+            <label class="contact-label" for="booking-email">Email</label>
+            <input id="booking-email" class="field-input" type="email" name="email" autocomplete="email"
+              placeholder="name@mail.com" required />
+          </div>
+        </div>
+        <div class="contact-row">
+          <div class="contact-field">
+            <label class="contact-label" for="booking-date">Дата виїзду</label>
+            <select id="booking-date" class="field-input" name="date" required>
+              <option value="2026-11-12">12.11.2026</option>
+              <option value="2026-12-03">03.12.2026</option>
+            </select>
+          </div>
+          <div class="contact-field">
+            <label class="contact-label" for="booking-guests">Кількість осіб</label>
+            <input id="booking-guests" class="field-input" type="number" name="guests" min="1" max="6" value="2"
+              required />
+          </div>
+        </div>
+        <div class="contact-field">
+          <label class="contact-label" for="booking-comment">Коментар</label>
+          <textarea id="booking-comment" class="field-input" name="comment" maxlength="500"></textarea>
+        </div>
+        <label class="check"><input type="checkbox" name="consent" required /> Погоджуюся з умовами
+          бронювання</label>
+        <button type="submit" class="modal-btn modal-btn--primary">Надіслати заявку</button>
+      </form>
+    </div>
+  </div>
   <script src="assets/scripts/main.js" defer></script>
 </body>
 

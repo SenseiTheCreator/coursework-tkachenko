@@ -224,10 +224,10 @@ function initSliders() {
     if (!qs(selector)) return;
     new Swiper(selector, {
       spaceBetween: 32,
+      uniqueNavElements: false,
       navigation: {
         prevEl: `.swiper-btn-prev-${name}`,
         nextEl: `.swiper-btn-next-${name}`,
-        uniqueNavElements: false,
       },
       a11y: { prevSlideMessage: "Попередній слайд", nextSlideMessage: "Наступний слайд" },
       ...options,
@@ -327,7 +327,6 @@ function createTourCard(tour, favorites) {
   const img = qs("img", card);
   img.src = tour.image;
   img.alt = tour.alt;
-  // a missing photo must not break the card
   img.addEventListener("error", () => card.classList.add("tour-card--no-img"), { once: true });
 
   qs(".card-tag", card).textContent = tour.country;
@@ -386,7 +385,6 @@ function initCatalog() {
     qs("#loadMore").hidden = list.length <= state.limit;
   }
 
-  // filters passed from the search form on the home page
   if (params.get("query")) form.elements.query.value = params.get("query");
   const country = params.get("country");
   if (country && qs(`[data-country="${CSS.escape(country)}"]`, form)) {
@@ -407,7 +405,6 @@ function initCatalog() {
     setChips(form, "data-country", state.country);
     render();
   });
-  // "reset" fires before the fields are cleared, so render on the next tick
   form.addEventListener("reset", () =>
     setTimeout(() => {
       state.country = "all";
