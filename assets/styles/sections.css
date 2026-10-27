@@ -1500,7 +1500,7 @@
   color: var(--text-primary);
 }
 
-.contact-form textarea.field-input {
+textarea.field-input {
   min-height: 140px;
   resize: vertical;
 }
