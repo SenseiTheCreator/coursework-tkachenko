@@ -722,7 +722,7 @@
 .main-header.main-header--inner {
   background-image:
     linear-gradient(rgba(23, 36, 50, 0.7), rgba(23, 36, 50, 0.7)),
-    url("../images/header-photo.jpg");
+    url("../images/header-photo.webp");
   background-position: center;
 }
 

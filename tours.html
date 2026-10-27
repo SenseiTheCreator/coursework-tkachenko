@@ -115,7 +115,7 @@
 
                 <div>
                     <div class="catalog-bar">
-                        <p>Знайдено турів: <strong id="tourCount">9</strong></p>
+                        <p>Знайдено турів: <strong id="tourCount">0</strong></p>
                         <div class="chip-list" role="group" aria-label="Сортування">
                             <button class="chip is-active" type="button" data-sort="rating" aria-pressed="true">За
                                 рейтингом</button>
@@ -125,7 +125,31 @@
                                 aria-pressed="false">Дорожчі</button>
                         </div>
                     </div>
-                    <div class="tour-grid" id="tourGrid"></div>
+                    <div class="tour-grid" id="tourGrid" aria-live="polite"></div>
+                    <template id="tourCardTpl">
+                        <article class="tour-card">
+                            <div class="card-img">
+                                <img src="" alt="" width="400" height="300" loading="lazy" />
+                                <span class="card-tag"></span>
+                                <button class="fav-btn" type="button" aria-label="Додати в обране" aria-pressed="false">
+                                    <i class="fa-regular fa-heart" aria-hidden="true"></i>
+                                </button>
+                            </div>
+                            <div class="tour-card-body">
+                                <h2 class="tour-card-title"></h2>
+                                <p class="tour-card-meta">
+                                    <span class="tour-card-rating"><svg width="20" height="19" aria-hidden="true">
+                                            <use href="assets/images/icons/sprite.svg#star"></use>
+                                        </svg><span class="tour-card-score"></span></span>
+                                    <span class="tour-card-days"></span>
+                                </p>
+                                <div class="tour-card-foot">
+                                    <p>від <strong class="tour-card-price"></strong></p>
+                                    <a class="btn-sm" href="tour.html">Детальніше</a>
+                                </div>
+                            </div>
+                        </article>
+                    </template>
                     <p class="tours-empty" id="toursEmpty" hidden>За вашими фільтрами турів не знайдено. Змініть
                         критерії пошуку.</p>
                     <div class="more-wrap"><button id="loadMore" class="btn-line" type="button">Показати ще</button>
