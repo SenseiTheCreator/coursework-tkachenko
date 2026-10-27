@@ -20,20 +20,18 @@
         <!-- NAVBAR -->
         <div class="navbar d-flex vertical-center">
             <nav class="d-flex vertical-center">
-                <div class="logo d-flex">
-                    <img src="assets/images/icons/logo.svg" alt="Travellian" />
-                </div>
+                <a class="logo d-flex" href="index.html"><img src="assets/images/icons/logo.svg" alt="Travellian" /></a>
 
                 <!-- MENU -->
 
                 <button type="button" id="iconBlock" class="menu-icon" aria-label="Меню" aria-expanded="false">
                     <span id="iconOpen" class="menu-icon-open">
-                        <svg width="38" height="23" role="img" aria-label="Меню">
+                        <svg width="38" height="23" aria-hidden="true">
                             <use href="assets/images/icons/sprite.svg#menu"></use>
                         </svg>
                     </span>
                     <span id="iconClose" class="menu-icon-close d-none">
-                        <i class="fa-solid fa-xmark"></i>
+                        <i class="fa-solid fa-xmark" aria-hidden="true"></i>
                     </span>
                 </button>
 
@@ -44,16 +42,16 @@
                     <li><a href="404.html">Блог</a></li>
                     <li><a href="contacts.html" class="is-active">Зв'язатись</a></li>
                     <li class="menu-mobile-btn">
-                        <button class="btn btn-outline mobile-login">Увійти</button>
+                        <button type="button" class="btn btn-outline mobile-login">Увійти</button>
                     </li>
                     <li class="menu-mobile-btn">
-                        <button class="btn btn-primary mobile-signup">Зареєструватися</button>
+                        <button type="button" class="btn btn-primary mobile-signup">Зареєструватися</button>
                     </li>
                 </ul>
 
                 <div class="nav-actions d-flex">
-                    <button id="loginBtn" class="btn btn-outline">Увійти</button>
-                    <button id="signupBtn" class="btn btn-primary">Зареєструватися</button>
+                    <button type="button" id="loginBtn" class="btn btn-outline">Увійти</button>
+                    <button type="button" id="signupBtn" class="btn btn-primary">Зареєструватися</button>
                 </div>
             </nav>
         </div>
@@ -74,7 +72,8 @@
                 <div class="contact-layout">
                     <ul class="contact-cards">
                         <li class="contact-card">
-                            <span class="contact-card-icon" aria-hidden="true"><i class="fa-solid fa-phone"></i></span>
+                            <span class="contact-card-icon" aria-hidden="true"><i class="fa-solid fa-phone"
+                                    aria-hidden="true"></i></span>
                             <div>
                                 <p class="contact-card-label">Телефон</p>
                                 <p class="contact-card-value"><a href="tel:+380965604217">+380 96 560 42 17</a></p>
@@ -98,7 +97,8 @@
                             </div>
                         </li>
                         <li class="contact-card">
-                            <span class="contact-card-icon" aria-hidden="true"><i class="fa-solid fa-clock"></i></span>
+                            <span class="contact-card-icon" aria-hidden="true"><i class="fa-solid fa-clock"
+                                    aria-hidden="true"></i></span>
                             <div>
                                 <p class="contact-card-label">Графік роботи</p>
                                 <p class="contact-card-value">Пн–Пт: 9:00–18:00<br />Сб: 10:00–15:00</p>
@@ -106,7 +106,8 @@
                         </li>
                     </ul>
 
-                    <form class="contact-form" data-validate data-success="Дякуємо! Ми відповімо протягом робочого дня.">
+                    <form class="contact-form" data-validate
+                        data-success="Дякуємо! Ми відповімо протягом робочого дня.">
                         <h2 class="contact-title">Напишіть нам</h2>
                         <div class="contact-row">
                             <div class="contact-field">
@@ -185,7 +186,7 @@
             </div>
 
             <div class="footer-col">
-                <h3 class="footer-col-title">Навігація</h3>
+                <h2 class="footer-col-title">Навігація</h2>
                 <ul class="footer-col-list">
                     <li><a href="index.html">Головна</a></li>
                     <li><a href="about.html">Про нас</a></li>
@@ -196,7 +197,7 @@
             </div>
 
             <div class="footer-col">
-                <h3 class="footer-col-title">Інформація</h3>
+                <h2 class="footer-col-title">Інформація</h2>
                 <ul class="footer-col-list">
                     <li><a href="about.html">Про нас</a></li>
                     <li><a href="contacts.html">Контакти</a></li>
@@ -206,7 +207,7 @@
             </div>
 
             <div class="footer-col">
-                <h3 class="footer-col-title">Контакти</h3>
+                <h2 class="footer-col-title">Контакти</h2>
                 <address class="footer-col-list">
                     <p>+380 96 560 42 17</p>
                     <p>travellian@corp.com</p>
@@ -215,25 +216,29 @@
             </div>
 
             <div class="footer-col">
-                <h3 class="footer-col-title">Підпишіться на наші новини</h3>
+                <h2 class="footer-col-title">Підпишіться на наші новини</h2>
                 <div class="footer-social">
-                    <a href="#" class="footer-social-link">
-                        <svg width="31" height="31" role="img" aria-label="Facebook">
+                    <a href="https://www.facebook.com/" class="footer-social-link" target="_blank" rel="noopener"
+                        aria-label="Facebook">
+                        <svg width="31" height="31" aria-hidden="true">
                             <use href="assets/images/icons/sprite.svg#facebook"></use>
                         </svg>
                     </a>
-                    <a href="#" class="footer-social-link">
-                        <svg width="32" height="32" role="img" aria-label="Pinterest">
+                    <a href="https://www.pinterest.com/" class="footer-social-link" target="_blank" rel="noopener"
+                        aria-label="Pinterest">
+                        <svg width="32" height="32" aria-hidden="true">
                             <use href="assets/images/icons/sprite.svg#pinterest"></use>
                         </svg>
                     </a>
-                    <a href="#" class="footer-social-link">
-                        <svg width="32" height="32" role="img" aria-label="Instagram">
+                    <a href="https://www.instagram.com/" class="footer-social-link" target="_blank" rel="noopener"
+                        aria-label="Instagram">
+                        <svg width="32" height="32" aria-hidden="true">
                             <use href="assets/images/icons/sprite.svg#instagram"></use>
                         </svg>
                     </a>
-                    <a href="#" class="footer-social-link">
-                        <svg width="26" height="21" role="img" aria-label="Twitter">
+                    <a href="https://x.com/" class="footer-social-link" target="_blank" rel="noopener"
+                        aria-label="Twitter">
+                        <svg width="26" height="21" aria-hidden="true">
                             <use href="assets/images/icons/sprite.svg#twitter"></use>
                         </svg>
                     </a>
@@ -246,7 +251,7 @@
     <div id="loginModal" class="modal-overlay d-none">
         <div class="modal-box" role="dialog" aria-modal="true" aria-labelledby="loginModalTitle">
             <button id="closeLogin" class="modal-close" type="button" aria-label="Закрити">
-                <i class="fa-solid fa-xmark"></i>
+                <i class="fa-solid fa-xmark" aria-hidden="true"></i>
             </button>
             <h2 class="modal-title" id="loginModalTitle">З поверненням!</h2>
             <p class="modal-subtitle">
@@ -259,7 +264,7 @@
                 <label class="visually-hidden" for="login-password">Пароль</label>
                 <input id="login-password" name="password" type="password" autocomplete="current-password"
                     placeholder="Введіть ваш пароль" minlength="8" required />
-                <a href="#" class="modal-forgot">Забули пароль?</a>
+                <a href="contacts.html" class="modal-forgot">Забули пароль?</a>
                 <button type="submit" class="modal-btn modal-btn--primary">
                     Увійти
                 </button>
@@ -272,13 +277,13 @@
             </div>
             <div class="modal-socials">
                 <button class="social-btn" type="button" aria-label="Увійти через Google">
-                    <i class="fa-brands fa-google"></i>
+                    <i class="fa-brands fa-google" aria-hidden="true"></i>
                 </button>
                 <button class="social-btn" type="button" aria-label="Увійти через Facebook">
-                    <i class="fa-brands fa-facebook"></i>
+                    <i class="fa-brands fa-facebook" aria-hidden="true"></i>
                 </button>
                 <button class="social-btn" type="button" aria-label="Увійти через Apple">
-                    <i class="fa-brands fa-apple"></i>
+                    <i class="fa-brands fa-apple" aria-hidden="true"></i>
                 </button>
             </div>
         </div>
@@ -288,7 +293,7 @@
     <div id="signupModal" class="modal-overlay d-none">
         <div class="modal-box" role="dialog" aria-modal="true" aria-labelledby="signupModalTitle">
             <button id="closeSignup" class="modal-close" type="button" aria-label="Закрити">
-                <i class="fa-solid fa-xmark"></i>
+                <i class="fa-solid fa-xmark" aria-hidden="true"></i>
             </button>
             <h2 class="modal-title" id="signupModalTitle">Приєднуйтесь до нас</h2>
             <p class="modal-subtitle">
@@ -320,13 +325,13 @@
             </div>
             <div class="modal-socials">
                 <button class="social-btn" type="button" aria-label="Увійти через Google">
-                    <i class="fa-brands fa-google"></i>
+                    <i class="fa-brands fa-google" aria-hidden="true"></i>
                 </button>
                 <button class="social-btn" type="button" aria-label="Увійти через Facebook">
-                    <i class="fa-brands fa-facebook"></i>
+                    <i class="fa-brands fa-facebook" aria-hidden="true"></i>
                 </button>
                 <button class="social-btn" type="button" aria-label="Увійти через Apple">
-                    <i class="fa-brands fa-apple"></i>
+                    <i class="fa-brands fa-apple" aria-hidden="true"></i>
                 </button>
             </div>
         </div>
