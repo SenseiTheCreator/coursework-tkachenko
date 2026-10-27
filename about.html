@@ -21,20 +21,18 @@
     <!-- NAVBAR -->
     <div class="navbar d-flex vertical-center">
       <nav class="d-flex vertical-center">
-        <div class="logo d-flex">
-          <img src="assets/images/icons/logo.svg" alt="Travellian" />
-        </div>
+        <a class="logo d-flex" href="index.html"><img src="assets/images/icons/logo.svg" alt="Travellian" /></a>
 
         <!-- MENU -->
 
         <button type="button" id="iconBlock" class="menu-icon" aria-label="Меню" aria-expanded="false">
           <span id="iconOpen" class="menu-icon-open">
-            <svg width="38" height="23" role="img" aria-label="Меню">
+            <svg width="38" height="23" aria-hidden="true">
               <use href="assets/images/icons/sprite.svg#menu"></use>
             </svg>
           </span>
           <span id="iconClose" class="menu-icon-close d-none">
-            <i class="fa-solid fa-xmark"></i>
+            <i class="fa-solid fa-xmark" aria-hidden="true"></i>
           </span>
         </button>
 
@@ -45,16 +43,16 @@
           <li><a href="404.html">Блог</a></li>
           <li><a href="contacts.html">Зв'язатись</a></li>
           <li class="menu-mobile-btn">
-            <button class="btn btn-outline mobile-login">Увійти</button>
+            <button type="button" class="btn btn-outline mobile-login">Увійти</button>
           </li>
           <li class="menu-mobile-btn">
-            <button class="btn btn-primary mobile-signup">Зареєструватися</button>
+            <button type="button" class="btn btn-primary mobile-signup">Зареєструватися</button>
           </li>
         </ul>
 
         <div class="nav-actions d-flex">
-          <button id="loginBtn" class="btn btn-outline">Увійти</button>
-          <button id="signupBtn" class="btn btn-primary">Зареєструватися</button>
+          <button type="button" id="loginBtn" class="btn btn-outline">Увійти</button>
+          <button type="button" id="signupBtn" class="btn btn-primary">Зареєструватися</button>
         </div>
       </nav>
     </div>
@@ -83,7 +81,7 @@
       </div>
 
       <div class="blog-card content-wrap">
-        <img src="assets/images/corp-trav.webp" alt="Наша команда" class="blog-card-img" />
+        <img src="assets/images/corp-trav.webp" alt="Наша команда" class="blog-card-img" loading="lazy" />
         <div class="blog-card-body">
           <h3 class="blog-card-title">
             Мандруємо Європою<br />з 2016 року
@@ -99,7 +97,7 @@
           </p>
           <a href="tours.html" class="blog-card-link">
             <span>Переглянути тури</span>
-            <i class="fa-solid fa-arrow-right-long"></i>
+            <i class="fa-solid fa-arrow-right-long" aria-hidden="true"></i>
           </a>
         </div>
       </div>
@@ -162,13 +160,15 @@
           </p>
         </div>
         <div class="section-head-arrows arrows-desktop">
-          <button id="gallery-prev" class="arrow-btn swiper-btn-prev-gallery">
-            <svg width="12" height="22" role="img" aria-label="Назад">
+          <button id="gallery-prev" class="arrow-btn swiper-btn-prev-gallery" type="button"
+            aria-label="Попередній слайд">
+            <svg width="12" height="22" aria-hidden="true">
               <use href="assets/images/icons/sprite.svg#slider-left"></use>
             </svg>
           </button>
-          <button id="gallery-next" class="arrow-btn swiper-btn-next-gallery">
-            <svg width="12" height="22" role="img" aria-label="Далі">
+          <button id="gallery-next" class="arrow-btn swiper-btn-next-gallery" type="button"
+            aria-label="Наступний слайд">
+            <svg width="12" height="22" aria-hidden="true">
               <use href="assets/images/icons/sprite.svg#slider-right"></use>
             </svg>
           </button>
@@ -178,29 +178,39 @@
         <div class="swiper-wrapper">
           <div class="swiper-slide">
             <div class="gallery-grid">
-              <img src="assets/images/gallery-first.webp" alt="Світлина з подорожі, 1" class="gallery-img" />
-              <img src="assets/images/gallery-second.webp" alt="Світлина з подорожі, 2" class="gallery-img" />
-              <img src="assets/images/gallery-third.webp" alt="Світлина з подорожі, 3" class="gallery-img" />
-              <img src="assets/images/gallery-four.webp" alt="Світлина з подорожі, 4" class="gallery-img" />
+              <img src="assets/images/gallery-first.webp" alt="Світлина з подорожі, 1" class="gallery-img"
+                loading="lazy" />
+              <img src="assets/images/gallery-second.webp" alt="Світлина з подорожі, 2" class="gallery-img"
+                loading="lazy" />
+              <img src="assets/images/gallery-third.webp" alt="Світлина з подорожі, 3" class="gallery-img"
+                loading="lazy" />
+              <img src="assets/images/gallery-four.webp" alt="Світлина з подорожі, 4" class="gallery-img"
+                loading="lazy" />
             </div>
           </div>
           <div class="swiper-slide">
             <div class="gallery-grid">
-              <img src="assets/images/gallery-first.webp" alt="Світлина з подорожі, 5" class="gallery-img" />
-              <img src="assets/images/gallery-second.webp" alt="Світлина з подорожі, 6" class="gallery-img" />
-              <img src="assets/images/gallery-third.webp" alt="Світлина з подорожі, 7" class="gallery-img" />
-              <img src="assets/images/gallery-four.webp" alt="Світлина з подорожі, 8" class="gallery-img" />
+              <img src="assets/images/gallery-first.webp" alt="Світлина з подорожі, 5" class="gallery-img"
+                loading="lazy" />
+              <img src="assets/images/gallery-second.webp" alt="Світлина з подорожі, 6" class="gallery-img"
+                loading="lazy" />
+              <img src="assets/images/gallery-third.webp" alt="Світлина з подорожі, 7" class="gallery-img"
+                loading="lazy" />
+              <img src="assets/images/gallery-four.webp" alt="Світлина з подорожі, 8" class="gallery-img"
+                loading="lazy" />
             </div>
           </div>
         </div>
         <div class="section-head-arrows arrows-mobile arrows-mobile--gallery">
-          <button id="gallery-prev-mob" class="arrow-btn swiper-btn-prev-gallery">
-            <svg width="12" height="22" role="img" aria-label="Назад">
+          <button id="gallery-prev-mob" class="arrow-btn swiper-btn-prev-gallery" type="button"
+            aria-label="Попередній слайд">
+            <svg width="12" height="22" aria-hidden="true">
               <use href="assets/images/icons/sprite.svg#slider-left"></use>
             </svg>
           </button>
-          <button id="gallery-next-mob" class="arrow-btn swiper-btn-next-gallery">
-            <svg width="12" height="22" role="img" aria-label="Далі">
+          <button id="gallery-next-mob" class="arrow-btn swiper-btn-next-gallery" type="button"
+            aria-label="Наступний слайд">
+            <svg width="12" height="22" aria-hidden="true">
               <use href="assets/images/icons/sprite.svg#slider-right"></use>
             </svg>
           </button>
@@ -226,14 +236,14 @@
         <div class="swiper-wrapper">
           <div class="swiper-slide">
             <figure class="exp-card">
-              <img src="assets/images/avatar-first.png" alt="Юрій Семеген" class="exp-card-avatar" />
+              <img src="assets/images/avatar-first.png" alt="Юрій Семеген" class="exp-card-avatar" loading="lazy" />
               <p class="exp-card-text">
                 Подорож перевершила всі мої очікування! Усе було добре
                 організовано, а маршрут дозволив побачити не лише відомі
                 пам'ятки, а й затишні місця, про які не пишуть у звичайних
                 туристичних путівниках. Обов'язково вирушу знову!
               </p>
-              <div class="exp-card-stars">
+              <div class="exp-card-stars" role="img" aria-label="Оцінка 5 з 5">
                 <svg width="20" height="19" aria-hidden="true">
                   <use href="assets/images/icons/sprite.svg#star"></use>
                 </svg>
@@ -257,14 +267,14 @@
 
           <div class="swiper-slide">
             <figure class="exp-card">
-              <img src="assets/images/avatar-second.png" alt="Влад Карась" class="exp-card-avatar" />
+              <img src="assets/images/avatar-second.png" alt="Влад Карась" class="exp-card-avatar" loading="lazy" />
               <p class="exp-card-text">
                 Найбільше сподобалося поєднання свободи та продуманого
                 планування. Ми встигли побачити багато цікавого, спробувати
                 місцеві страви й просто насолодитися атмосферою міста.
                 Чудовий спосіб провести відпустку без зайвого клопоту.
               </p>
-              <div class="exp-card-stars">
+              <div class="exp-card-stars" role="img" aria-label="Оцінка 5 з 5">
                 <svg width="20" height="19" aria-hidden="true">
                   <use href="assets/images/icons/sprite.svg#star"></use>
                 </svg>
@@ -288,14 +298,14 @@
 
           <div class="swiper-slide">
             <figure class="exp-card">
-              <img src="assets/images/avatar-third.png" alt="Ірина Арабчук" class="exp-card-avatar" />
+              <img src="assets/images/avatar-third.png" alt="Ірина Арабчук" class="exp-card-avatar" loading="lazy" />
               <p class="exp-card-text">
                 Це була саме та відпустка, якої мені давно бракувало.
                 Нові місця, красиві краєвиди та безліч маленьких відкриттів
                 щодня. Особливо приємно, що можна було зосередитися на
                 враженнях, а не на організаційних питаннях.
               </p>
-              <div class="exp-card-stars">
+              <div class="exp-card-stars" role="img" aria-label="Оцінка 5 з 5">
                 <svg width="20" height="19" aria-hidden="true">
                   <use href="assets/images/icons/sprite.svg#star"></use>
                 </svg>
@@ -318,13 +328,13 @@
           </div>
         </div>
         <div class="section-head-arrows section-head-arrows--exp">
-          <button class="arrow-btn swiper-btn-prev-exp">
-            <svg width="12" height="22" role="img" aria-label="Назад">
+          <button class="arrow-btn swiper-btn-prev-exp" type="button" aria-label="Попередній слайд">
+            <svg width="12" height="22" aria-hidden="true">
               <use href="assets/images/icons/sprite.svg#slider-left"></use>
             </svg>
           </button>
-          <button class="arrow-btn swiper-btn-next-exp">
-            <svg width="12" height="22" role="img" aria-label="Далі">
+          <button class="arrow-btn swiper-btn-next-exp" type="button" aria-label="Наступний слайд">
+            <svg width="12" height="22" aria-hidden="true">
               <use href="assets/images/icons/sprite.svg#slider-right"></use>
             </svg>
           </button>
@@ -359,7 +369,7 @@
       </div>
 
       <div class="footer-col">
-        <h3 class="footer-col-title">Навігація</h3>
+        <h2 class="footer-col-title">Навігація</h2>
         <ul class="footer-col-list">
           <li><a href="index.html">Головна</a></li>
           <li><a href="about.html">Про нас</a></li>
@@ -370,7 +380,7 @@
       </div>
 
       <div class="footer-col">
-        <h3 class="footer-col-title">Інформація</h3>
+        <h2 class="footer-col-title">Інформація</h2>
         <ul class="footer-col-list">
           <li><a href="about.html">Про нас</a></li>
           <li><a href="contacts.html">Контакти</a></li>
@@ -380,7 +390,7 @@
       </div>
 
       <div class="footer-col">
-        <h3 class="footer-col-title">Контакти</h3>
+        <h2 class="footer-col-title">Контакти</h2>
         <address class="footer-col-list">
           <p>+380 96 560 42 17</p>
           <p>travellian@corp.com</p>
@@ -389,25 +399,28 @@
       </div>
 
       <div class="footer-col">
-        <h3 class="footer-col-title">Підпишіться на наші новини</h3>
+        <h2 class="footer-col-title">Підпишіться на наші новини</h2>
         <div class="footer-social">
-          <a href="#" class="footer-social-link">
-            <svg width="31" height="31" role="img" aria-label="Facebook">
+          <a href="https://www.facebook.com/" class="footer-social-link" target="_blank" rel="noopener"
+            aria-label="Facebook">
+            <svg width="31" height="31" aria-hidden="true">
               <use href="assets/images/icons/sprite.svg#facebook"></use>
             </svg>
           </a>
-          <a href="#" class="footer-social-link">
-            <svg width="32" height="32" role="img" aria-label="Pinterest">
+          <a href="https://www.pinterest.com/" class="footer-social-link" target="_blank" rel="noopener"
+            aria-label="Pinterest">
+            <svg width="32" height="32" aria-hidden="true">
               <use href="assets/images/icons/sprite.svg#pinterest"></use>
             </svg>
           </a>
-          <a href="#" class="footer-social-link">
-            <svg width="32" height="32" role="img" aria-label="Instagram">
+          <a href="https://www.instagram.com/" class="footer-social-link" target="_blank" rel="noopener"
+            aria-label="Instagram">
+            <svg width="32" height="32" aria-hidden="true">
               <use href="assets/images/icons/sprite.svg#instagram"></use>
             </svg>
           </a>
-          <a href="#" class="footer-social-link">
-            <svg width="26" height="21" role="img" aria-label="Twitter">
+          <a href="https://x.com/" class="footer-social-link" target="_blank" rel="noopener" aria-label="Twitter">
+            <svg width="26" height="21" aria-hidden="true">
               <use href="assets/images/icons/sprite.svg#twitter"></use>
             </svg>
           </a>
@@ -420,7 +433,7 @@
   <div id="loginModal" class="modal-overlay d-none">
     <div class="modal-box" role="dialog" aria-modal="true" aria-labelledby="loginModalTitle">
       <button id="closeLogin" class="modal-close" type="button" aria-label="Закрити">
-        <i class="fa-solid fa-xmark"></i>
+        <i class="fa-solid fa-xmark" aria-hidden="true"></i>
       </button>
       <h2 class="modal-title" id="loginModalTitle">З поверненням!</h2>
       <p class="modal-subtitle">
@@ -433,7 +446,7 @@
         <label class="visually-hidden" for="login-password">Пароль</label>
         <input id="login-password" name="password" type="password" autocomplete="current-password"
           placeholder="Введіть ваш пароль" minlength="8" required />
-        <a href="#" class="modal-forgot">Забули пароль?</a>
+        <a href="contacts.html" class="modal-forgot">Забули пароль?</a>
         <button type="submit" class="modal-btn modal-btn--primary">
           Увійти
         </button>
@@ -446,13 +459,13 @@
       </div>
       <div class="modal-socials">
         <button class="social-btn" type="button" aria-label="Увійти через Google">
-          <i class="fa-brands fa-google"></i>
+          <i class="fa-brands fa-google" aria-hidden="true"></i>
         </button>
         <button class="social-btn" type="button" aria-label="Увійти через Facebook">
-          <i class="fa-brands fa-facebook"></i>
+          <i class="fa-brands fa-facebook" aria-hidden="true"></i>
         </button>
         <button class="social-btn" type="button" aria-label="Увійти через Apple">
-          <i class="fa-brands fa-apple"></i>
+          <i class="fa-brands fa-apple" aria-hidden="true"></i>
         </button>
       </div>
     </div>
@@ -462,7 +475,7 @@
   <div id="signupModal" class="modal-overlay d-none">
     <div class="modal-box" role="dialog" aria-modal="true" aria-labelledby="signupModalTitle">
       <button id="closeSignup" class="modal-close" type="button" aria-label="Закрити">
-        <i class="fa-solid fa-xmark"></i>
+        <i class="fa-solid fa-xmark" aria-hidden="true"></i>
       </button>
       <h2 class="modal-title" id="signupModalTitle">Приєднуйтесь до нас</h2>
       <p class="modal-subtitle">
@@ -494,13 +507,13 @@
       </div>
       <div class="modal-socials">
         <button class="social-btn" type="button" aria-label="Увійти через Google">
-          <i class="fa-brands fa-google"></i>
+          <i class="fa-brands fa-google" aria-hidden="true"></i>
         </button>
         <button class="social-btn" type="button" aria-label="Увійти через Facebook">
-          <i class="fa-brands fa-facebook"></i>
+          <i class="fa-brands fa-facebook" aria-hidden="true"></i>
         </button>
         <button class="social-btn" type="button" aria-label="Увійти через Apple">
-          <i class="fa-brands fa-apple"></i>
+          <i class="fa-brands fa-apple" aria-hidden="true"></i>
         </button>
       </div>
     </div>
