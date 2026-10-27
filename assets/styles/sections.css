@@ -482,11 +482,11 @@
 
 /*  EXPERIENCES  */
 .section-title--exp {
-  font-size: 3rem;
+  font-size: 2.5rem;
 }
 
 .section-title--exp::after {
-  width: 347px;
+  max-width: 100%;
 }
 
 .experiences-section {
@@ -1609,6 +1609,10 @@ textarea.field-input {
     max-width: 100%;
   }
 
+  .section-title--exp {
+    font-size: 3rem;
+  }
+
   .arrows-mobile--offer {
     padding: 100px 0 0;
   }
@@ -1910,6 +1914,7 @@ textarea.field-input {
   }
 
   .trip-section .section-head {
+    flex: none;
     flex-direction: column;
     align-items: flex-start;
     justify-content: flex-end;
@@ -1917,6 +1922,10 @@ textarea.field-input {
     width: auto;
   }
 
+  .trip-section .section-head-text {
+    max-width: 390px;
+  }
+  
   .trip-section .section-subtitle--trip {
     max-width: 390px;
     font-size: 1.125rem;
