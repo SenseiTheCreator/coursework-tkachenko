@@ -241,6 +241,9 @@
 }
 
 .offer-card-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
   height: 56px;
   min-width: 127px;
   padding: 16px 24px;
@@ -1042,6 +1045,22 @@
   color: var(--color-white);
   font-size: 0.875rem;
   font-weight: 500;
+}
+
+.tour-card--no-img .card-img {
+  background: var(--color-bg-accent);
+}
+
+.tour-card--no-img .card-img img {
+  visibility: hidden;
+}
+
+.tours-empty {
+  padding: 48px 16px;
+  border: 1px dashed #d9d9d9;
+  border-radius: 12px;
+  text-align: center;
+  color: var(--text-secondary);
 }
 
 .more-wrap {
