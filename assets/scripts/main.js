@@ -429,3 +429,48 @@ function initCatalog() {
 }
 
 initCatalog();
+
+/* Scroll reveal */
+function initReveal() {
+  const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  if (reduceMotion || !("IntersectionObserver" in window)) return;
+
+  const targets = qsa(
+    [
+      ".section-head",
+      ".swiper",
+      ".blog-card",
+      ".about-values-grid > li",
+      ".newsletter",
+      ".tour-gallery",
+      ".tour-aside",
+      ".tour-content",
+      ".similar-grid > *",
+      ".contact-cards > li",
+      ".contact-form",
+      ".faq-item",
+    ].join(", "),
+    qs("main") ?? document,
+  );
+  if (!targets.length) return;
+
+  const observer = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        if (!entry.isIntersecting) return;
+        entry.target.classList.add("is-visible");
+        observer.unobserve(entry.target);
+      });
+    },
+    { threshold: 0.15, rootMargin: "0px 0px -50px 0px" },
+  );
+
+  targets.forEach((el) => {
+    const index = [...el.parentElement.children].indexOf(el);
+    el.style.setProperty("--reveal-delay", `${Math.min(index, 5) * 0.08}s`);
+    el.classList.add("reveal");
+    observer.observe(el);
+  });
+}
+
+initReveal();
