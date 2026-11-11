@@ -203,14 +203,54 @@ initGallery();
 
 /* Accordion */
 function initAccordion() {
+  const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  const duration = reduceMotion ? 0 : 350;
+  const easing = "ease";
+
+  const isOpen = (item) => item.open && !item.classList.contains("is-closing");
+
+  const toggleItem = (item, open) => {
+    const summary = qs("summary", item);
+    const start = item.offsetHeight;
+    item.getAnimations().forEach((animation) => animation.cancel());
+
+    let end;
+    if (open) {
+      item.classList.remove("is-closing");
+      item.open = true;
+      end = item.offsetHeight;
+      qs(".faq-answer", item)?.animate({ opacity: [0, 1] }, { duration, easing });
+    } else {
+      item.classList.add("is-closing");
+      end = summary.offsetHeight + (item.offsetHeight - item.clientHeight);
+    }
+
+    item.style.overflow = "hidden";
+    const animation = item.animate(
+      { height: [`${start}px`, `${end}px`] },
+      { duration, easing },
+    );
+    animation.onfinish = () => {
+      if (!open) item.open = false;
+      item.classList.remove("is-closing");
+      item.style.overflow = "";
+    };
+  };
+
   qsa(".faq").forEach((faq) => {
     const items = qsa("details", faq);
-    items.forEach((item) =>
-      item.addEventListener("toggle", () => {
-        if (!item.open) return;
-        items.filter((other) => other !== item).forEach((other) => (other.open = false));
-      }),
-    );
+    items.forEach((item) => {
+      qs("summary", item).addEventListener("click", (e) => {
+        e.preventDefault();
+        const willOpen = !isOpen(item);
+        if (willOpen) {
+          items
+            .filter((other) => other !== item && isOpen(other))
+            .forEach((other) => toggleItem(other, false));
+        }
+        toggleItem(item, willOpen);
+      });
+    });
   });
 }
 
@@ -277,7 +317,7 @@ function toggleFavorite(id) {
   try {
     localStorage.setItem(FAV_KEY, JSON.stringify([...favorites]));
   } catch {
-    // storage is unavailable: the button still toggles for this visit
+    
   }
   return favorites.has(id);
 }

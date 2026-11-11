@@ -1549,10 +1549,12 @@ textarea.field-input {
   flex-shrink: 0;
   font-size: 1.5rem;
   color: var(--color-primary);
+  transition: transform 0.35s ease;
 }
 
-.faq-item[open] .faq-question::after {
+.faq-item[open]:not(.is-closing) .faq-question::after {
   content: "−";
+  transform: rotate(180deg);
 }
 
 .faq-answer {
