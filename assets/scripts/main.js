@@ -1,3 +1,4 @@
+import { db } from "./app.js";
 const qs = (selector, root = document) => root.querySelector(selector);
 const qsa = (selector, root = document) => [...root.querySelectorAll(selector)];
 
@@ -342,17 +343,24 @@ function initFavoriteButtons() {
 initFavoriteButtons();
 
 /* Tour catalog */
-const tours = [
-  { id: 1, title: "Вічний Рим", country: "Італія", days: 7, price: 820, rating: 4.9, image: "assets/images/tours/tours-rome.webp", alt: "Вид на Колізей у Римі" },
-  { id: 2, title: "Париж за 5 днів", country: "Франція", days: 5, price: 690, rating: 4.8, image: "assets/images/tours/tours-paris.webp", alt: "Ейфелева вежа в Парижі" },
-  { id: 3, title: "Венеціанський карнавал", country: "Італія", days: 4, price: 720, rating: 4.8, image: "assets/images/tours/tours-italy-carnaval.webp", alt: "Маски венеціанського карнавалу" },
-  { id: 4, title: "Дубровник і Адріатика", country: "Хорватія", days: 7, price: 780, rating: 4.8, image: "assets/images/tours/tours-croatia-dubrovnik.webp", alt: "Старе місто Дубровника над морем" },
-  { id: 5, title: "Барселона Гауді", country: "Іспанія", days: 6, price: 750, rating: 4.7, image: "assets/images/tours/tours-spain-barcelona.webp", alt: "Саграда Фамілія в Барселоні" },
-  { id: 6, title: "Лісабон і Сінтра", country: "Португалія", days: 6, price: 600, rating: 4.7, image: "assets/images/tours/tours-portugal.webp", alt: "Кольорові вулиці Лісабона" },
-  { id: 7, title: "Мадрид і Толедо", country: "Іспанія", days: 5, price: 640, rating: 4.6, image: "assets/images/tours/tours-spain-madrid.webp", alt: "Центр Мадрида" },
-  { id: 8, title: "Спліт і острів Хвар", country: "Хорватія", days: 5, price: 590, rating: 4.6, image: "assets/images/tours/tours-croatia-split.webp", alt: "Набережна Спліта" },
-  { id: 9, title: "Афіни та острови", country: "Греція", days: 5, price: 650, rating: 4.5, image: "assets/images/tours/tours-greece.webp", alt: "Білі будинки грецького острова" },
-];
+async function fetchTours() {
+  const { data, error } = await db
+    .from("tours")
+    .select("id, title, days, price, rating, image, image_alt, countries(name)")
+    .order("id");
+  if (error) throw error;
+
+  return data.map((tour) => ({
+    id: tour.id,
+    title: tour.title,
+    country: tour.countries.name,
+    days: tour.days,
+    price: tour.price,
+    rating: Number(tour.rating),
+    image: tour.image,
+    alt: tour.image_alt,
+  }));
+}
 
 const PAGE_SIZE = 6;
 
@@ -389,6 +397,7 @@ function initCatalog() {
   if (!grid || !form) return;
 
   const sortBar = qs(".catalog-bar [role='group']");
+  const status = qs("#toursStatus");
   const params = new URLSearchParams(location.search);
   const state = { country: "all", sort: "rating", limit: PAGE_SIZE };
   const sorters = {
@@ -396,6 +405,7 @@ function initCatalog() {
     "price-asc": (a, b) => a.price - b.price,
     "price-desc": (a, b) => b.price - a.price,
   };
+  let tours = null;
 
   const setChips = (container, attr, value) =>
     qsa(`[${attr}]`, container).forEach((chip) => {
@@ -404,7 +414,19 @@ function initCatalog() {
       chip.setAttribute("aria-pressed", String(isActive));
     });
 
+  function showStatus(text) {
+    status.textContent = text;
+    status.hidden = false;
+    grid.replaceChildren();
+    qs("#tourCount").textContent = "—";
+    qs("#toursEmpty").hidden = true;
+    qs("#loadMore").hidden = true;
+  }
+
   function render() {
+    if (!tours) return; // дані ще не завантажені або сталася помилка
+    status.hidden = true;
+
     const data = new FormData(form);
     const query = data.get("query").trim().toLowerCase();
     const min = Number(data.get("priceMin")) || 0;
@@ -423,6 +445,17 @@ function initCatalog() {
     qs("#tourCount").textContent = list.length;
     qs("#toursEmpty").hidden = list.length > 0;
     qs("#loadMore").hidden = list.length <= state.limit;
+  }
+
+  async function load() {
+    showStatus("Завантаження турів…");
+    try {
+      tours = await fetchTours();
+      render();
+    } catch (error) {
+      console.error("Помилка завантаження турів:", error);
+      showStatus("Не вдалося завантажити тури. Перевірте з'єднання з інтернетом і оновіть сторінку.");
+    }
   }
 
   if (params.get("query")) form.elements.query.value = params.get("query");
@@ -465,7 +498,7 @@ function initCatalog() {
     render();
   });
 
-  render();
+  load();
 }
 
 initCatalog();
