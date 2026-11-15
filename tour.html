@@ -4,9 +4,26 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Тур «Вічний Рим»: 7 днів Італією від €820 | Travellian</title>
+  <title>Тур — Travellian</title>
   <meta name="description"
-    content="Тур «Вічний Рим» від Travellian: 7 днів в Італії, готель 4★, гід українською, переліт з Києва. Програма, умови та відгуки мандрівників." />
+    content="Деталі туру Travellian: опис, програма по днях, умови подорожі, вартість і бронювання онлайн." />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css"
+    integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw=="
+    crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <link rel="icon" type="image/png" href="assets/images/favicon.png" />
+  <link rel="stylesheet" href="assets/styles/_variables.css" />
+  <link rel="stylesheet" href="assets/styles/style.css" />
+</head>
+
+<!doctype html>
+<html lang="uk">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Тур — Travellian</title>
+  <meta name="description"
+    content="Деталі туру Travellian: опис, програма по днях, умови подорожі, вартість і бронювання онлайн." />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css"
     integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw=="
     crossorigin="anonymous" referrerpolicy="no-referrer" />
@@ -59,13 +76,13 @@
 
     <div class="page-hero">
       <div class="content-wrap">
-        <h1 class="page-hero-title">Тур «Вічний Рим»</h1>
-        <p class="tour-hero-meta">
-          <span>Рим, Італія</span>
+        <h1 class="page-hero-title" id="tourTitle">Тур</h1>
+        <p class="tour-hero-meta" id="tourMeta" hidden>
+          <span id="tourCountry"></span>
           <span class="tour-hero-rating"><svg width="20" height="19" aria-hidden="true">
               <use href="assets/images/icons/sprite.svg#star"></use>
-            </svg> 4.9 (128 відгуків)</span>
-          <span>7 днів / 6 ночей</span>
+            </svg> <span id="tourRating"></span></span>
+          <span id="tourDuration"></span>
         </p>
       </div>
     </div>
@@ -74,56 +91,34 @@
   <main>
     <section class="page-section">
       <div class="content-wrap">
-        <div class="tour-layout">
+        <div class="tours-empty" id="tourStatus" role="status">
+          <p id="tourStatusText">Завантаження туру…</p>
+          <a class="btn-line tour-status-link" id="tourStatusLink" href="tours.html" hidden>Перейти до каталогу</a>
+        </div>
+        <div class="tour-layout" id="tourPage" hidden>
           <div class="tour-gallery">
             <div class="tour-photo">
-              <img src="assets/images/tours/tours-rome.webp" alt="Колізей у Римі" width="800" height="500" />
-              <span class="tour-photo-label">Колізей</span>
+              <span class="tour-photo-label"></span>
             </div>
-            <div class="tour-thumbs">
-              <button type="button" class="tour-thumb is-active">
-                <img src="assets/images/tours/rome-colosseum.webp" alt="Колізей, Рим" width="200" height="150"
-                  loading="lazy" />
-                <span class="tour-thumb-label">Колізей</span>
-              </button>
-              <button type="button" class="tour-thumb">
-                <img src="assets/images/tours/rome-vatican.webp" alt="Ватикан, Рим" width="200" height="150"
-                  loading="lazy" />
-                <span class="tour-thumb-label">Ватикан</span>
-              </button>
-              <button type="button" class="tour-thumb">
-                <img src="assets/images/tours/rome-trevi.webp" alt="Фонтан Треві, Рим" width="200" height="150"
-                  loading="lazy" />
-                <span class="tour-thumb-label">Фонтан Треві</span>
-              </button>
-              <button type="button" class="tour-thumb">
-                <img src="assets/images/tours/rome-trastevere.webp" alt="Трастевере, Рим" width="200" height="150"
-                  loading="lazy" />
-                <span class="tour-thumb-label">Трастевере</span>
-              </button>
-            </div>
+            <div class="tour-thumbs" hidden></div>
           </div>
 
           <aside class="tour-aside" aria-label="Бронювання туру">
             <p class="tour-aside-label">Вартість на особу</p>
-            <p class="tour-aside-price">€820</p>
+            <p class="tour-aside-price" id="tourPrice"></p>
             <dl class="tour-facts">
               <div>
-                <dt>Найближчий виїзд</dt>
-                <dd>12.11.2026</dd>
-              </div>
-              <div>
-                <dt>Вільних місць</dt>
-                <dd>6 із 15</dd>
+                <dt>Країна</dt>
+                <dd id="tourCountryFact"></dd>
               </div>
               <div>
                 <dt>Тривалість</dt>
-                <dd>7 днів</dd>
+                <dd id="tourDays"></dd>
               </div>
             </dl>
             <button class="btn btn-primary" type="button" data-modal="bookingModal">Забронювати</button>
-            <button class="btn-line fav-toggle" type="button" data-fav="1" aria-pressed="false"><i class="fa-regular fa-heart"
-                aria-hidden="true"></i> В обране</button>
+            <button class="btn-line fav-toggle" id="tourFav" type="button" aria-pressed="false"><i
+                class="fa-regular fa-heart" aria-hidden="true"></i> В обране</button>
           </aside>
 
           <div class="tour-content">
@@ -138,12 +133,10 @@
 
             <section class="tour-section" id="description" role="tabpanel" aria-labelledby="tab-description">
               <h2 class="tour-section-title">Опис</h2>
-              <p class="tour-text">Сім днів у місті, де кожна вулиця — музей просто неба. Ви побачите Колізей і Римський
-                форум, проведете день у Ватикані, скуштуєте справжню карбонару в Трастевере та кинете монетку у фонтан
-                Треві.</p>
+              <p class="tour-text" id="tourDescription"></p>
               <ul class="tour-list">
                 <li>Проживання в готелі 4★ у центрі, сніданки</li>
-                <li>Переліт Київ — Рим — Київ (через Варшаву)</li>
+                <li>Переліт з Києва і назад (через Варшаву)</li>
                 <li>Гід українською мовою</li>
                 <li>Група до 15 осіб</li>
               </ul>
@@ -151,37 +144,7 @@
 
             <section class="tour-section" id="program" role="tabpanel" aria-labelledby="tab-program" hidden>
               <h2 class="tour-section-title">Програма</h2>
-              <ol class="tour-program">
-                <li>
-                  <h3 class="program-day">День 1</h3>
-                  <p class="tour-text">Переліт Київ — Рим (через Варшаву), заселення в готель, вечірня прогулянка
-                    центром.</p>
-                </li>
-                <li>
-                  <h3 class="program-day">День 2</h3>
-                  <p class="tour-text">Колізей і Римський форум разом із гідом, обід у районі Монті.</p>
-                </li>
-                <li>
-                  <h3 class="program-day">День 3</h3>
-                  <p class="tour-text">Ватикан: музеї, Сикстинська капела та собор Святого Петра.</p>
-                </li>
-                <li>
-                  <h3 class="program-day">День 4</h3>
-                  <p class="tour-text">Фонтан Треві, Іспанські сходи, площа Навона й вільний вечір.</p>
-                </li>
-                <li>
-                  <h3 class="program-day">День 5</h3>
-                  <p class="tour-text">Трастевере: гастрономічна прогулянка та вечеря з карбонарою.</p>
-                </li>
-                <li>
-                  <h3 class="program-day">День 6</h3>
-                  <p class="tour-text">Вільний день або додаткова поїздка до Тіволі.</p>
-                </li>
-                <li>
-                  <h3 class="program-day">День 7</h3>
-                  <p class="tour-text">Виселення, переліт Рим — Київ.</p>
-                </li>
-              </ol>
+              <ol class="tour-program" id="tourProgram"></ol>
             </section>
 
             <section class="tour-section" id="conditions" role="tabpanel" aria-labelledby="tab-conditions" hidden>
@@ -190,7 +153,7 @@
                 <div>
                   <h3 class="tour-info-title">Входить у вартість</h3>
                   <ul class="tour-list">
-                    <li>6 ночей у готелі 4★, сніданки</li>
+                    <li>Проживання в готелі 4★, сніданки</li>
                     <li>Авіаквитки та трансфер з аеропорту</li>
                     <li>Супровід гіда українською</li>
                     <li>Медичне страхування</li>
@@ -200,7 +163,7 @@
                   <h3 class="tour-info-title">Оплачується окремо</h3>
                   <ul class="tour-list">
                     <li>Обіди та вечері</li>
-                    <li>Вхідні квитки до Ватикану</li>
+                    <li>Вхідні квитки до музеїв</li>
                     <li>Міський податок у готелі</li>
                   </ul>
                 </div>
@@ -229,7 +192,7 @@
                           <use href="assets/images/icons/sprite.svg#star"></use>
                         </svg></span>
                     </div>
-                    <p class="review-text">Гід розповідав так цікаво, що час у Ватикані пролетів непомітно.</p>
+                    <p class="review-text">Гід розповідав так цікаво, що екскурсії пролітали непомітно.</p>
                   </div>
                 </article>
                 <article class="review-card">
@@ -249,7 +212,7 @@
                           <use href="assets/images/icons/sprite.svg#star"></use>
                         </svg></span>
                     </div>
-                    <p class="review-text">Готель справді в центрі — до Колізею пішки 10 хвилин.</p>
+                    <p class="review-text">Готель справді в центрі — до головних пам'яток пішки 10 хвилин.</p>
                   </div>
                 </article>
                 <article class="review-card">
@@ -278,37 +241,9 @@
           </div>
         </div>
 
-        <section class="similar-section" aria-labelledby="similar-title">
+        <section class="similar-section" aria-labelledby="similar-title" hidden>
           <h2 class="tour-section-title" id="similar-title">Схожі тури</h2>
-          <div class="similar-grid">
-            <a class="similar-card" href="tours.html?country=Італія">
-              <div class="similar-card-img">
-                <img src="assets/images/tours/venice.webp" alt="Венеція, Італія" width="400" height="250"
-                  loading="lazy" />
-                <span class="similar-card-label">Венеція</span>
-              </div>
-              <h3 class="similar-card-title">Венеціанський карнавал</h3>
-              <p class="similar-card-meta">4 дні · від €720</p>
-            </a>
-            <a class="similar-card" href="tours.html?country=Італія">
-              <div class="similar-card-img">
-                <img src="assets/images/tours/florence.webp" alt="Флоренція, Італія" width="400" height="250"
-                  loading="lazy" />
-                <span class="similar-card-label">Флоренція</span>
-              </div>
-              <h3 class="similar-card-title">Тоскана та Флоренція</h3>
-              <p class="similar-card-meta">5 днів · від €680</p>
-            </a>
-            <a class="similar-card" href="tours.html?country=Італія">
-              <div class="similar-card-img">
-                <img src="assets/images/tours/naples.webp" alt="Неаполь, Італія" width="400" height="250"
-                  loading="lazy" />
-                <span class="similar-card-label">Неаполь</span>
-              </div>
-              <h3 class="similar-card-title">Неаполь і Амальфі</h3>
-              <p class="similar-card-meta">6 днів · від €790</p>
-            </a>
-          </div>
+          <div class="similar-grid"></div>
         </section>
       </div>
     </section>
@@ -357,23 +292,26 @@
       <div class="footer-col">
         <h2 class="footer-col-title">Підпишіться на наші новини</h2>
         <div class="footer-social">
-          <a href="https://www.facebook.com/" class="footer-social-link" target="_blank" rel="noopener" aria-label="Facebook">
-              <svg width="31" height="31" aria-hidden="true">
+          <a href="https://www.facebook.com/" class="footer-social-link" target="_blank" rel="noopener"
+            aria-label="Facebook">
+            <svg width="31" height="31" aria-hidden="true">
               <use href="assets/images/icons/sprite.svg#facebook"></use>
             </svg>
           </a>
-          <a href="https://www.pinterest.com/" class="footer-social-link" target="_blank" rel="noopener" aria-label="Pinterest">
-              <svg width="32" height="32" aria-hidden="true">
+          <a href="https://www.pinterest.com/" class="footer-social-link" target="_blank" rel="noopener"
+            aria-label="Pinterest">
+            <svg width="32" height="32" aria-hidden="true">
               <use href="assets/images/icons/sprite.svg#pinterest"></use>
             </svg>
           </a>
-          <a href="https://www.instagram.com/" class="footer-social-link" target="_blank" rel="noopener" aria-label="Instagram">
-              <svg width="32" height="32" aria-hidden="true">
+          <a href="https://www.instagram.com/" class="footer-social-link" target="_blank" rel="noopener"
+            aria-label="Instagram">
+            <svg width="32" height="32" aria-hidden="true">
               <use href="assets/images/icons/sprite.svg#instagram"></use>
             </svg>
           </a>
           <a href="https://x.com/" class="footer-social-link" target="_blank" rel="noopener" aria-label="Twitter">
-              <svg width="26" height="21" aria-hidden="true">
+            <svg width="26" height="21" aria-hidden="true">
               <use href="assets/images/icons/sprite.svg#twitter"></use>
             </svg>
           </a>
@@ -478,7 +416,7 @@
         <i class="fa-solid fa-xmark" aria-hidden="true"></i>
       </button>
       <h2 class="modal-title" id="bookingModalTitle">Бронювання туру</h2>
-      <p class="modal-subtitle">Вічний Рим · 7 днів · €820 за особу</p>
+      <p class="modal-subtitle" id="bookingSummary"></p>
       <form class="booking-modal-form" data-validate
         data-success="Заявку надіслано! Менеджер зв'яжеться з вами протягом години.">
         <div class="contact-field">
