@@ -613,7 +613,8 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 25px 0;
+  padding: 25px 20px;
+  text-overflow: ellipsis;
   background: var(--color-contacts);
   border: none;
   border-radius: 12px;
@@ -644,6 +645,26 @@
 
 .newsletter-btn:hover {
   opacity: 0.85;
+}
+
+/* повідомлення форми не мають зсувати поле та кнопку */
+.newsletter-form {
+  flex-wrap: wrap;
+}
+
+.newsletter-form .form-status {
+  flex-basis: 100%;
+  margin-top: -16px;
+}
+
+.newsletter-field {
+  position: relative;
+}
+
+.newsletter-field .field-error {
+  position: absolute;
+  top: 100%;
+  left: 0;
 }
 
 /*  FOOTER  */
@@ -1745,7 +1766,7 @@ textarea.field-input {
 
   .newsletter-input {
     text-align: left;
-    padding-left: 40px;
+    padding-inline: 40px;
   }
 
   .newsletter-field {
