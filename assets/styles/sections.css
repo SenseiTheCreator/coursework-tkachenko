@@ -164,7 +164,14 @@
   max-width: 100%;
 }
 
+.offer-swiper .swiper-slide {
+  height: auto;
+}
+
 .offer-card {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
   border-radius: 16px;
   overflow: hidden;
   background: var(--color-white);
@@ -173,12 +180,14 @@
 .offer-card-img {
   width: 100%;
   height: 286px;
+  object-fit: cover;
   align-self: stretch;
   display: block;
   border-radius: 26px 26px 0 0;
 }
 
 .offer-card-body {
+  flex: 1;
   background: var(--color-bg-accent);
   padding: 20px;
   display: flex;
@@ -345,6 +354,7 @@
 }
 
 .trip-card-img-wrap {
+  display: block;
   border-radius: 26px;
   overflow: hidden;
 }
@@ -386,6 +396,10 @@
   font-size: 1.75rem;
   font-weight: 600;
   color: var(--color-secondary);
+}
+
+.trip-card-title a {
+  color: inherit;
 }
 
 .trip-card-bottom {

@@ -349,7 +349,7 @@ initFavoriteButtons();
 async function fetchTours() {
   const { data, error } = await db
     .from("tours")
-    .select("id, title, days, price, rating, image, image_alt, countries(name)")
+    .select("id, title, days, price, rating, image, image_alt, description, countries(name)")
     .order("id");
   if (error) throw error;
 
@@ -362,6 +362,7 @@ async function fetchTours() {
     rating: Number(tour.rating),
     image: tour.image,
     alt: tour.image_alt,
+    description: tour.description,
   }));
 }
 
@@ -695,6 +696,116 @@ async function initTourPage() {
 }
 
 initTourPage();
+
+/* Home page tours */
+function createElement(tag, className, text) {
+  const element = document.createElement(tag);
+  if (className) element.className = className;
+  if (text !== undefined) element.textContent = text;
+  return element;
+}
+
+function createStars(rating, className) {
+  const stars = createElement("div", className);
+  stars.setAttribute("role", "img");
+  stars.setAttribute("aria-label", `Оцінка ${rating.toFixed(1)} з 5`);
+  for (let i = 0; i < Math.round(rating); i += 1) {
+    const svg = document.createElementNS("http://www.w3.org/2000/svg", "svg");
+    svg.setAttribute("width", "20");
+    svg.setAttribute("height", "19");
+    svg.setAttribute("aria-hidden", "true");
+    const use = document.createElementNS("http://www.w3.org/2000/svg", "use");
+    use.setAttribute("href", "assets/images/icons/sprite.svg#star");
+    svg.append(use);
+    stars.append(svg);
+  }
+  return stars;
+}
+
+function createOfferSlide(tour) {
+  const img = createElement("img", "offer-card-img");
+  img.src = tour.image;
+  img.alt = tour.alt;
+  img.loading = "lazy";
+
+  const price = createElement("div", "offer-card-price");
+  price.append(createElement("span", "offer-card-from", "Від"), createElement("span", "offer-card-amount", `€${tour.price}`));
+  const link = createElement("a", "offer-card-btn", "Детальніше");
+  link.href = `tour.html?id=${tour.id}`;
+  const footer = createElement("div", "offer-card-footer");
+  footer.append(price, link);
+
+  const body = createElement("div", "offer-card-body");
+  body.append(
+    createElement("h3", "offer-card-title", `${tour.title}, ${tour.country}`),
+    createStars(tour.rating, "offer-card-stars"),
+    createElement("p", "offer-card-text", tour.description ?? ""),
+    footer,
+  );
+
+  const card = createElement("article", "offer-card");
+  card.append(img, body);
+  const slide = createElement("div", "swiper-slide");
+  slide.append(card);
+  return slide;
+}
+
+function createTripCard(tour) {
+  const img = createElement("img", "trip-card-img");
+  img.src = tour.image;
+  img.alt = tour.alt;
+  img.loading = "lazy";
+  const imgWrap = createElement("a", "trip-card-img-wrap");
+  imgWrap.href = `tour.html?id=${tour.id}`;
+  imgWrap.append(img);
+
+  const top = createElement("div", "trip-card-top");
+  top.append(createElement("span", "trip-card-type", tour.country), createElement("span", "trip-card-price", `від €${tour.price}`));
+
+  const link = createElement("a", "", tour.title);
+  link.href = `tour.html?id=${tour.id}`;
+  const title = createElement("h3", "trip-card-title");
+  title.append(link);
+
+  const bottom = createElement("div", "trip-card-bottom");
+  bottom.append(createStars(tour.rating, "trip-card-stars"), createElement("span", "trip-card-days", `Тур ${daysLabel(tour.days)}`));
+
+  const body = createElement("div", "trip-card-body");
+  body.append(top, title, bottom);
+  const card = createElement("article", "trip-card");
+  card.append(imgWrap, body);
+  return card;
+}
+
+async function initHomeTours() {
+  const offerList = qs("#offerList");
+  const tripList = qs("#tripList");
+  if (!offerList || !tripList) return;
+
+  try {
+    const tours = await fetchTours();
+    const offers = [...tours].sort((a, b) => a.price - b.price).slice(0, 5);
+    const trips = tours
+      .filter((tour) => !offers.includes(tour))
+      .sort((a, b) => b.rating - a.rating)
+      .slice(0, 4);
+
+    offerList.replaceChildren(...offers.map(createOfferSlide));
+    tripList.replaceChildren(...trips.map(createTripCard));
+    qs(".offer-swiper").swiper?.update();
+    qs("#offersStatus").hidden = true;
+    qs("#tripsStatus").hidden = true;
+  } catch (error) {
+    console.error("Помилка завантаження турів для головної:", error);
+    const message = "Не вдалося завантажити тури. Перевірте з'єднання з інтернетом і оновіть сторінку.";
+    qs("#offersStatus").textContent = message;
+    qs("#tripsStatus").textContent = message;
+    qs(".offer-swiper").hidden = true;
+    qs(".trip-swiper").hidden = true;
+  }
+}
+
+initHomeTours();
 
 /* Scroll reveal */
 function initReveal() {
