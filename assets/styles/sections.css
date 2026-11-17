@@ -1166,6 +1166,19 @@
   margin-top: 8px;
 }
 
+.tour-photo--no-img {
+  background: var(--color-bg-accent);
+}
+
+.tour-photo--no-img img {
+  visibility: hidden;
+}
+
+.tour-status-link {
+  display: inline-block;
+  margin-top: 16px;
+}
+
 .tour-thumb {
   position: relative;
   overflow: hidden;
@@ -1254,16 +1267,19 @@
   border-bottom: 1px solid #eee;
 }
 
-.tour-tabs a {
-  padding-bottom: 12px;
+.tour-tabs button {
+  padding: 0 0 12px;
+  background: none;
+  border: none;
   border-bottom: 2px solid transparent;
   white-space: nowrap;
   font: 500 0.9375rem var(--font-body);
   color: var(--text-secondary);
+  cursor: pointer;
 }
 
-.tour-tabs a:hover,
-.tour-tabs a.is-active {
+.tour-tabs button:hover,
+.tour-tabs button.is-active {
   border-bottom-color: var(--color-primary);
   color: var(--text-primary);
 }

@@ -167,12 +167,14 @@ function initTabs() {
       });
     };
 
-    tabs.forEach((tab, index) => {
+    tabs.forEach((tab) => {
       tab.addEventListener("click", () => activate(tab));
       tab.addEventListener("keydown", (e) => {
         const step = { ArrowRight: 1, ArrowLeft: -1 }[e.key];
         if (!step) return;
-        const next = tabs[(index + step + tabs.length) % tabs.length];
+        const visible = tabs.filter((t) => !t.hidden);
+        const index = visible.indexOf(tab);
+        const next = visible[(index + step + visible.length) % visible.length];
         activate(next);
         next.focus();
       });
@@ -184,20 +186,20 @@ initTabs();
 
 /* Tour gallery */
 function initGallery() {
-  const mainImage = qs(".tour-photo img");
-  const caption = qs(".tour-photo-label");
-  const thumbs = qsa(".tour-thumb");
-  if (!mainImage || !thumbs.length) return;
+  const photo = qs(".tour-photo");
+  const thumbs = qs(".tour-thumbs");
+  if (!photo || !thumbs) return;
 
-  thumbs.forEach((thumb) =>
-    thumb.addEventListener("click", () => {
-      const image = qs("img", thumb);
-      mainImage.src = image.src;
-      mainImage.alt = image.alt;
-      if (caption) caption.textContent = qs(".tour-thumb-label", thumb)?.textContent ?? "";
-      thumbs.forEach((t) => t.classList.toggle("is-active", t === thumb));
-    }),
-  );
+  thumbs.addEventListener("click", (e) => {
+    const thumb = e.target.closest(".tour-thumb");
+    if (!thumb) return;
+    const image = qs("img", thumb);
+    const mainImage = qs("img", photo);
+    mainImage.src = image.src;
+    mainImage.alt = image.alt;
+    qs(".tour-photo-label", photo).textContent = qs(".tour-thumb-label", thumb).textContent;
+    qsa(".tour-thumb", thumbs).forEach((t) => t.classList.toggle("is-active", t === thumb));
+  });
 }
 
 initGallery();
@@ -331,13 +333,14 @@ function paintFavorite(button, isFav) {
   icon?.classList.toggle("fa-regular", !isFav);
 }
 
+function bindFavoriteButton(button) {
+  const id = Number(button.dataset.fav);
+  paintFavorite(button, readFavorites().has(id));
+  button.addEventListener("click", () => paintFavorite(button, toggleFavorite(id)));
+}
+
 function initFavoriteButtons() {
-  const favorites = readFavorites();
-  qsa(".fav-toggle[data-fav]").forEach((button) => {
-    const id = Number(button.dataset.fav);
-    paintFavorite(button, favorites.has(id));
-    button.addEventListener("click", () => paintFavorite(button, toggleFavorite(id)));
-  });
+  qsa(".fav-toggle[data-fav]").forEach(bindFavoriteButton);
 }
 
 initFavoriteButtons();
@@ -424,7 +427,7 @@ function initCatalog() {
   }
 
   function render() {
-    if (!tours) return; // дані ще не завантажені або сталася помилка
+    if (!tours) return;
     status.hidden = true;
 
     const data = new FormData(form);
@@ -502,6 +505,196 @@ function initCatalog() {
 }
 
 initCatalog();
+
+/* Tour page */
+function nightsLabel(nights) {
+  if (nights % 10 === 1 && nights % 100 !== 11) return `${nights} ніч`;
+  if ([2, 3, 4].includes(nights % 10) && ![12, 13, 14].includes(nights % 100)) return `${nights} ночі`;
+  return `${nights} ночей`;
+}
+
+function createImage(src, alt, width, height) {
+  const img = document.createElement("img");
+  img.src = src;
+  img.alt = alt;
+  img.width = width;
+  img.height = height;
+  return img;
+}
+
+function renderGallery(tour) {
+  const photos = tour.gallery?.length
+    ? tour.gallery
+    : [{ image: tour.image, alt: tour.image_alt, label: "" }];
+
+  const photo = qs(".tour-photo");
+  const mainImage = createImage(photos[0].image, photos[0].alt, 800, 500);
+  mainImage.addEventListener("error", () => photo.classList.add("tour-photo--no-img"));
+  mainImage.addEventListener("load", () => photo.classList.remove("tour-photo--no-img"));
+  photo.prepend(mainImage);
+  qs(".tour-photo-label", photo).textContent = photos[0].label;
+
+  const thumbs = qs(".tour-thumbs");
+  thumbs.hidden = photos.length < 2;
+  thumbs.replaceChildren(
+    ...photos.map((item, index) => {
+      const thumb = document.createElement("button");
+      thumb.type = "button";
+      thumb.className = "tour-thumb";
+      thumb.classList.toggle("is-active", index === 0);
+      const img = createImage(item.image, item.alt, 200, 150);
+      img.loading = "lazy";
+      const label = document.createElement("span");
+      label.className = "tour-thumb-label";
+      label.textContent = item.label;
+      thumb.append(img, label);
+      return thumb;
+    }),
+  );
+}
+
+function renderProgram(program) {
+  const hasProgram = Array.isArray(program) && program.length > 0;
+  qs("#tab-program").hidden = !hasProgram;
+  if (!hasProgram) return;
+
+  qs("#tourProgram").replaceChildren(
+    ...program.map((text, index) => {
+      const item = document.createElement("li");
+      const day = document.createElement("h3");
+      day.className = "program-day";
+      day.textContent = `День ${index + 1}`;
+      const description = document.createElement("p");
+      description.className = "tour-text";
+      description.textContent = text;
+      item.append(day, description);
+      return item;
+    }),
+  );
+}
+
+function renderTour(tour) {
+  const country = tour.countries.name;
+  const duration = tour.days > 1
+    ? `${daysLabel(tour.days)} / ${nightsLabel(tour.days - 1)}`
+    : daysLabel(tour.days);
+
+  document.title = `Тур «${tour.title}»: ${daysLabel(tour.days)}, від €${tour.price} | Travellian`;
+  qs("#tourTitle").textContent = `Тур «${tour.title}»`;
+  qs("#tourCountry").textContent = country;
+  qs("#tourRating").textContent = Number(tour.rating).toFixed(1);
+  qs("#tourDuration").textContent = duration;
+  qs("#tourMeta").hidden = false;
+
+  qs("#tourPrice").textContent = `€${tour.price}`;
+  qs("#tourCountryFact").textContent = country;
+  qs("#tourDays").textContent = daysLabel(tour.days);
+  qs("#tourDescription").textContent = tour.description || "Опис туру з'явиться найближчим часом.";
+  qs("#bookingSummary").textContent = `${tour.title} · ${daysLabel(tour.days)} · €${tour.price} за особу`;
+
+  const fav = qs("#tourFav");
+  fav.dataset.fav = tour.id;
+  bindFavoriteButton(fav);
+
+  renderGallery(tour);
+  renderProgram(tour.program);
+}
+
+function createSimilarCard(tour) {
+  const card = document.createElement("a");
+  card.className = "similar-card";
+  card.href = `tour.html?id=${tour.id}`;
+
+  const imageBox = document.createElement("div");
+  imageBox.className = "similar-card-img";
+  const img = createImage(tour.image, tour.image_alt, 400, 250);
+  img.loading = "lazy";
+  const label = document.createElement("span");
+  label.className = "similar-card-label";
+  label.textContent = tour.countries.name;
+  imageBox.append(img, label);
+
+  const title = document.createElement("h3");
+  title.className = "similar-card-title";
+  title.textContent = tour.title;
+  const meta = document.createElement("p");
+  meta.className = "similar-card-meta";
+  meta.textContent = `${daysLabel(tour.days)} · від €${tour.price}`;
+
+  card.append(imageBox, title, meta);
+  return card;
+}
+
+async function fetchSimilarTours(tour, limit = 3) {
+  const query = (count) =>
+    db
+      .from("tours")
+      .select("id, title, days, price, image, image_alt, countries(name)")
+      .neq("id", tour.id)
+      .order("rating", { ascending: false })
+      .limit(count);
+
+  const same = await query(limit).eq("country_id", tour.country_id);
+  if (same.error) throw same.error;
+  if (same.data.length >= limit) return same.data;
+
+  const other = await query(limit - same.data.length).neq("country_id", tour.country_id);
+  if (other.error) throw other.error;
+  return [...same.data, ...other.data];
+}
+
+async function loadSimilarTours(tour) {
+  const section = qs(".similar-section");
+  try {
+    const similar = await fetchSimilarTours(tour);
+    qs(".similar-grid", section).replaceChildren(...similar.map(createSimilarCard));
+    section.hidden = similar.length === 0;
+  } catch (error) {
+    console.error("Помилка завантаження схожих турів:", error);
+    section.hidden = true;
+  }
+}
+
+async function initTourPage() {
+  const page = qs("#tourPage");
+  if (!page) return;
+
+  const showStatus = (text) => {
+    qs("#tourStatusText").textContent = text;
+    qs("#tourStatusLink").hidden = false;
+    qs("#tourStatus").hidden = false;
+    page.hidden = true;
+  };
+
+  const id = Number(new URLSearchParams(location.search).get("id"));
+  if (!Number.isInteger(id) || id < 1) {
+    showStatus("Тур не обрано. Оберіть подорож у каталозі.");
+    return;
+  }
+
+  try {
+    const { data: tour, error } = await db
+      .from("tours")
+      .select("id, title, days, price, rating, image, image_alt, description, program, gallery, country_id, countries(name)")
+      .eq("id", id)
+      .maybeSingle();
+    if (error) throw error;
+    if (!tour) {
+      showStatus("Такого туру немає. Можливо, його прибрали з каталогу.");
+      return;
+    }
+
+    renderTour(tour);
+    qs("#tourStatus").hidden = true;
+    page.hidden = false;
+    loadSimilarTours(tour);
+  } catch (error) {
+    console.error("Помилка завантаження туру:", error);
+    showStatus("Не вдалося завантажити тур. Перевірте з'єднання з інтернетом і оновіть сторінку.");
+  }
+}
+
+initTourPage();
 
 /* Scroll reveal */
 function initReveal() {

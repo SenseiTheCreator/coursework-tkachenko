@@ -507,6 +507,10 @@ ul {
   transform: none;
 }
 
+[hidden] {
+  display: none !important;
+}
+
 /* ===== TABLET 768px ===== */
 @media (min-width: 768px) {
   .content-wrap {
