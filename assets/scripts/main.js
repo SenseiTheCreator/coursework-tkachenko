@@ -106,7 +106,7 @@ function setFieldError(field, message) {
   else field.removeAttribute("aria-describedby");
 }
 
-function showStatus(form, text) {
+function showStatus(form, text, isError = false) {
   let status = qs(".form-status", form);
   if (!status) {
     status = document.createElement("p");
@@ -115,6 +115,7 @@ function showStatus(form, text) {
     form.append(status);
   }
   status.textContent = text;
+  status.classList.toggle("form-status--error", isError);
 }
 
 function initFormValidation() {
@@ -130,7 +131,7 @@ function initFormValidation() {
       });
     });
 
-    form.addEventListener("submit", (e) => {
+    form.addEventListener("submit", async (e) => {
       e.preventDefault();
       let firstInvalid = null;
       fields.forEach((field) => {
@@ -143,6 +144,23 @@ function initFormValidation() {
         firstInvalid.focus();
         return;
       }
+
+      const authAction = getAuthAction(form);
+      if (authAction) {
+        const button = qs('[type="submit"]', form);
+        button.disabled = true;
+        qs(".form-status", form)?.remove();
+        try {
+          await authAction(form);
+        } catch (error) {
+          console.error("Помилка автентифікації:", error);
+          showStatus(form, authErrorMessage(error), true);
+        } finally {
+          button.disabled = false;
+        }
+        return;
+      }
+
       form.reset();
       showStatus(form, form.dataset.success || "Дякуємо! Дані надіслано.");
     });
@@ -150,6 +168,101 @@ function initFormValidation() {
 }
 
 initFormValidation();
+
+/* Auth (Supabase Authentication) */
+const AUTH_ERRORS = {
+  invalid_credentials: "Неправильний email або пароль.",
+  user_already_exists: "Користувач із таким email уже зареєстрований.",
+  email_exists: "Користувач із таким email уже зареєстрований.",
+  weak_password: "Пароль надто простий. Використайте щонайменше 8 символів.",
+  email_not_confirmed: "Спершу підтвердьте email за посиланням у листі.",
+  over_request_rate_limit: "Забагато спроб. Зачекайте хвилину й спробуйте ще раз.",
+  over_email_send_rate_limit: "Забагато спроб. Зачекайте хвилину й спробуйте ще раз.",
+};
+
+function authErrorMessage(error) {
+  return AUTH_ERRORS[error?.code] ?? "Не вдалося виконати запит. Перевірте інтернет і спробуйте ще раз.";
+}
+
+// форма входу і форма реєстрації розрізняються за модальним вікном, у якому лежать
+function getAuthAction(form) {
+  if (form.closest("#loginModal")) return logIn;
+  if (form.closest("#signupModal")) return signUp;
+  return null;
+}
+
+function closeModalOf(form) {
+  qs(".modal-close", form.closest(".modal-overlay"))?.click();
+}
+
+async function logIn(form) {
+  const { email, password } = Object.fromEntries(new FormData(form));
+  const { error } = await db.auth.signInWithPassword({ email: email.trim(), password });
+  if (error) throw error;
+  form.reset();
+  closeModalOf(form);
+}
+
+async function signUp(form) {
+  const { name, surname, email, password } = Object.fromEntries(new FormData(form));
+  const { data, error } = await db.auth.signUp({
+    email: email.trim(),
+    password,
+    // ім'я потрапляє в таблицю profiles через тригер handle_new_user
+    options: { data: { name: `${name.trim()} ${surname.trim()}` } },
+  });
+  if (error) throw error;
+  form.reset();
+  if (!data.session) {
+    showStatus(form, "Майже готово! Підтвердіть email за посиланням у листі.");
+    return;
+  }
+  closeModalOf(form);
+}
+
+function initAuthUI() {
+  const actions = qs(".nav-actions");
+  const menu = qs("#mainMenu");
+  if (!actions || !menu) return;
+
+  const userName = createElement("span", "nav-user");
+  const logoutBtn = createElement("button", "btn btn-outline", "Вийти");
+  logoutBtn.type = "button";
+  actions.append(userName, logoutBtn);
+
+  const mobileUser = createElement("li", "menu-mobile-btn menu-user");
+  const mobileItem = createElement("li", "menu-mobile-btn");
+  const mobileLogout = createElement("button", "btn btn-outline mobile-logout", "Вийти");
+  mobileLogout.type = "button";
+  mobileItem.append(mobileLogout);
+  menu.append(mobileUser, mobileItem);
+
+  const guestOnly = qsa("#loginBtn, #signupBtn, .mobile-login, .mobile-signup").map(
+    (button) => button.closest(".menu-mobile-btn") ?? button,
+  );
+  const userOnly = [userName, logoutBtn, mobileUser, mobileItem];
+
+  const render = (user) => {
+    guestOnly.forEach((element) => (element.hidden = Boolean(user)));
+    userOnly.forEach((element) => (element.hidden = !user));
+    if (!user) return;
+    const name = user.user_metadata?.name || user.email;
+    userName.textContent = name;
+    mobileUser.textContent = name;
+  };
+
+  const logOut = async () => {
+    const { error } = await db.auth.signOut();
+    if (error) console.error("Помилка виходу:", error);
+  };
+  logoutBtn.addEventListener("click", logOut);
+  mobileLogout.addEventListener("click", logOut);
+
+  render(null);
+  db.auth.onAuthStateChange((_event, session) => render(session?.user ?? null));
+}
+
+initAuthUI();
 
 /* tablist */
 function initTabs() {
