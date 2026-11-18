@@ -69,9 +69,11 @@ function initModals(setMenu) {
   document.addEventListener("keydown", (e) => {
     if (e.key === "Escape") modals.forEach(close);
   });
+
+  return { open, close };
 }
 
-initModals(closeMenu);
+const modals = initModals(closeMenu);
 
 /* validations form */
 function getError(field) {
@@ -86,6 +88,7 @@ function getError(field) {
   if (validity.tooShort) return `Мінімум ${field.minLength} символів`;
   if (validity.rangeUnderflow) return `Мінімум ${field.min}`;
   if (validity.rangeOverflow) return `Максимум ${field.max}`;
+  if (validity.stepMismatch) return `Крок значення — ${field.step}`;
   if (validity.patternMismatch) return field.dataset.error || "Невірний формат";
   return field.validationMessage;
 }
@@ -145,16 +148,16 @@ function initFormValidation() {
         return;
       }
 
-      const authAction = getAuthAction(form);
-      if (authAction) {
+      const formAction = getFormAction(form);
+      if (formAction) {
         const button = qs('[type="submit"]', form);
         button.disabled = true;
         qs(".form-status", form)?.remove();
         try {
-          await authAction(form);
+          await formAction(form);
         } catch (error) {
-          console.error("Помилка автентифікації:", error);
-          showStatus(form, authErrorMessage(error), true);
+          console.error("Помилка запиту:", error);
+          showStatus(form, describeError(error), true);
         } finally {
           button.disabled = false;
         }
@@ -170,7 +173,7 @@ function initFormValidation() {
 initFormValidation();
 
 /* Auth (Supabase Authentication) */
-const AUTH_ERRORS = {
+const ERROR_MESSAGES = {
   invalid_credentials: "Неправильний email або пароль.",
   user_already_exists: "Користувач із таким email уже зареєстрований.",
   email_exists: "Користувач із таким email уже зареєстрований.",
@@ -178,17 +181,32 @@ const AUTH_ERRORS = {
   email_not_confirmed: "Спершу підтвердьте email за посиланням у листі.",
   over_request_rate_limit: "Забагато спроб. Зачекайте хвилину й спробуйте ще раз.",
   over_email_send_rate_limit: "Забагато спроб. Зачекайте хвилину й спробуйте ще раз.",
+  // коди помилок PostgreSQL
+  42501: "Недостатньо прав. Увійдіть як адміністратор.",
+  23503: "Цей запис пов'язаний з іншими даними, тому його не можна змінити.",
+  23514: "Перевірте значення полів: деякі з них поза допустимими межами.",
+  "22P02": "Невірний формат даних.",
 };
 
-function authErrorMessage(error) {
-  return AUTH_ERRORS[error?.code] ?? "Не вдалося виконати запит. Перевірте інтернет і спробуйте ще раз.";
+function describeError(error) {
+  return ERROR_MESSAGES[error?.code] ?? "Не вдалося виконати запит. Перевірте інтернет і спробуйте ще раз.";
 }
 
-// форма входу і форма реєстрації розрізняються за модальним вікном, у якому лежать
-function getAuthAction(form) {
+// форми, які замість звичайного «Дякуємо» надсилають дані в Supabase
+function getFormAction(form) {
   if (form.closest("#loginModal")) return logIn;
   if (form.closest("#signupModal")) return signUp;
+  // matches, а не form.id: у формі туру є поле name="id", яке перекриває form.id
+  if (form.matches("#tourForm")) return saveTour;
   return null;
+}
+
+async function getUserRole() {
+  const { data: { session } } = await db.auth.getSession();
+  if (!session) return null;
+  const { data, error } = await db.from("profiles").select("role").eq("id", session.user.id).maybeSingle();
+  if (error) throw error;
+  return data?.role ?? null;
 }
 
 function closeModalOf(form) {
@@ -226,26 +244,40 @@ function initAuthUI() {
   if (!actions || !menu) return;
 
   const userName = createElement("span", "nav-user");
+  const adminLink = createElement("a", "btn btn-outline", "Адмін-панель");
+  adminLink.href = "admin.html";
   const logoutBtn = createElement("button", "btn btn-outline", "Вийти");
   logoutBtn.type = "button";
-  actions.append(userName, logoutBtn);
+  actions.append(userName, adminLink, logoutBtn);
 
   const mobileUser = createElement("li", "menu-mobile-btn menu-user");
+  const mobileAdmin = createElement("li", "menu-mobile-btn");
+  const mobileAdminLink = createElement("a", "", "Адмін-панель");
+  mobileAdminLink.href = "admin.html";
+  mobileAdmin.append(mobileAdminLink);
   const mobileItem = createElement("li", "menu-mobile-btn");
   const mobileLogout = createElement("button", "btn btn-outline mobile-logout", "Вийти");
   mobileLogout.type = "button";
   mobileItem.append(mobileLogout);
-  menu.append(mobileUser, mobileItem);
+  menu.append(mobileUser, mobileAdmin, mobileItem);
 
   const guestOnly = qsa("#loginBtn, #signupBtn, .mobile-login, .mobile-signup").map(
     (button) => button.closest(".menu-mobile-btn") ?? button,
   );
   const userOnly = [userName, logoutBtn, mobileUser, mobileItem];
+  const adminOnly = [adminLink, mobileAdmin];
+
+  const showAdminLinks = async () => {
+    const role = await getUserRole().catch(() => null);
+    adminOnly.forEach((element) => (element.hidden = role !== "admin"));
+  };
 
   const render = (user) => {
     guestOnly.forEach((element) => (element.hidden = Boolean(user)));
     userOnly.forEach((element) => (element.hidden = !user));
+    adminOnly.forEach((element) => (element.hidden = true));
     if (!user) return;
+    setTimeout(showAdminLinks);
     const name = user.user_metadata?.name || user.email;
     userName.textContent = name;
     mobileUser.textContent = name;
@@ -919,6 +951,196 @@ async function initHomeTours() {
 }
 
 initHomeTours();
+
+/* Admin panel */
+let adminTours = [];
+let tourToDelete = null;
+
+function clearFormMessages(form) {
+  qs(".form-status", form)?.remove();
+  qsa(".field-error", form).forEach((box) => (box.textContent = ""));
+  qsa("[aria-invalid]", form).forEach((field) => {
+    field.removeAttribute("aria-invalid");
+    field.removeAttribute("aria-describedby");
+  });
+}
+
+function createAdminRow(tour) {
+  const row = document.createElement("tr");
+  const title = createElement("th", "", tour.title);
+  title.scope = "row";
+  const cell = (label, text) => {
+    const td = createElement("td", "", text);
+    td.dataset.label = label;
+    return td;
+  };
+  row.append(
+    title,
+    cell("Країна", tour.countries.name),
+    cell("Тривалість", daysLabel(tour.days)),
+    cell("Ціна", `€${tour.price}`),
+    cell("Рейтинг", Number(tour.rating).toFixed(1)),
+  );
+
+  const actions = createElement("td");
+  const box = createElement("div", "admin-actions");
+  const edit = createElement("button", "btn-line", "Редагувати");
+  edit.type = "button";
+  edit.dataset.edit = tour.id;
+  edit.setAttribute("aria-label", `Редагувати «${tour.title}»`);
+  const remove = createElement("button", "btn-line admin-delete", "Видалити");
+  remove.type = "button";
+  remove.dataset.delete = tour.id;
+  remove.setAttribute("aria-label", `Видалити «${tour.title}»`);
+  box.append(edit, remove);
+  actions.append(box);
+  row.append(actions);
+  return row;
+}
+
+async function loadAdminTours() {
+  const { data, error } = await db
+    .from("tours")
+    .select("id, title, country_id, days, price, rating, image, image_alt, description, program, countries(name)")
+    .order("id");
+  if (error) throw error;
+  adminTours = data;
+  qs("#adminTours").replaceChildren(...data.map(createAdminRow));
+  qs("#adminCount").textContent = data.length;
+}
+
+async function loadCountryOptions() {
+  const { data, error } = await db.from("countries").select("id, name").order("name");
+  if (error) throw error;
+  const select = qs("#tour-country");
+  const placeholder = select.options[0];
+  select.replaceChildren(
+    placeholder,
+    ...data.map((country) => new Option(country.name, country.id)),
+  );
+}
+
+function openTourForm(tour = null) {
+  const form = qs("#tourForm");
+  form.reset();
+  clearFormMessages(form);
+  const fields = form.elements;
+  fields.id.value = tour?.id ?? "";
+  if (tour) {
+    fields.title.value = tour.title;
+    fields.country_id.value = tour.country_id;
+    fields.days.value = tour.days;
+    fields.price.value = tour.price;
+    fields.rating.value = tour.rating;
+    fields.image.value = tour.image;
+    fields.image_alt.value = tour.image_alt;
+    fields.description.value = tour.description ?? "";
+    fields.program.value = (tour.program ?? []).join("\n");
+  }
+  qs("#tourModalTitle").textContent = tour ? "Редагування туру" : "Новий тур";
+  modals.open("tourModal");
+}
+
+async function saveTour(form) {
+  const data = Object.fromEntries(new FormData(form));
+  const program = data.program.split("\n").map((line) => line.trim()).filter(Boolean);
+  const values = {
+    title: data.title.trim(),
+    country_id: Number(data.country_id),
+    days: Number(data.days),
+    price: Number(data.price),
+    rating: Number(data.rating),
+    image: data.image.trim(),
+    image_alt: data.image_alt.trim(),
+    description: data.description.trim() || null,
+    program: program.length ? program : null,
+  };
+
+  const query = data.id
+    ? db.from("tours").update(values).eq("id", Number(data.id))
+    : db.from("tours").insert(values);
+  const { data: saved, error } = await query.select("id");
+  if (error) throw error;
+  if (!saved.length) throw { code: "42501" };
+
+  closeModalOf(form);
+  await loadAdminTours();
+}
+
+async function deleteTour() {
+  const button = qs("#confirmDelete");
+  const message = qs("#deleteError");
+  button.disabled = true;
+  message.hidden = true;
+  try {
+    const { data, error } = await db.from("tours").delete().eq("id", tourToDelete.id).select("id");
+    if (error) throw error;
+    if (!data.length) throw { code: "42501" };
+    modals.close(qs("#deleteModal"));
+    await loadAdminTours();
+  } catch (error) {
+    console.error("Помилка видалення туру:", error);
+    message.textContent = describeError(error);
+    message.hidden = false;
+  } finally {
+    button.disabled = false;
+  }
+}
+
+async function checkAdminAccess() {
+  const status = qs("#adminStatus");
+  const panel = qs("#adminPanel");
+  const showStatus = (text, withLogin = false) => {
+    qs("#adminStatusText").textContent = text;
+    qs("#adminLogin").hidden = !withLogin;
+    status.hidden = false;
+    panel.hidden = true;
+  };
+
+  try {
+    const role = await getUserRole();
+    if (!role) {
+      showStatus("Увійдіть як адміністратор, щоб керувати турами.", true);
+      return;
+    }
+    if (role !== "admin") {
+      showStatus("Ця сторінка доступна лише адміністраторам.");
+      return;
+    }
+    await Promise.all([loadCountryOptions(), loadAdminTours()]);
+    status.hidden = true;
+    panel.hidden = false;
+  } catch (error) {
+    console.error("Помилка завантаження адмін-панелі:", error);
+    showStatus("Не вдалося завантажити дані. Перевірте з'єднання з інтернетом і оновіть сторінку.");
+  }
+}
+
+function initAdminPage() {
+  if (!qs("#adminPanel")) return;
+
+  qs("#addTourBtn").addEventListener("click", () => openTourForm());
+  qs("#adminTours").addEventListener("click", (e) => {
+    const editId = e.target.closest("[data-edit]")?.dataset.edit;
+    const deleteId = e.target.closest("[data-delete]")?.dataset.delete;
+    if (editId) openTourForm(adminTours.find((tour) => tour.id === Number(editId)));
+    if (deleteId) {
+      tourToDelete = adminTours.find((tour) => tour.id === Number(deleteId));
+      qs("#deleteText").textContent = `Тур «${tourToDelete.title}» буде видалено з каталогу назавжди.`;
+      qs("#deleteError").hidden = true;
+      modals.open("deleteModal");
+    }
+  });
+  qs("#confirmDelete").addEventListener("click", deleteTour);
+  qs("#cancelDelete").addEventListener("click", () => modals.close(qs("#deleteModal")));
+
+  db.auth.onAuthStateChange((event) => {
+    if (event === "SIGNED_IN" || event === "SIGNED_OUT") setTimeout(checkAdminAccess);
+  });
+  checkAdminAccess();
+}
+
+initAdminPage();
 
 /* Scroll reveal */
 function initReveal() {

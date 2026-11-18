@@ -1,0 +1,346 @@
+<!doctype html>
+<html lang="uk">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Адмін-панель — Travellian</title>
+    <meta name="description" content="Адміністративна частина Travellian: керування каталогом турів." />
+    <meta name="robots" content="noindex" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css"
+        integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="icon" type="image/png" href="assets/images/favicon.png" />
+    <link rel="stylesheet" href="assets/styles/_variables.css" />
+    <link rel="stylesheet" href="assets/styles/style.css" />
+</head>
+
+<body>
+    <header class="main-header main-header--inner">
+        <!-- NAVBAR -->
+        <div class="navbar d-flex vertical-center">
+            <nav class="d-flex vertical-center">
+                <a class="logo d-flex" href="index.html"><img src="assets/images/icons/logo.svg" alt="Travellian" /></a>
+
+                <!-- MENU -->
+                <button type="button" id="iconBlock" class="menu-icon" aria-label="Меню" aria-expanded="false">
+                    <span id="iconOpen" class="menu-icon-open">
+                        <svg width="38" height="23" aria-hidden="true">
+                            <use href="assets/images/icons/sprite.svg#menu"></use>
+                        </svg>
+                    </span>
+                    <span id="iconClose" class="menu-icon-close d-none">
+                        <i class="fa-solid fa-xmark" aria-hidden="true"></i>
+                    </span>
+                </button>
+
+                <ul id="mainMenu" class="main-menu d-flex">
+                    <li><a href="index.html">Головна</a></li>
+                    <li><a href="about.html">Про нас</a></li>
+                    <li><a href="tours.html">Тури</a></li>
+                    <li><a href="404.html">Блог</a></li>
+                    <li><a href="contacts.html">Зв'язатись</a></li>
+                    <li class="menu-mobile-btn">
+                        <button type="button" class="btn btn-outline mobile-login">Увійти</button>
+                    </li>
+                    <li class="menu-mobile-btn">
+                        <button type="button" class="btn btn-primary mobile-signup">Зареєструватися</button>
+                    </li>
+                </ul>
+
+                <div class="nav-actions d-flex">
+                    <button type="button" id="loginBtn" class="btn btn-outline">Увійти</button>
+                    <button type="button" id="signupBtn" class="btn btn-primary">Зареєструватися</button>
+                </div>
+            </nav>
+        </div>
+
+
+        <div class="page-hero">
+            <div class="content-wrap">
+                <h1 class="page-hero-title">Адмін-панель</h1>
+                <p class="page-hero-subtitle">Додавайте, редагуйте та видаляйте тури каталогу.</p>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <section class="page-section">
+            <div class="content-wrap">
+                <div class="tours-empty" id="adminStatus" role="status">
+                    <p id="adminStatusText">Перевірка доступу…</p>
+                    <button class="btn-line tour-status-link" id="adminLogin" type="button" data-modal="loginModal"
+                        hidden>Увійти</button>
+                </div>
+
+                <div id="adminPanel" hidden>
+                    <div class="admin-bar">
+                        <div>
+                            <h2 class="admin-title">Тури</h2>
+                            <p class="admin-count">У каталозі: <strong id="adminCount">0</strong></p>
+                        </div>
+                        <button class="btn btn-primary" id="addTourBtn" type="button">Додати тур</button>
+                    </div>
+                    <div class="admin-table-wrap">
+                        <table class="admin-table">
+                            <caption class="visually-hidden">Список турів каталогу</caption>
+                            <thead>
+                                <tr>
+                                    <th scope="col">Назва</th>
+                                    <th scope="col">Країна</th>
+                                    <th scope="col">Тривалість</th>
+                                    <th scope="col">Ціна</th>
+                                    <th scope="col">Рейтинг</th>
+                                    <th scope="col"><span class="visually-hidden">Дії</span></th>
+                                </tr>
+                            </thead>
+                            <tbody id="adminTours"></tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- FOOTER -->
+    <footer class="main-footer main-footer--tours">
+        <div class="footer-body content-wrap">
+            <div class="footer-col footer-col-logo">
+                <img src="assets/images/icons/logo.svg" alt="Travellian" class="footer-logo" />
+                <p class="footer-copy">
+                    Copyright © Travellian, 2026. Подорожуйте з натхненням.
+                </p>
+            </div>
+
+            <div class="footer-col">
+                <h2 class="footer-col-title">Навігація</h2>
+                <ul class="footer-col-list">
+                    <li><a href="index.html">Головна</a></li>
+                    <li><a href="about.html">Про нас</a></li>
+                    <li><a href="tours.html">Тури</a></li>
+                    <li><a href="404.html">Блог</a></li>
+                    <li><a href="contacts.html">Зв'язатися</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-col">
+                <h2 class="footer-col-title">Інформація</h2>
+                <ul class="footer-col-list">
+                    <li><a href="about.html">Про нас</a></li>
+                    <li><a href="contacts.html">Контакти</a></li>
+                    <li><a href="404.html">Політика приватності</a></li>
+                    <li><a href="404.html">Умови використання</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-col">
+                <h2 class="footer-col-title">Контакти</h2>
+                <address class="footer-col-list">
+                    <p>+380 96 560 42 17</p>
+                    <p>travellian@corp.com</p>
+                    <p>Вовчинецька 206, Івано-Франківськ, Україна</p>
+                </address>
+            </div>
+
+            <div class="footer-col">
+                <h2 class="footer-col-title">Підпишіться на наші новини</h2>
+                <div class="footer-social">
+                    <a href="https://www.facebook.com/" class="footer-social-link" target="_blank" rel="noopener"
+                        aria-label="Facebook">
+                        <svg width="31" height="31" aria-hidden="true">
+                            <use href="assets/images/icons/sprite.svg#facebook"></use>
+                        </svg>
+                    </a>
+                    <a href="https://www.pinterest.com/" class="footer-social-link" target="_blank" rel="noopener"
+                        aria-label="Pinterest">
+                        <svg width="32" height="32" aria-hidden="true">
+                            <use href="assets/images/icons/sprite.svg#pinterest"></use>
+                        </svg>
+                    </a>
+                    <a href="https://www.instagram.com/" class="footer-social-link" target="_blank" rel="noopener"
+                        aria-label="Instagram">
+                        <svg width="32" height="32" aria-hidden="true">
+                            <use href="assets/images/icons/sprite.svg#instagram"></use>
+                        </svg>
+                    </a>
+                    <a href="https://x.com/" class="footer-social-link" target="_blank" rel="noopener"
+                        aria-label="Twitter">
+                        <svg width="26" height="21" aria-hidden="true">
+                            <use href="assets/images/icons/sprite.svg#twitter"></use>
+                        </svg>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- LOGIN MODAL -->
+    <div id="loginModal" class="modal-overlay d-none">
+        <div class="modal-box" role="dialog" aria-modal="true" aria-labelledby="loginModalTitle">
+            <button id="closeLogin" class="modal-close" type="button" aria-label="Закрити">
+                <i class="fa-solid fa-xmark" aria-hidden="true"></i>
+            </button>
+            <h2 class="modal-title" id="loginModalTitle">З поверненням!</h2>
+            <p class="modal-subtitle">
+                Увійдіть до свого акаунта, щоб продовжити планувати подорожі.
+            </p>
+            <form class="modal-form" data-validate>
+                <label class="visually-hidden" for="login-email">Email</label>
+                <input id="login-email" name="email" type="email" autocomplete="email" placeholder="Введіть ваш Email"
+                    required />
+                <label class="visually-hidden" for="login-password">Пароль</label>
+                <input id="login-password" name="password" type="password" autocomplete="current-password"
+                    placeholder="Введіть ваш пароль" minlength="8" required />
+                <a href="contacts.html" class="modal-forgot">Забули пароль?</a>
+                <button type="submit" class="modal-btn modal-btn--primary">
+                    Увійти
+                </button>
+                <button type="button" id="toSignUp" class="modal-btn modal-btn--secondary">
+                    Реєстрація
+                </button>
+            </form>
+            <div class="modal-divider">
+                <span>Або продовжити через</span>
+            </div>
+            <div class="modal-socials">
+                <button class="social-btn" type="button" aria-label="Увійти через Google">
+                    <i class="fa-brands fa-google" aria-hidden="true"></i>
+                </button>
+                <button class="social-btn" type="button" aria-label="Увійти через Facebook">
+                    <i class="fa-brands fa-facebook" aria-hidden="true"></i>
+                </button>
+                <button class="social-btn" type="button" aria-label="Увійти через Apple">
+                    <i class="fa-brands fa-apple" aria-hidden="true"></i>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- SIGNUP MODAL -->
+    <div id="signupModal" class="modal-overlay d-none">
+        <div class="modal-box" role="dialog" aria-modal="true" aria-labelledby="signupModalTitle">
+            <button id="closeSignup" class="modal-close" type="button" aria-label="Закрити">
+                <i class="fa-solid fa-xmark" aria-hidden="true"></i>
+            </button>
+            <h2 class="modal-title" id="signupModalTitle">Приєднуйтесь до нас</h2>
+            <p class="modal-subtitle">
+                Створіть акаунт, відкривайте цікаві напрямки та плануйте
+                свої майбутні пригоди.
+            </p>
+            <form class="modal-form" data-validate>
+                <label class="visually-hidden" for="signup-name">Ім'я</label>
+                <input id="signup-name" name="name" type="text" autocomplete="given-name"
+                    placeholder="Введіть ваше ім'я" minlength="2" required />
+                <label class="visually-hidden" for="signup-surname">Прізвище</label>
+                <input id="signup-surname" name="surname" type="text" autocomplete="family-name"
+                    placeholder="Введіть ваше прізвище" minlength="2" required />
+                <label class="visually-hidden" for="signup-email">Email</label>
+                <input id="signup-email" name="email" type="email" autocomplete="email" placeholder="Введіть ваш Email"
+                    required />
+                <label class="visually-hidden" for="signup-password">Пароль</label>
+                <input id="signup-password" name="password" type="password" autocomplete="new-password"
+                    placeholder="Введіть ваш пароль" minlength="8" required />
+                <button type="submit" class="modal-btn modal-btn--primary">
+                    Реєстрація
+                </button>
+                <button type="button" id="toLogin" class="modal-btn modal-btn--secondary">
+                    Увійти
+                </button>
+            </form>
+            <div class="modal-divider">
+                <span>Або продовжити через</span>
+            </div>
+            <div class="modal-socials">
+                <button class="social-btn" type="button" aria-label="Увійти через Google">
+                    <i class="fa-brands fa-google" aria-hidden="true"></i>
+                </button>
+                <button class="social-btn" type="button" aria-label="Увійти через Facebook">
+                    <i class="fa-brands fa-facebook" aria-hidden="true"></i>
+                </button>
+                <button class="social-btn" type="button" aria-label="Увійти через Apple">
+                    <i class="fa-brands fa-apple" aria-hidden="true"></i>
+                </button>
+            </div>
+        </div>
+    </div>
+    <!-- TOUR MODAL -->
+    <div id="tourModal" class="modal-overlay d-none">
+        <div class="modal-box modal-box--wide" role="dialog" aria-modal="true" aria-labelledby="tourModalTitle">
+            <button class="modal-close" type="button" aria-label="Закрити">
+                <i class="fa-solid fa-xmark" aria-hidden="true"></i>
+            </button>
+            <h2 class="modal-title" id="tourModalTitle">Новий тур</h2>
+            <form class="booking-modal-form" id="tourForm" data-validate>
+                <div class="contact-field">
+                    <label class="contact-label" for="tour-title">Назва</label>
+                    <input id="tour-title" class="field-input" type="text" name="title" minlength="2" maxlength="120"
+                        required />
+                </div>
+                <input type="hidden" name="id" />
+                <div class="contact-row">
+                    <div class="contact-field">
+                        <label class="contact-label" for="tour-country">Країна</label>
+                        <select id="tour-country" class="field-input" name="country_id" required>
+                            <option value="">Оберіть країну</option>
+                        </select>
+                    </div>
+                    <div class="contact-field">
+                        <label class="contact-label" for="tour-days">Тривалість, днів</label>
+                        <input id="tour-days" class="field-input" type="number" name="days" min="1" max="60" required />
+                    </div>
+                </div>
+                <div class="contact-row">
+                    <div class="contact-field">
+                        <label class="contact-label" for="tour-price">Ціна, €</label>
+                        <input id="tour-price" class="field-input" type="number" name="price" min="1" max="100000"
+                            required />
+                    </div>
+                    <div class="contact-field">
+                        <label class="contact-label" for="tour-rating">Рейтинг</label>
+                        <input id="tour-rating" class="field-input" type="number" name="rating" min="0" max="5"
+                            step="0.1" required />
+                    </div>
+                </div>
+                <div class="contact-field">
+                    <label class="contact-label" for="tour-image">Фото (шлях до файлу)</label>
+                    <input id="tour-image" class="field-input" type="text" name="image" maxlength="255"
+                        placeholder="assets/images/tours/назва.webp" required />
+                </div>
+                <div class="contact-field">
+                    <label class="contact-label" for="tour-image-alt">Опис фото</label>
+                    <input id="tour-image-alt" class="field-input" type="text" name="image_alt" minlength="3"
+                        maxlength="160" required />
+                </div>
+                <div class="contact-field">
+                    <label class="contact-label" for="tour-description">Опис туру</label>
+                    <textarea id="tour-description" class="field-input" name="description" maxlength="2000"></textarea>
+                </div>
+                <div class="contact-field">
+                    <label class="contact-label" for="tour-program">Програма (кожен день з нового рядка)</label>
+                    <textarea id="tour-program" class="field-input" name="program" maxlength="5000"></textarea>
+                </div>
+                <button type="submit" class="modal-btn modal-btn--primary">Зберегти</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- DELETE MODAL -->
+    <div id="deleteModal" class="modal-overlay d-none">
+        <div class="modal-box" role="dialog" aria-modal="true" aria-labelledby="deleteModalTitle">
+            <button class="modal-close" type="button" aria-label="Закрити">
+                <i class="fa-solid fa-xmark" aria-hidden="true"></i>
+            </button>
+            <h2 class="modal-title" id="deleteModalTitle">Видалити тур?</h2>
+            <p class="modal-subtitle" id="deleteText"></p>
+            <div class="modal-form">
+                <button class="modal-btn modal-btn--primary" id="confirmDelete" type="button">Видалити</button>
+                <button class="modal-btn modal-btn--secondary" id="cancelDelete" type="button">Скасувати</button>
+            </div>
+            <p class="form-status form-status--error" id="deleteError" role="status" hidden></p>
+        </div>
+    </div>
+
+    <script type="module" src="assets/scripts/main.js"></script>
+</body>
+
+</html>

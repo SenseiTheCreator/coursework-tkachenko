@@ -719,6 +719,14 @@ ul {
     display: flex;
   }
 
+  .nav-actions .btn {
+    white-space: nowrap;
+  }
+
+  .nav-actions:has(a:not([hidden])) .nav-user {
+    display: none;
+  }
+
   .hero {
     padding: 0 32px;
     margin: 72px 0 140px 0;
@@ -817,6 +825,10 @@ ul {
 
 /* ===== DESKTOP 1440px ===== */
 @media (min-width: 1440px) {
+  .nav-actions:has(a:not([hidden])) .nav-user {
+    display: block;
+  }
+
   .navbar {
     padding: 0 32px;
     height: 128px;

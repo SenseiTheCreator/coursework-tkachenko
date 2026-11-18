@@ -1464,7 +1464,97 @@
   color: var(--text-secondary);
 }
 
-/* ===== CONTACTS PAGE ===== */
+/* ADMIN PAGE */
+.admin-bar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  margin-bottom: 24px;
+}
+
+.admin-title {
+  font: 400 2rem var(--font-heading);
+  color: var(--text-primary);
+}
+
+.admin-count {
+  font: 400 0.9375rem var(--font-body);
+  color: var(--text-secondary);
+}
+
+.admin-table-wrap {
+  position: relative;
+  border: 1px solid #eee;
+  border-radius: 12px;
+}
+
+.admin-table,
+.admin-table tbody,
+.admin-table tr,
+.admin-table th,
+.admin-table td {
+  display: block;
+}
+
+.admin-table {
+  width: 100%;
+  border-collapse: collapse;
+  font: 400 0.9375rem var(--font-body);
+  color: var(--text-primary);
+}
+
+.admin-table thead {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+}
+
+.admin-table tbody tr {
+  padding: 16px;
+  border-bottom: 1px solid #eee;
+}
+
+.admin-table tbody tr:last-child {
+  border-bottom: none;
+}
+
+.admin-table tbody th {
+  margin-bottom: 8px;
+  font-size: 1rem;
+  font-weight: 500;
+  text-align: left;
+  overflow-wrap: anywhere;
+}
+
+.admin-table td {
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 4px 0;
+}
+
+.admin-table td::before {
+  content: attr(data-label);
+  color: var(--text-secondary);
+}
+
+.admin-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 8px;
+  width: 100%;
+  margin-top: 8px;
+}
+
+.admin-delete {
+  color: #c62828;
+}
+
+/* CONTACTS PAGE */
 .contact-layout {
   display: grid;
   grid-template-columns: minmax(0, 1fr);
@@ -2178,6 +2268,71 @@ textarea.field-input {
 
   .faq {
     margin-top: 100px;
+  }
+
+  .admin-table-wrap {
+    overflow-x: auto;
+  }
+
+  .admin-table {
+    display: table;
+    min-width: 720px;
+  }
+
+  .admin-table thead {
+    position: static;
+    display: table-header-group;
+    width: auto;
+    height: auto;
+    overflow: visible;
+    clip: auto;
+  }
+
+  .admin-table tbody {
+    display: table-row-group;
+  }
+
+  .admin-table tbody tr {
+    display: table-row;
+    padding: 0;
+  }
+
+  .admin-table th,
+  .admin-table td {
+    display: table-cell;
+    padding: 12px 16px;
+    border-bottom: 1px solid #eee;
+    text-align: left;
+    white-space: nowrap;
+  }
+
+  .admin-table thead tr {
+    display: table-row;
+  }
+
+  .admin-table thead th {
+    font-weight: 500;
+    color: var(--text-secondary);
+    background: var(--color-bg-accent);
+  }
+
+  .admin-table tbody th {
+    min-width: 220px;
+    margin: 0;
+    font-size: inherit;
+    white-space: normal;
+  }
+
+  .admin-table td::before {
+    content: none;
+  }
+
+  .admin-table tbody tr:last-child > * {
+    border-bottom: none;
+  }
+
+  .admin-actions {
+    margin-top: 0;
   }
 }
 
