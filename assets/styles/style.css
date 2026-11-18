@@ -711,8 +711,7 @@ ul {
     font-size: 1.25rem;
   }
 
-  .main-menu li:nth-last-child(1),
-  .main-menu li:nth-last-child(2) {
+  .main-menu .menu-mobile-btn {
     display: none;
   }
 
