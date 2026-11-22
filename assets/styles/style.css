@@ -84,6 +84,21 @@ ul {
   color: #c62828;
 }
 
+.toast {
+  position: fixed;
+  left: 50%;
+  bottom: 24px;
+  z-index: 1100;
+  max-width: calc(100% - 32px);
+  padding: 12px 20px;
+  transform: translateX(-50%);
+  border-radius: 8px;
+  background: var(--color-secondary);
+  font: 400 0.9375rem var(--font-body);
+  color: var(--color-white);
+  text-align: center;
+}
+
 /* CONTAINER */
 .content-wrap {
   width: 100%;

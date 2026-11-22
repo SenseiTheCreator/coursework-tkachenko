@@ -449,8 +449,10 @@ initSliders();
 
 /* Favorites */
 const FAV_KEY = "travellian-favorites";
+let favoriteIds = new Set();
+let favoritesUserId = null;
 
-function readFavorites() {
+function readLocalFavorites() {
   try {
     return new Set(JSON.parse(localStorage.getItem(FAV_KEY)) || []);
   } catch {
@@ -458,16 +460,37 @@ function readFavorites() {
   }
 }
 
-function toggleFavorite(id) {
-  const favorites = readFavorites();
-  if (favorites.has(id)) favorites.delete(id);
-  else favorites.add(id);
+function saveLocalFavorites() {
   try {
-    localStorage.setItem(FAV_KEY, JSON.stringify([...favorites]));
+    localStorage.setItem(FAV_KEY, JSON.stringify([...favoriteIds]));
   } catch {
-    
+    console.error("Не вдалося зберегти обране в localStorage");
   }
-  return favorites.has(id);
+}
+
+async function loadFavorites() {
+  const { data: { session } } = await db.auth.getSession();
+  favoritesUserId = session?.user.id ?? null;
+  if (!favoritesUserId) {
+    favoriteIds = readLocalFavorites();
+    return;
+  }
+  const { data, error } = await db.from("favorites").select("tour_id");
+  if (error) throw error;
+  favoriteIds = new Set(data.map((row) => row.tour_id));
+}
+
+async function toggleFavorite(id) {
+  const add = !favoriteIds.has(id);
+  if (favoritesUserId) {
+    const { error } = add
+      ? await db.from("favorites").insert({ user_id: favoritesUserId, tour_id: id })
+      : await db.from("favorites").delete().eq("user_id", favoritesUserId).eq("tour_id", id);
+    if (error) throw error;
+  }
+  if (add) favoriteIds.add(id);
+  else favoriteIds.delete(id);
+  if (!favoritesUserId) saveLocalFavorites();
 }
 
 function paintFavorite(button, isFav) {
@@ -478,17 +501,46 @@ function paintFavorite(button, isFav) {
   icon?.classList.toggle("fa-regular", !isFav);
 }
 
+function repaintFavorites() {
+  qsa("[data-fav]").forEach((button) => paintFavorite(button, favoriteIds.has(Number(button.dataset.fav))));
+}
+
+function showToast(text) {
+  const toast = createElement("p", "toast", text);
+  toast.setAttribute("role", "status");
+  document.body.append(toast);
+  setTimeout(() => toast.remove(), 4000);
+}
+
 function bindFavoriteButton(button) {
   const id = Number(button.dataset.fav);
-  paintFavorite(button, readFavorites().has(id));
-  button.addEventListener("click", () => paintFavorite(button, toggleFavorite(id)));
+  paintFavorite(button, favoriteIds.has(id));
+  button.addEventListener("click", async () => {
+    button.disabled = true;
+    try {
+      await toggleFavorite(id);
+      repaintFavorites();
+    } catch (error) {
+      console.error("Помилка зміни обраного:", error);
+      showToast("Не вдалося змінити обране. Перевірте інтернет і спробуйте ще раз.");
+    } finally {
+      button.disabled = false;
+    }
+  });
 }
 
-function initFavoriteButtons() {
-  qsa(".fav-toggle[data-fav]").forEach(bindFavoriteButton);
-}
+const favoritesReady = loadFavorites().catch((error) =>
+  console.error("Помилка завантаження обраного:", error),
+);
 
-initFavoriteButtons();
+db.auth.onAuthStateChange((event) => {
+  if (event !== "SIGNED_IN" && event !== "SIGNED_OUT") return;
+  setTimeout(() =>
+    loadFavorites()
+      .then(repaintFavorites)
+      .catch((error) => console.error("Помилка завантаження обраного:", error)),
+  );
+});
 
 /* Tour catalog */
 async function fetchTours() {
@@ -519,7 +571,7 @@ function daysLabel(days) {
   return `${days} днів`;
 }
 
-function createTourCard(tour, favorites) {
+function createTourCard(tour) {
   const card = qs("#tourCardTpl").content.firstElementChild.cloneNode(true);
   const img = qs("img", card);
   img.src = tour.image;
@@ -535,8 +587,8 @@ function createTourCard(tour, favorites) {
 
   const fav = qs(".fav-btn", card);
   fav.setAttribute("aria-label", `Додати «${tour.title}» в обране`);
-  paintFavorite(fav, favorites.has(tour.id));
-  fav.addEventListener("click", () => paintFavorite(fav, toggleFavorite(tour.id)));
+  fav.dataset.fav = tour.id;
+  bindFavoriteButton(fav);
   return card;
 }
 
@@ -589,8 +641,7 @@ function initCatalog() {
       .filter((t) => !ranges.length || ranges.some(([from, to]) => t.days >= from && t.days <= to))
       .sort(sorters[state.sort]);
 
-    const favorites = readFavorites();
-    grid.replaceChildren(...list.slice(0, state.limit).map((tour) => createTourCard(tour, favorites)));
+    grid.replaceChildren(...list.slice(0, state.limit).map(createTourCard));
     qs("#tourCount").textContent = list.length;
     qs("#toursEmpty").hidden = list.length > 0;
     qs("#loadMore").hidden = list.length <= state.limit;
@@ -599,7 +650,7 @@ function initCatalog() {
   async function load() {
     showStatus("Завантаження турів…");
     try {
-      tours = await fetchTours();
+      [tours] = await Promise.all([fetchTours(), favoritesReady]);
       render();
     } catch (error) {
       console.error("Помилка завантаження турів:", error);
@@ -830,6 +881,7 @@ async function initTourPage() {
       return;
     }
 
+    await favoritesReady;
     renderTour(tour);
     qs("#tourStatus").hidden = true;
     page.hidden = false;
