@@ -573,10 +573,10 @@ function daysLabel(days) {
 
 function createTourCard(tour) {
   const card = qs("#tourCardTpl").content.firstElementChild.cloneNode(true);
-  const img = qs("img", card);
-  img.src = tour.image;
-  img.alt = tour.alt;
+  const img = createImage(tour.image, tour.alt, 400, 300);
+  img.loading = "lazy";
   img.addEventListener("error", () => card.classList.add("tour-card--no-img"), { once: true });
+  qs(".card-img", card).prepend(img);
 
   qs(".card-tag", card).textContent = tour.country;
   qs(".tour-card-title", card).textContent = tour.title;
