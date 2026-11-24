@@ -198,6 +198,7 @@ function getFormAction(form) {
   if (form.closest("#signupModal")) return signUp;
   // matches, а не form.id: у формі туру є поле name="id", яке перекриває form.id
   if (form.matches("#tourForm")) return saveTour;
+  if (form.matches("#bookingForm")) return sendBooking;
   return null;
 }
 
@@ -236,6 +237,50 @@ async function signUp(form) {
     return;
   }
   closeModalOf(form);
+}
+
+/* Booking (REST API on Render) */
+const API_URL = "https://travellian-world.onrender.com";
+
+// найближчі 6 субот, але не раніше ніж за тиждень від сьогодні
+function fillBookingDates() {
+  const select = qs("#booking-date");
+  if (!select) return;
+  const date = new Date();
+  date.setDate(date.getDate() + 7 + ((6 - date.getDay() + 7) % 7));
+  const pad = (n) => String(n).padStart(2, "0");
+  for (let i = 0; i < 6; i++) {
+    const [y, m, d] = [date.getFullYear(), pad(date.getMonth() + 1), pad(date.getDate())];
+    select.append(new Option(`${d}.${m}.${y}`, `${y}-${m}-${d}`));
+    date.setDate(date.getDate() + 7);
+  }
+}
+
+async function sendBooking(form) {
+  const { name, phone, email, date, guests, comment } = Object.fromEntries(new FormData(form));
+  // безкоштовний сервер Render після простою прокидається до хвилини
+  showStatus(form, "Надсилаємо заявку… Перший запит може тривати до хвилини.");
+
+  const response = await fetch(`${API_URL}/api/bookings`, {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ tourId: Number(form.dataset.tourId), name, phone, email, date, guests: Number(guests), comment }),
+    signal: AbortSignal.timeout(70000),
+  });
+  const result = await response.json().catch(() => ({}));
+
+  if (!response.ok) {
+    // помилки серверної валідації показуємо під відповідними полями
+    Object.entries(result.fields ?? {}).forEach(([key, message]) => {
+      const field = form.elements[key];
+      if (field) setFieldError(field, message);
+    });
+    showStatus(form, result.error || "Не вдалося надіслати заявку. Спробуйте ще раз.", true);
+    return;
+  }
+
+  form.reset();
+  showStatus(form, `Заявку №${result.id} на тур «${result.tour}» надіслано! Менеджер зв'яжеться з вами протягом години.`);
 }
 
 function initAuthUI() {
@@ -883,6 +928,8 @@ async function initTourPage() {
 
     await favoritesReady;
     renderTour(tour);
+    qs("#bookingForm").dataset.tourId = tour.id;
+    fillBookingDates();
     qs("#tourStatus").hidden = true;
     page.hidden = false;
     loadSimilarTours(tour);

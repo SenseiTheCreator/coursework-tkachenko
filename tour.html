@@ -399,8 +399,7 @@
       </button>
       <h2 class="modal-title" id="bookingModalTitle">Бронювання туру</h2>
       <p class="modal-subtitle" id="bookingSummary"></p>
-      <form class="booking-modal-form" data-validate
-        data-success="Заявку надіслано! Менеджер зв'яжеться з вами протягом години.">
+      <form class="booking-modal-form" id="bookingForm" data-validate>
         <div class="contact-field">
           <label class="contact-label" for="booking-name">Ім'я та прізвище</label>
           <input id="booking-name" class="field-input" type="text" name="name" autocomplete="name" minlength="2"
@@ -422,8 +421,7 @@
           <div class="contact-field">
             <label class="contact-label" for="booking-date">Дата виїзду</label>
             <select id="booking-date" class="field-input" name="date" required>
-              <option value="2026-11-12">12.11.2026</option>
-              <option value="2026-12-03">03.12.2026</option>
+              <option value="">Оберіть дату</option>
             </select>
           </div>
           <div class="contact-field">

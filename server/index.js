@@ -52,6 +52,13 @@ function validateBooking(body) {
   return { errors, data: { tourId, name, phone, email, date, guests, comment: comment || null } };
 }
 
+app.get("/", (req, res) => {
+  res.json({
+    name: "Travellian REST API",
+    endpoints: ["GET /api/health", "GET /api/tours/:id", "POST /api/bookings"],
+  });
+});
+
 app.get("/api/health", async (req, res) => {
   await pool.query("SELECT 1");
   res.json({ status: "ok" });
