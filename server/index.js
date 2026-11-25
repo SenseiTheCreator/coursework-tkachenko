@@ -1,3 +1,4 @@
+const path = require("path");
 require("dotenv").config({ quiet: true });
 const express = require("express");
 const cors = require("cors");
@@ -20,6 +21,9 @@ app.use(express.json({ limit: "10kb" }));
 
 const kyivToday = () =>
   new Date().toLocaleDateString("sv-SE", { timeZone: "Europe/Kyiv" });
+
+app.use("/server", (request, response) => response.status(404).end());
+app.use(express.static(path.join(__dirname, "..")));
 
 function parseId(value) {
   const id = Number(value);
