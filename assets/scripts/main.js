@@ -24,6 +24,8 @@ function plural(n, [one, few, many]) {
 const daysLabel = (n) => plural(n, ["день", "дні", "днів"]);
 const nightsLabel = (n) => plural(n, ["ніч", "ночі", "ночей"]);
 
+const LOAD_ERROR = "Перевірте з'єднання з інтернетом і оновіть сторінку.";
+
 function normalizeTour(row) {
   return {
     ...row,
@@ -665,7 +667,7 @@ function initCatalog() {
       chip.setAttribute("aria-pressed", String(isActive));
     });
 
-  function showStatus(text) {
+  function showPageStatus(text) {
     status.textContent = text;
     status.hidden = false;
     grid.replaceChildren();
@@ -698,13 +700,13 @@ function initCatalog() {
   }
 
   async function load() {
-    showStatus("Завантаження турів…");
+    showPageStatus("Завантаження турів…");
     try {
       [tours] = await Promise.all([fetchTours(), favoritesReady]);
       render();
     } catch (error) {
       console.error("Помилка завантаження турів:", error);
-      showStatus("Не вдалося завантажити тури. Перевірте з'єднання з інтернетом і оновіть сторінку.");
+      showPageStatus(`Не вдалося завантажити тури. ${LOAD_ERROR}`);
     }
   }
 
@@ -872,7 +874,7 @@ async function initTourPage() {
   if (!page) return;
   fetch(`${API_URL}/api/health`).catch(() => {});
 
-  const showStatus = (text) => {
+  const showPageStatus = (text) => {
     qs("#tourStatusText").textContent = text;
     qs("#tourStatusLink").hidden = false;
     qs("#tourStatus").hidden = false;
@@ -881,7 +883,7 @@ async function initTourPage() {
 
   const id = Number(new URLSearchParams(location.search).get("id"));
   if (!Number.isInteger(id) || id < 1) {
-    showStatus("Тур не обрано. Оберіть подорож у каталозі.");
+    showPageStatus("Тур не обрано. Оберіть подорож у каталозі.");
     return;
   }
 
@@ -895,7 +897,7 @@ async function initTourPage() {
     ]);
     if (error) throw error;
     if (!row) {
-      showStatus("Такого туру немає. Можливо, його прибрали з каталогу.");
+      showPageStatus("Такого туру немає. Можливо, його прибрали з каталогу.");
       return;
     }
 
@@ -908,7 +910,7 @@ async function initTourPage() {
     loadSimilarTours(tour);
   } catch (error) {
     console.error("Помилка завантаження туру:", error);
-    showStatus("Не вдалося завантажити тур. Перевірте з'єднання з інтернетом і оновіть сторінку.");
+    showPageStatus(`Не вдалося завантажити тур. ${LOAD_ERROR}`);
   }
 }
 
@@ -1006,7 +1008,7 @@ async function initHomeTours() {
     qs("#tripsStatus").hidden = true;
   } catch (error) {
     console.error("Помилка завантаження турів для головної:", error);
-    const message = "Не вдалося завантажити тури. Перевірте з'єднання з інтернетом і оновіть сторінку.";
+    const message = `Не вдалося завантажити тури. ${LOAD_ERROR}`;
     qs("#offersStatus").textContent = message;
     qs("#tripsStatus").textContent = message;
     qs(".offer-swiper").hidden = true;
@@ -1125,7 +1127,7 @@ async function saveTour(form) {
     : db.from("tours").insert(values);
   const { data: saved, error } = await query.select("id");
   if (error) throw error;
-  if (!saved.length) throw { code: "42501" };
+  if (!saved.length) throw Object.assign(new Error("Недостатньо прав"), { code: "42501" });
 
   closeModalOf(form);
   await loadAdminTours();
@@ -1139,7 +1141,7 @@ async function deleteTour() {
   try {
     const { data, error } = await db.from("tours").delete().eq("id", tourToDelete.id).select("id");
     if (error) throw error;
-    if (!data.length) throw { code: "42501" };
+    if (!data.length) throw Object.assign(new Error("Недостатньо прав"), { code: "42501" });
     modals.close(qs("#deleteModal"));
     await loadAdminTours();
   } catch (error) {
@@ -1154,7 +1156,7 @@ async function deleteTour() {
 async function checkAdminAccess() {
   const status = qs("#adminStatus");
   const panel = qs("#adminPanel");
-  const showStatus = (text, withLogin = false) => {
+  const showPageStatus = (text, withLogin = false) => {
     qs("#adminStatusText").textContent = text;
     qs("#adminLogin").hidden = !withLogin;
     status.hidden = false;
@@ -1164,11 +1166,11 @@ async function checkAdminAccess() {
   try {
     const role = await getUserRole();
     if (!role) {
-      showStatus("Увійдіть як адміністратор, щоб керувати турами.", true);
+      showPageStatus("Увійдіть як адміністратор, щоб керувати турами.", true);
       return;
     }
     if (role !== "admin") {
-      showStatus("Ця сторінка доступна лише адміністраторам.");
+      showPageStatus("Ця сторінка доступна лише адміністраторам.");
       return;
     }
     await Promise.all([loadCountryOptions(), loadAdminTours()]);
@@ -1176,7 +1178,7 @@ async function checkAdminAccess() {
     panel.hidden = false;
   } catch (error) {
     console.error("Помилка завантаження адмін-панелі:", error);
-    showStatus("Не вдалося завантажити дані. Перевірте з'єднання з інтернетом і оновіть сторінку.");
+    showPageStatus(`Не вдалося завантажити дані. ${LOAD_ERROR}`);
   }
 }
 
