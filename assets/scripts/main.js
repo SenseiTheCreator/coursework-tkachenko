@@ -53,8 +53,8 @@ function initMenu() {
   menu.addEventListener("click", (e) => {
     if (e.target.closest("a")) setMenu(false);
   });
-  window.addEventListener("resize", () => {
-    if (window.innerWidth >= 1152) setMenu(false);
+  matchMedia("(min-width: 1152px)").addEventListener("change", (e) => {
+    if (e.matches) setMenu(false);
   });
   return setMenu;
 }
@@ -843,21 +843,16 @@ function createSimilarCard(tour) {
 }
 
 async function fetchSimilarTours(tour, limit = 3) {
-  const query = (count) =>
-    db
-      .from("tours")
-      .select("id, title, days, price, image, image_alt, countries(name)")
-      .neq("id", tour.id)
-      .order("rating", { ascending: false })
-      .limit(count);
-
-  const same = await query(limit).eq("country_id", tour.country_id);
-  if (same.error) throw same.error;
-  if (same.data.length >= limit) return same.data;
-
-  const other = await query(limit - same.data.length).neq("country_id", tour.country_id);
-  if (other.error) throw other.error;
-  return [...same.data, ...other.data].map(normalizeTour);
+  const { data, error } = await db
+    .from("tours")
+    .select("id, title, days, price, image, image_alt, country_id, countries(name)")
+    .neq("id", tour.id)
+    .order("rating", { ascending: false })
+    .order("id");
+  if (error) throw error;
+  const same = data.filter((t) => t.country_id === tour.country_id);
+  const other = data.filter((t) => t.country_id !== tour.country_id);
+  return [...same, ...other].slice(0, limit).map(normalizeTour);
 }
 
 async function loadSimilarTours(tour) {
@@ -875,6 +870,7 @@ async function loadSimilarTours(tour) {
 async function initTourPage() {
   const page = qs("#tourPage");
   if (!page) return;
+  fetch(`${API_URL}/api/health`).catch(() => {});
 
   const showStatus = (text) => {
     qs("#tourStatusText").textContent = text;
@@ -890,19 +886,21 @@ async function initTourPage() {
   }
 
   try {
-    const { data: tour, error } = await db
-      .from("tours")
-      .select("id, title, days, price, rating, image, image_alt, description, program, gallery, country_id, countries(name)")
-      .eq("id", id)
-      .maybeSingle();
+    const [{ data: row, error }] = await Promise.all([
+      db.from("tours")
+        .select("id, title, days, price, rating, image, image_alt, description, program, gallery, country_id, countries(name)")
+        .eq("id", id)
+        .maybeSingle(),
+      favoritesReady,
+    ]);
     if (error) throw error;
-    if (!tour) {
+    if (!row) {
       showStatus("Такого туру немає. Можливо, його прибрали з каталогу.");
       return;
     }
 
-    await favoritesReady;
-    renderTour(normalizeTour(tour));
+    const tour = normalizeTour(row);
+    renderTour(tour);
     qs("#bookingForm").dataset.tourId = tour.id;
     fillBookingDates();
     qs("#tourStatus").hidden = true;
