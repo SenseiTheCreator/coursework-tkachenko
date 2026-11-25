@@ -2,6 +2,37 @@ import { db } from "./app.js";
 const qs = (selector, root = document) => root.querySelector(selector);
 const qsa = (selector, root = document) => [...root.querySelectorAll(selector)];
 
+function createElement(tag, className, text) {
+  const element = document.createElement(tag);
+  if (className) element.className = className;
+  if (text !== undefined) element.textContent = text;
+  return element;
+}
+
+function createImage(src, alt, width, height) {
+  const img = createElement("img");
+  Object.assign(img, { src, alt, width, height });
+  return img;
+}
+
+function plural(n, [one, few, many]) {
+  const mod10 = n % 10, mod100 = n % 100;
+  if (mod10 === 1 && mod100 !== 11) return `${n} ${one}`;
+  if (mod10 >= 2 && mod10 <= 4 && (mod100 < 12 || mod100 > 14)) return `${n} ${few}`;
+  return `${n} ${many}`;
+}
+const daysLabel = (n) => plural(n, ["день", "дні", "днів"]);
+const nightsLabel = (n) => plural(n, ["ніч", "ночі", "ночей"]);
+
+function normalizeTour(row) {
+  return {
+    ...row,
+    country: row.countries?.name ?? "",
+    alt: row.image_alt,
+    rating: Number(row.rating),
+  };
+}
+
 /* Mobile menu */
 function initMenu() {
   const toggle = qs("#iconBlock");
@@ -172,7 +203,6 @@ function initFormValidation() {
 
 initFormValidation();
 
-/* Auth (Supabase Authentication) */
 const ERROR_MESSAGES = {
   invalid_credentials: "Неправильний email або пароль.",
   user_already_exists: "Користувач із таким email уже зареєстрований.",
@@ -181,7 +211,6 @@ const ERROR_MESSAGES = {
   email_not_confirmed: "Спершу підтвердьте email за посиланням у листі.",
   over_request_rate_limit: "Забагато спроб. Зачекайте хвилину й спробуйте ще раз.",
   over_email_send_rate_limit: "Забагато спроб. Зачекайте хвилину й спробуйте ще раз.",
-  // коди помилок PostgreSQL
   42501: "Недостатньо прав. Увійдіть як адміністратор.",
   23503: "Цей запис пов'язаний з іншими даними, тому його не можна змінити.",
   23514: "Перевірте значення полів: деякі з них поза допустимими межами.",
@@ -192,11 +221,9 @@ function describeError(error) {
   return ERROR_MESSAGES[error?.code] ?? "Не вдалося виконати запит. Перевірте інтернет і спробуйте ще раз.";
 }
 
-// форми, які замість звичайного «Дякуємо» надсилають дані в Supabase
 function getFormAction(form) {
   if (form.closest("#loginModal")) return logIn;
   if (form.closest("#signupModal")) return signUp;
-  // matches, а не form.id: у формі туру є поле name="id", яке перекриває form.id
   if (form.matches("#tourForm")) return saveTour;
   if (form.matches("#bookingForm")) return sendBooking;
   return null;
@@ -227,7 +254,6 @@ async function signUp(form) {
   const { data, error } = await db.auth.signUp({
     email: email.trim(),
     password,
-    // ім'я потрапляє в таблицю profiles через тригер handle_new_user
     options: { data: { name: `${name.trim()} ${surname.trim()}` } },
   });
   if (error) throw error;
@@ -239,10 +265,8 @@ async function signUp(form) {
   closeModalOf(form);
 }
 
-/* Booking (REST API on Render) */
 const API_URL = "https://travellian-world.onrender.com";
 
-// найближчі 6 субот, але не раніше ніж за тиждень від сьогодні
 function fillBookingDates() {
   const select = qs("#booking-date");
   if (!select) return;
@@ -258,7 +282,6 @@ function fillBookingDates() {
 
 async function sendBooking(form) {
   const { name, phone, email, date, guests, comment } = Object.fromEntries(new FormData(form));
-  // безкоштовний сервер Render після простою прокидається до хвилини
   showStatus(form, "Надсилаємо заявку… Перший запит може тривати до хвилини.");
 
   const response = await fetch(`${API_URL}/api/bookings`, {
@@ -270,7 +293,6 @@ async function sendBooking(form) {
   const result = await response.json().catch(() => ({}));
 
   if (!response.ok) {
-    // помилки серверної валідації показуємо під відповідними полями
     Object.entries(result.fields ?? {}).forEach(([key, message]) => {
       const field = form.elements[key];
       if (field) setFieldError(field, message);
@@ -594,27 +616,10 @@ async function fetchTours() {
     .select("id, title, days, price, rating, image, image_alt, description, countries(name)")
     .order("id");
   if (error) throw error;
-
-  return data.map((tour) => ({
-    id: tour.id,
-    title: tour.title,
-    country: tour.countries.name,
-    days: tour.days,
-    price: tour.price,
-    rating: Number(tour.rating),
-    image: tour.image,
-    alt: tour.image_alt,
-    description: tour.description,
-  }));
+  return data.map(normalizeTour);
 }
 
 const PAGE_SIZE = 6;
-
-function daysLabel(days) {
-  if (days % 10 === 1 && days % 100 !== 11) return `${days} день`;
-  if ([2, 3, 4].includes(days % 10) && ![12, 13, 14].includes(days % 100)) return `${days} дні`;
-  return `${days} днів`;
-}
 
 function createTourCard(tour) {
   const card = qs("#tourCardTpl").content.firstElementChild.cloneNode(true);
@@ -749,25 +754,10 @@ function initCatalog() {
 initCatalog();
 
 /* Tour page */
-function nightsLabel(nights) {
-  if (nights % 10 === 1 && nights % 100 !== 11) return `${nights} ніч`;
-  if ([2, 3, 4].includes(nights % 10) && ![12, 13, 14].includes(nights % 100)) return `${nights} ночі`;
-  return `${nights} ночей`;
-}
-
-function createImage(src, alt, width, height) {
-  const img = document.createElement("img");
-  img.src = src;
-  img.alt = alt;
-  img.width = width;
-  img.height = height;
-  return img;
-}
-
 function renderGallery(tour) {
   const photos = tour.gallery?.length
     ? tour.gallery
-    : [{ image: tour.image, alt: tour.image_alt, label: "" }];
+    : [{ image: tour.image, alt: tour.alt, label: "" }];
 
   const photo = qs(".tour-photo");
   const mainImage = createImage(photos[0].image, photos[0].alt, 800, 500);
@@ -780,16 +770,12 @@ function renderGallery(tour) {
   thumbs.hidden = photos.length < 2;
   thumbs.replaceChildren(
     ...photos.map((item, index) => {
-      const thumb = document.createElement("button");
+      const thumb = createElement("button", "tour-thumb");
       thumb.type = "button";
-      thumb.className = "tour-thumb";
       thumb.classList.toggle("is-active", index === 0);
       const img = createImage(item.image, item.alt, 200, 150);
       img.loading = "lazy";
-      const label = document.createElement("span");
-      label.className = "tour-thumb-label";
-      label.textContent = item.label;
-      thumb.append(img, label);
+      thumb.append(img, createElement("span", "tour-thumb-label", item.label));
       return thumb;
     }),
   );
@@ -802,21 +788,18 @@ function renderProgram(program) {
 
   qs("#tourProgram").replaceChildren(
     ...program.map((text, index) => {
-      const item = document.createElement("li");
-      const day = document.createElement("h3");
-      day.className = "program-day";
-      day.textContent = `День ${index + 1}`;
-      const description = document.createElement("p");
-      description.className = "tour-text";
-      description.textContent = text;
-      item.append(day, description);
+      const item = createElement("li");
+      item.append(
+        createElement("h3", "program-day", `День ${index + 1}`),
+        createElement("p", "tour-text", text),
+      );
       return item;
     }),
   );
 }
 
 function renderTour(tour) {
-  const country = tour.countries.name;
+  const { country } = tour;
   const duration = tour.days > 1
     ? `${daysLabel(tour.days)} / ${nightsLabel(tour.days - 1)}`
     : daysLabel(tour.days);
@@ -824,7 +807,7 @@ function renderTour(tour) {
   document.title = `Тур «${tour.title}»: ${daysLabel(tour.days)}, від €${tour.price} | Travellian`;
   qs("#tourTitle").textContent = `Тур «${tour.title}»`;
   qs("#tourCountry").textContent = country;
-  qs("#tourRating").textContent = Number(tour.rating).toFixed(1);
+  qs("#tourRating").textContent = tour.rating.toFixed(1);
   qs("#tourDuration").textContent = duration;
   qs("#tourMeta").hidden = false;
 
@@ -843,27 +826,19 @@ function renderTour(tour) {
 }
 
 function createSimilarCard(tour) {
-  const card = document.createElement("a");
-  card.className = "similar-card";
+  const card = createElement("a", "similar-card");
   card.href = `tour.html?id=${tour.id}`;
 
-  const imageBox = document.createElement("div");
-  imageBox.className = "similar-card-img";
-  const img = createImage(tour.image, tour.image_alt, 400, 250);
+  const imageBox = createElement("div", "similar-card-img");
+  const img = createImage(tour.image, tour.alt, 400, 250);
   img.loading = "lazy";
-  const label = document.createElement("span");
-  label.className = "similar-card-label";
-  label.textContent = tour.countries.name;
-  imageBox.append(img, label);
+  imageBox.append(img, createElement("span", "similar-card-label", tour.country));
 
-  const title = document.createElement("h3");
-  title.className = "similar-card-title";
-  title.textContent = tour.title;
-  const meta = document.createElement("p");
-  meta.className = "similar-card-meta";
-  meta.textContent = `${daysLabel(tour.days)} · від €${tour.price}`;
-
-  card.append(imageBox, title, meta);
+  card.append(
+    imageBox,
+    createElement("h3", "similar-card-title", tour.title),
+    createElement("p", "similar-card-meta", `${daysLabel(tour.days)} · від €${tour.price}`),
+  );
   return card;
 }
 
@@ -882,7 +857,7 @@ async function fetchSimilarTours(tour, limit = 3) {
 
   const other = await query(limit - same.data.length).neq("country_id", tour.country_id);
   if (other.error) throw other.error;
-  return [...same.data, ...other.data];
+  return [...same.data, ...other.data].map(normalizeTour);
 }
 
 async function loadSimilarTours(tour) {
@@ -927,7 +902,7 @@ async function initTourPage() {
     }
 
     await favoritesReady;
-    renderTour(tour);
+    renderTour(normalizeTour(tour));
     qs("#bookingForm").dataset.tourId = tour.id;
     fillBookingDates();
     qs("#tourStatus").hidden = true;
@@ -942,12 +917,6 @@ async function initTourPage() {
 initTourPage();
 
 /* Home page tours */
-function createElement(tag, className, text) {
-  const element = document.createElement(tag);
-  if (className) element.className = className;
-  if (text !== undefined) element.textContent = text;
-  return element;
-}
 
 function createStars(rating, className) {
   const stars = createElement("div", className);
@@ -967,9 +936,8 @@ function createStars(rating, className) {
 }
 
 function createOfferSlide(tour) {
-  const img = createElement("img", "offer-card-img");
-  img.src = tour.image;
-  img.alt = tour.alt;
+  const img = createImage(tour.image, tour.alt);
+  img.className = "offer-card-img";
   img.loading = "lazy";
 
   const price = createElement("div", "offer-card-price");
@@ -995,9 +963,8 @@ function createOfferSlide(tour) {
 }
 
 function createTripCard(tour) {
-  const img = createElement("img", "trip-card-img");
-  img.src = tour.image;
-  img.alt = tour.alt;
+  const img = createImage(tour.image, tour.alt);
+  img.className = "trip-card-img";
   img.loading = "lazy";
   const imgWrap = createElement("a", "trip-card-img-wrap");
   imgWrap.href = `tour.html?id=${tour.id}`;
@@ -1075,10 +1042,10 @@ function createAdminRow(tour) {
   };
   row.append(
     title,
-    cell("Країна", tour.countries.name),
+    cell("Країна", tour.country),
     cell("Тривалість", daysLabel(tour.days)),
     cell("Ціна", `€${tour.price}`),
-    cell("Рейтинг", Number(tour.rating).toFixed(1)),
+    cell("Рейтинг", tour.rating.toFixed(1)),
   );
 
   const actions = createElement("td");
@@ -1103,8 +1070,8 @@ async function loadAdminTours() {
     .select("id, title, country_id, days, price, rating, image, image_alt, description, program, countries(name)")
     .order("id");
   if (error) throw error;
-  adminTours = data;
-  qs("#adminTours").replaceChildren(...data.map(createAdminRow));
+  adminTours = data.map(normalizeTour);
+  qs("#adminTours").replaceChildren(...adminTours.map(createAdminRow));
   qs("#adminCount").textContent = data.length;
 }
 
@@ -1132,7 +1099,7 @@ function openTourForm(tour = null) {
     fields.price.value = tour.price;
     fields.rating.value = tour.rating;
     fields.image.value = tour.image;
-    fields.image_alt.value = tour.image_alt;
+    fields.image_alt.value = tour.alt;
     fields.description.value = tour.description ?? "";
     fields.program.value = (tour.program ?? []).join("\n");
   }
