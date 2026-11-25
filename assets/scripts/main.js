@@ -16,9 +16,11 @@ function createImage(src, alt, width, height) {
 }
 
 function plural(n, [one, few, many]) {
-  const mod10 = n % 10, mod100 = n % 100;
+  const mod10 = n % 10,
+    mod100 = n % 100;
   if (mod10 === 1 && mod100 !== 11) return `${n} ${one}`;
-  if (mod10 >= 2 && mod10 <= 4 && (mod100 < 12 || mod100 > 14)) return `${n} ${few}`;
+  if (mod10 >= 2 && mod10 <= 4 && (mod100 < 12 || mod100 > 14))
+    return `${n} ${few}`;
   return `${n} ${many}`;
 }
 const daysLabel = (n) => plural(n, ["день", "дні", "днів"]);
@@ -35,7 +37,6 @@ function normalizeTour(row) {
   };
 }
 
-/* Mobile menu */
 function initMenu() {
   const toggle = qs("#iconBlock");
   const menu = qs("#mainMenu");
@@ -63,7 +64,6 @@ function initMenu() {
 
 const closeMenu = initMenu();
 
-/* Modal windows */
 function initModals(setMenu) {
   const modals = qsa(".modal-overlay");
   let lastFocus = null;
@@ -108,15 +108,18 @@ function initModals(setMenu) {
 
 const modals = initModals(closeMenu);
 
-/* validations form */
 function getError(field) {
   const { validity } = field;
   if (validity.valid) return "";
   if (validity.valueMissing) {
-    return field.type === "checkbox" ? "Потрібна ваша згода" : "Заповніть це поле";
+    return field.type === "checkbox"
+      ? "Потрібна ваша згода"
+      : "Заповніть це поле";
   }
   if (validity.typeMismatch) {
-    return field.type === "email" ? "Введіть коректний email" : "Невірне значення";
+    return field.type === "email"
+      ? "Введіть коректний email"
+      : "Невірне значення";
   }
   if (validity.tooShort) return `Мінімум ${field.minLength} символів`;
   if (validity.rangeUnderflow) return `Мінімум ${field.min}`;
@@ -211,8 +214,10 @@ const ERROR_MESSAGES = {
   email_exists: "Користувач із таким email уже зареєстрований.",
   weak_password: "Пароль надто простий. Використайте щонайменше 8 символів.",
   email_not_confirmed: "Спершу підтвердьте email за посиланням у листі.",
-  over_request_rate_limit: "Забагато спроб. Зачекайте хвилину й спробуйте ще раз.",
-  over_email_send_rate_limit: "Забагато спроб. Зачекайте хвилину й спробуйте ще раз.",
+  over_request_rate_limit:
+    "Забагато спроб. Зачекайте хвилину й спробуйте ще раз.",
+  over_email_send_rate_limit:
+    "Забагато спроб. Зачекайте хвилину й спробуйте ще раз.",
   42501: "Недостатньо прав. Увійдіть як адміністратор.",
   23503: "Цей запис пов'язаний з іншими даними, тому його не можна змінити.",
   23514: "Перевірте значення полів: деякі з них поза допустимими межами.",
@@ -220,7 +225,10 @@ const ERROR_MESSAGES = {
 };
 
 function describeError(error) {
-  return ERROR_MESSAGES[error?.code] ?? "Не вдалося виконати запит. Перевірте інтернет і спробуйте ще раз.";
+  return (
+    ERROR_MESSAGES[error?.code] ??
+    "Не вдалося виконати запит. Перевірте інтернет і спробуйте ще раз."
+  );
 }
 
 function getFormAction(form) {
@@ -232,9 +240,15 @@ function getFormAction(form) {
 }
 
 async function getUserRole() {
-  const { data: { session } } = await db.auth.getSession();
+  const {
+    data: { session },
+  } = await db.auth.getSession();
   if (!session) return null;
-  const { data, error } = await db.from("profiles").select("role").eq("id", session.user.id).maybeSingle();
+  const { data, error } = await db
+    .from("profiles")
+    .select("role")
+    .eq("id", session.user.id)
+    .maybeSingle();
   if (error) throw error;
   return data?.role ?? null;
 }
@@ -245,14 +259,19 @@ function closeModalOf(form) {
 
 async function logIn(form) {
   const { email, password } = Object.fromEntries(new FormData(form));
-  const { error } = await db.auth.signInWithPassword({ email: email.trim(), password });
+  const { error } = await db.auth.signInWithPassword({
+    email: email.trim(),
+    password,
+  });
   if (error) throw error;
   form.reset();
   closeModalOf(form);
 }
 
 async function signUp(form) {
-  const { name, surname, email, password } = Object.fromEntries(new FormData(form));
+  const { name, surname, email, password } = Object.fromEntries(
+    new FormData(form),
+  );
   const { data, error } = await db.auth.signUp({
     email: email.trim(),
     password,
@@ -276,20 +295,34 @@ function fillBookingDates() {
   date.setDate(date.getDate() + 7 + ((6 - date.getDay() + 7) % 7));
   const pad = (n) => String(n).padStart(2, "0");
   for (let i = 0; i < 6; i++) {
-    const [y, m, d] = [date.getFullYear(), pad(date.getMonth() + 1), pad(date.getDate())];
+    const [y, m, d] = [
+      date.getFullYear(),
+      pad(date.getMonth() + 1),
+      pad(date.getDate()),
+    ];
     select.append(new Option(`${d}.${m}.${y}`, `${y}-${m}-${d}`));
     date.setDate(date.getDate() + 7);
   }
 }
 
 async function sendBooking(form) {
-  const { name, phone, email, date, guests, comment } = Object.fromEntries(new FormData(form));
+  const { name, phone, email, date, guests, comment } = Object.fromEntries(
+    new FormData(form),
+  );
   showStatus(form, "Надсилаємо заявку… Перший запит може тривати до хвилини.");
 
   const response = await fetch(`${API_URL}/api/bookings`, {
     method: "POST",
     headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({ tourId: Number(form.dataset.tourId), name, phone, email, date, guests: Number(guests), comment }),
+    body: JSON.stringify({
+      tourId: Number(form.dataset.tourId),
+      name,
+      phone,
+      email,
+      date,
+      guests: Number(guests),
+      comment,
+    }),
     signal: AbortSignal.timeout(70000),
   });
   const result = await response.json().catch(() => ({}));
@@ -299,12 +332,19 @@ async function sendBooking(form) {
       const field = form.elements[key];
       if (field) setFieldError(field, message);
     });
-    showStatus(form, result.error || "Не вдалося надіслати заявку. Спробуйте ще раз.", true);
+    showStatus(
+      form,
+      result.error || "Не вдалося надіслати заявку. Спробуйте ще раз.",
+      true,
+    );
     return;
   }
 
   form.reset();
-  showStatus(form, `Заявку №${result.id} на тур «${result.tour}» надіслано! Менеджер зв'яжеться з вами протягом години.`);
+  showStatus(
+    form,
+    `Заявку №${result.id} на тур «${result.tour}» надіслано! Менеджер зв'яжеться з вами протягом години.`,
+  );
 }
 
 function initAuthUI() {
@@ -325,14 +365,18 @@ function initAuthUI() {
   mobileAdminLink.href = "admin.html";
   mobileAdmin.append(mobileAdminLink);
   const mobileItem = createElement("li", "menu-mobile-btn");
-  const mobileLogout = createElement("button", "btn btn-outline mobile-logout", "Вийти");
+  const mobileLogout = createElement(
+    "button",
+    "btn btn-outline mobile-logout",
+    "Вийти",
+  );
   mobileLogout.type = "button";
   mobileItem.append(mobileLogout);
   menu.append(mobileUser, mobileAdmin, mobileItem);
 
-  const guestOnly = qsa("#loginBtn, #signupBtn, .mobile-login, .mobile-signup").map(
-    (button) => button.closest(".menu-mobile-btn") ?? button,
-  );
+  const guestOnly = qsa(
+    "#loginBtn, #signupBtn, .mobile-login, .mobile-signup",
+  ).map((button) => button.closest(".menu-mobile-btn") ?? button);
   const userOnly = [userName, logoutBtn, mobileUser, mobileItem];
   const adminOnly = [adminLink, mobileAdmin];
 
@@ -365,7 +409,6 @@ function initAuthUI() {
 
 initAuthUI();
 
-/* tablist */
 function initTabs() {
   qsa('[role="tablist"]').forEach((list) => {
     const tabs = qsa('[role="tab"]', list);
@@ -376,7 +419,9 @@ function initTabs() {
         tab.classList.toggle("is-active", isActive);
         tab.setAttribute("aria-selected", String(isActive));
         tab.tabIndex = isActive ? 0 : -1;
-        const panel = document.getElementById(tab.getAttribute("aria-controls"));
+        const panel = document.getElementById(
+          tab.getAttribute("aria-controls"),
+        );
         if (panel) panel.hidden = !isActive;
       });
     };
@@ -398,7 +443,6 @@ function initTabs() {
 
 initTabs();
 
-/* Tour gallery */
 function initGallery() {
   const photo = qs(".tour-photo");
   const thumbs = qs(".tour-thumbs");
@@ -411,16 +455,22 @@ function initGallery() {
     const mainImage = qs("img", photo);
     mainImage.src = image.src;
     mainImage.alt = image.alt;
-    qs(".tour-photo-label", photo).textContent = qs(".tour-thumb-label", thumb).textContent;
-    qsa(".tour-thumb", thumbs).forEach((t) => t.classList.toggle("is-active", t === thumb));
+    qs(".tour-photo-label", photo).textContent = qs(
+      ".tour-thumb-label",
+      thumb,
+    ).textContent;
+    qsa(".tour-thumb", thumbs).forEach((t) =>
+      t.classList.toggle("is-active", t === thumb),
+    );
   });
 }
 
 initGallery();
 
-/* Accordion */
 function initAccordion() {
-  const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  const reduceMotion = window.matchMedia(
+    "(prefers-reduced-motion: reduce)",
+  ).matches;
   const duration = reduceMotion ? 0 : 350;
   const easing = "ease";
 
@@ -436,7 +486,10 @@ function initAccordion() {
       item.classList.remove("is-closing");
       item.open = true;
       end = item.offsetHeight;
-      qs(".faq-answer", item)?.animate({ opacity: [0, 1] }, { duration, easing });
+      qs(".faq-answer", item)?.animate(
+        { opacity: [0, 1] },
+        { duration, easing },
+      );
     } else {
       item.classList.add("is-closing");
       end = summary.offsetHeight + (item.offsetHeight - item.clientHeight);
@@ -473,7 +526,6 @@ function initAccordion() {
 
 initAccordion();
 
-/* Sliders */
 function initSliders() {
   if (typeof Swiper === "undefined") return;
 
@@ -486,7 +538,10 @@ function initSliders() {
         prevEl: `.swiper-btn-prev-${name}`,
         nextEl: `.swiper-btn-next-${name}`,
       },
-      a11y: { prevSlideMessage: "Попередній слайд", nextSlideMessage: "Наступний слайд" },
+      a11y: {
+        prevSlideMessage: "Попередній слайд",
+        nextSlideMessage: "Наступний слайд",
+      },
       ...options,
     });
   };
@@ -516,7 +571,6 @@ function initSliders() {
 
 initSliders();
 
-/* Favorites */
 const FAV_KEY = "travellian-favorites";
 let favoriteIds = new Set();
 let favoritesUserId = null;
@@ -538,7 +592,9 @@ function saveLocalFavorites() {
 }
 
 async function loadFavorites() {
-  const { data: { session } } = await db.auth.getSession();
+  const {
+    data: { session },
+  } = await db.auth.getSession();
   favoritesUserId = session?.user.id ?? null;
   if (!favoritesUserId) {
     favoriteIds = readLocalFavorites();
@@ -553,8 +609,14 @@ async function toggleFavorite(id) {
   const add = !favoriteIds.has(id);
   if (favoritesUserId) {
     const { error } = add
-      ? await db.from("favorites").insert({ user_id: favoritesUserId, tour_id: id })
-      : await db.from("favorites").delete().eq("user_id", favoritesUserId).eq("tour_id", id);
+      ? await db
+          .from("favorites")
+          .insert({ user_id: favoritesUserId, tour_id: id })
+      : await db
+          .from("favorites")
+          .delete()
+          .eq("user_id", favoritesUserId)
+          .eq("tour_id", id);
     if (error) throw error;
   }
   if (add) favoriteIds.add(id);
@@ -571,7 +633,9 @@ function paintFavorite(button, isFav) {
 }
 
 function repaintFavorites() {
-  qsa("[data-fav]").forEach((button) => paintFavorite(button, favoriteIds.has(Number(button.dataset.fav))));
+  qsa("[data-fav]").forEach((button) =>
+    paintFavorite(button, favoriteIds.has(Number(button.dataset.fav))),
+  );
 }
 
 function showToast(text) {
@@ -591,7 +655,9 @@ function bindFavoriteButton(button) {
       repaintFavorites();
     } catch (error) {
       console.error("Помилка зміни обраного:", error);
-      showToast("Не вдалося змінити обране. Перевірте інтернет і спробуйте ще раз.");
+      showToast(
+        "Не вдалося змінити обране. Перевірте інтернет і спробуйте ще раз.",
+      );
     } finally {
       button.disabled = false;
     }
@@ -611,11 +677,12 @@ db.auth.onAuthStateChange((event) => {
   );
 });
 
-/* Tour catalog */
 async function fetchTours() {
   const { data, error } = await db
     .from("tours")
-    .select("id, title, days, price, rating, image, image_alt, description, countries(name)")
+    .select(
+      "id, title, days, price, rating, image, image_alt, description, countries(name)",
+    )
     .order("id");
   if (error) throw error;
   return data.map(normalizeTour);
@@ -627,7 +694,9 @@ function createTourCard(tour) {
   const card = qs("#tourCardTpl").content.firstElementChild.cloneNode(true);
   const img = createImage(tour.image, tour.alt, 400, 300);
   img.loading = "lazy";
-  img.addEventListener("error", () => card.classList.add("tour-card--no-img"), { once: true });
+  img.addEventListener("error", () => card.classList.add("tour-card--no-img"), {
+    once: true,
+  });
   qs(".card-img", card).prepend(img);
 
   qs(".card-tag", card).textContent = tour.country;
@@ -684,13 +753,22 @@ function initCatalog() {
     const query = data.get("query").trim().toLowerCase();
     const min = Number(data.get("priceMin")) || 0;
     const max = Number(data.get("priceMax")) || Infinity;
-    const ranges = data.getAll("duration").map((range) => range.split("-").map(Number));
+    const ranges = data
+      .getAll("duration")
+      .map((range) => range.split("-").map(Number));
 
     const list = tours
       .filter((t) => state.country === "all" || t.country === state.country)
-      .filter((t) => !query || `${t.title} ${t.country}`.toLowerCase().includes(query))
+      .filter(
+        (t) =>
+          !query || `${t.title} ${t.country}`.toLowerCase().includes(query),
+      )
       .filter((t) => t.price >= min && t.price <= max)
-      .filter((t) => !ranges.length || ranges.some(([from, to]) => t.days >= from && t.days <= to))
+      .filter(
+        (t) =>
+          !ranges.length ||
+          ranges.some(([from, to]) => t.days >= from && t.days <= to),
+      )
       .sort(sorters[state.sort]);
 
     grid.replaceChildren(...list.slice(0, state.limit).map(createTourCard));
@@ -755,7 +833,6 @@ function initCatalog() {
 
 initCatalog();
 
-/* Tour page */
 function renderGallery(tour) {
   const photos = tour.gallery?.length
     ? tour.gallery
@@ -763,8 +840,12 @@ function renderGallery(tour) {
 
   const photo = qs(".tour-photo");
   const mainImage = createImage(photos[0].image, photos[0].alt, 800, 500);
-  mainImage.addEventListener("error", () => photo.classList.add("tour-photo--no-img"));
-  mainImage.addEventListener("load", () => photo.classList.remove("tour-photo--no-img"));
+  mainImage.addEventListener("error", () =>
+    photo.classList.add("tour-photo--no-img"),
+  );
+  mainImage.addEventListener("load", () =>
+    photo.classList.remove("tour-photo--no-img"),
+  );
   photo.prepend(mainImage);
   qs(".tour-photo-label", photo).textContent = photos[0].label;
 
@@ -802,9 +883,10 @@ function renderProgram(program) {
 
 function renderTour(tour) {
   const { country } = tour;
-  const duration = tour.days > 1
-    ? `${daysLabel(tour.days)} / ${nightsLabel(tour.days - 1)}`
-    : daysLabel(tour.days);
+  const duration =
+    tour.days > 1
+      ? `${daysLabel(tour.days)} / ${nightsLabel(tour.days - 1)}`
+      : daysLabel(tour.days);
 
   document.title = `Тур «${tour.title}»: ${daysLabel(tour.days)}, від €${tour.price} | Travellian`;
   qs("#tourTitle").textContent = `Тур «${tour.title}»`;
@@ -816,8 +898,10 @@ function renderTour(tour) {
   qs("#tourPrice").textContent = `€${tour.price}`;
   qs("#tourCountryFact").textContent = country;
   qs("#tourDays").textContent = daysLabel(tour.days);
-  qs("#tourDescription").textContent = tour.description || "Опис туру з'явиться найближчим часом.";
-  qs("#bookingSummary").textContent = `${tour.title} · ${daysLabel(tour.days)} · €${tour.price} за особу`;
+  qs("#tourDescription").textContent =
+    tour.description || "Опис туру з'явиться найближчим часом.";
+  qs("#bookingSummary").textContent =
+    `${tour.title} · ${daysLabel(tour.days)} · €${tour.price} за особу`;
 
   const fav = qs("#tourFav");
   fav.dataset.fav = tour.id;
@@ -834,12 +918,19 @@ function createSimilarCard(tour) {
   const imageBox = createElement("div", "similar-card-img");
   const img = createImage(tour.image, tour.alt, 400, 250);
   img.loading = "lazy";
-  imageBox.append(img, createElement("span", "similar-card-label", tour.country));
+  imageBox.append(
+    img,
+    createElement("span", "similar-card-label", tour.country),
+  );
 
   card.append(
     imageBox,
     createElement("h3", "similar-card-title", tour.title),
-    createElement("p", "similar-card-meta", `${daysLabel(tour.days)} · від €${tour.price}`),
+    createElement(
+      "p",
+      "similar-card-meta",
+      `${daysLabel(tour.days)} · від €${tour.price}`,
+    ),
   );
   return card;
 }
@@ -847,7 +938,9 @@ function createSimilarCard(tour) {
 async function fetchSimilarTours(tour, limit = 3) {
   const { data, error } = await db
     .from("tours")
-    .select("id, title, days, price, image, image_alt, country_id, countries(name)")
+    .select(
+      "id, title, days, price, image, image_alt, country_id, countries(name)",
+    )
     .neq("id", tour.id)
     .order("rating", { ascending: false })
     .order("id");
@@ -861,7 +954,9 @@ async function loadSimilarTours(tour) {
   const section = qs(".similar-section");
   try {
     const similar = await fetchSimilarTours(tour);
-    qs(".similar-grid", section).replaceChildren(...similar.map(createSimilarCard));
+    qs(".similar-grid", section).replaceChildren(
+      ...similar.map(createSimilarCard),
+    );
     section.hidden = similar.length === 0;
   } catch (error) {
     console.error("Помилка завантаження схожих турів:", error);
@@ -889,8 +984,11 @@ async function initTourPage() {
 
   try {
     const [{ data: row, error }] = await Promise.all([
-      db.from("tours")
-        .select("id, title, days, price, rating, image, image_alt, description, program, gallery, country_id, countries(name)")
+      db
+        .from("tours")
+        .select(
+          "id, title, days, price, rating, image, image_alt, description, program, gallery, country_id, countries(name)",
+        )
         .eq("id", id)
         .maybeSingle(),
       favoritesReady,
@@ -916,8 +1014,6 @@ async function initTourPage() {
 
 initTourPage();
 
-/* Home page tours */
-
 function createStars(rating, className) {
   const stars = createElement("div", className);
   stars.setAttribute("role", "img");
@@ -941,7 +1037,10 @@ function createOfferSlide(tour) {
   img.loading = "lazy";
 
   const price = createElement("div", "offer-card-price");
-  price.append(createElement("span", "offer-card-from", "Від"), createElement("span", "offer-card-amount", `€${tour.price}`));
+  price.append(
+    createElement("span", "offer-card-from", "Від"),
+    createElement("span", "offer-card-amount", `€${tour.price}`),
+  );
   const link = createElement("a", "offer-card-btn", "Детальніше");
   link.href = `tour.html?id=${tour.id}`;
   const footer = createElement("div", "offer-card-footer");
@@ -971,7 +1070,10 @@ function createTripCard(tour) {
   imgWrap.append(img);
 
   const top = createElement("div", "trip-card-top");
-  top.append(createElement("span", "trip-card-type", tour.country), createElement("span", "trip-card-price", `від €${tour.price}`));
+  top.append(
+    createElement("span", "trip-card-type", tour.country),
+    createElement("span", "trip-card-price", `від €${tour.price}`),
+  );
 
   const link = createElement("a", "", tour.title);
   link.href = `tour.html?id=${tour.id}`;
@@ -979,7 +1081,10 @@ function createTripCard(tour) {
   title.append(link);
 
   const bottom = createElement("div", "trip-card-bottom");
-  bottom.append(createStars(tour.rating, "trip-card-stars"), createElement("span", "trip-card-days", `Тур ${daysLabel(tour.days)}`));
+  bottom.append(
+    createStars(tour.rating, "trip-card-stars"),
+    createElement("span", "trip-card-days", `Тур ${daysLabel(tour.days)}`),
+  );
 
   const body = createElement("div", "trip-card-body");
   body.append(top, title, bottom);
@@ -1018,7 +1123,6 @@ async function initHomeTours() {
 
 initHomeTours();
 
-/* Admin panel */
 let adminTours = [];
 let tourToDelete = null;
 
@@ -1067,7 +1171,9 @@ function createAdminRow(tour) {
 async function loadAdminTours() {
   const { data, error } = await db
     .from("tours")
-    .select("id, title, country_id, days, price, rating, image, image_alt, description, program, countries(name)")
+    .select(
+      "id, title, country_id, days, price, rating, image, image_alt, description, program, countries(name)",
+    )
     .order("id");
   if (error) throw error;
   adminTours = data.map(normalizeTour);
@@ -1076,7 +1182,10 @@ async function loadAdminTours() {
 }
 
 async function loadCountryOptions() {
-  const { data, error } = await db.from("countries").select("id, name").order("name");
+  const { data, error } = await db
+    .from("countries")
+    .select("id, name")
+    .order("name");
   if (error) throw error;
   const select = qs("#tour-country");
   const placeholder = select.options[0];
@@ -1109,7 +1218,10 @@ function openTourForm(tour = null) {
 
 async function saveTour(form) {
   const data = Object.fromEntries(new FormData(form));
-  const program = data.program.split("\n").map((line) => line.trim()).filter(Boolean);
+  const program = data.program
+    .split("\n")
+    .map((line) => line.trim())
+    .filter(Boolean);
   const values = {
     title: data.title.trim(),
     country_id: Number(data.country_id),
@@ -1127,7 +1239,8 @@ async function saveTour(form) {
     : db.from("tours").insert(values);
   const { data: saved, error } = await query.select("id");
   if (error) throw error;
-  if (!saved.length) throw Object.assign(new Error("Недостатньо прав"), { code: "42501" });
+  if (!saved.length)
+    throw Object.assign(new Error("Недостатньо прав"), { code: "42501" });
 
   closeModalOf(form);
   await loadAdminTours();
@@ -1139,9 +1252,14 @@ async function deleteTour() {
   button.disabled = true;
   message.hidden = true;
   try {
-    const { data, error } = await db.from("tours").delete().eq("id", tourToDelete.id).select("id");
+    const { data, error } = await db
+      .from("tours")
+      .delete()
+      .eq("id", tourToDelete.id)
+      .select("id");
     if (error) throw error;
-    if (!data.length) throw Object.assign(new Error("Недостатньо прав"), { code: "42501" });
+    if (!data.length)
+      throw Object.assign(new Error("Недостатньо прав"), { code: "42501" });
     modals.close(qs("#deleteModal"));
     await loadAdminTours();
   } catch (error) {
@@ -1189,28 +1307,34 @@ function initAdminPage() {
   qs("#adminTours").addEventListener("click", (e) => {
     const editId = e.target.closest("[data-edit]")?.dataset.edit;
     const deleteId = e.target.closest("[data-delete]")?.dataset.delete;
-    if (editId) openTourForm(adminTours.find((tour) => tour.id === Number(editId)));
+    if (editId)
+      openTourForm(adminTours.find((tour) => tour.id === Number(editId)));
     if (deleteId) {
       tourToDelete = adminTours.find((tour) => tour.id === Number(deleteId));
-      qs("#deleteText").textContent = `Тур «${tourToDelete.title}» буде видалено з каталогу назавжди.`;
+      qs("#deleteText").textContent =
+        `Тур «${tourToDelete.title}» буде видалено з каталогу назавжди.`;
       qs("#deleteError").hidden = true;
       modals.open("deleteModal");
     }
   });
   qs("#confirmDelete").addEventListener("click", deleteTour);
-  qs("#cancelDelete").addEventListener("click", () => modals.close(qs("#deleteModal")));
+  qs("#cancelDelete").addEventListener("click", () =>
+    modals.close(qs("#deleteModal")),
+  );
 
   db.auth.onAuthStateChange((event) => {
-    if (event === "SIGNED_IN" || event === "SIGNED_OUT") setTimeout(checkAdminAccess);
+    if (event === "SIGNED_IN" || event === "SIGNED_OUT")
+      setTimeout(checkAdminAccess);
   });
   checkAdminAccess();
 }
 
 initAdminPage();
 
-/* Scroll reveal */
 function initReveal() {
-  const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  const reduceMotion = window.matchMedia(
+    "(prefers-reduced-motion: reduce)",
+  ).matches;
   if (reduceMotion || !("IntersectionObserver" in window)) return;
 
   const targets = qsa(

@@ -18,7 +18,8 @@ const app = express();
 app.use(cors({ origin: allowedOrigins }));
 app.use(express.json({ limit: "10kb" }));
 
-const kyivToday = () => new Date().toLocaleDateString("sv-SE", { timeZone: "Europe/Kyiv" });
+const kyivToday = () =>
+  new Date().toLocaleDateString("sv-SE", { timeZone: "Europe/Kyiv" });
 
 function parseId(value) {
   const id = Number(value);
@@ -36,10 +37,13 @@ function validateBooking(body) {
   const date = body.date;
 
   if (!tourId) errors.tourId = "Невірний тур";
-  if (name.length < 2 || name.length > 80) errors.name = "Ім'я: від 2 до 80 символів";
+  if (name.length < 2 || name.length > 80)
+    errors.name = "Ім'я: від 2 до 80 символів";
   if (!/^\+380\d{9}$/.test(phone)) errors.phone = "Формат: +380XXXXXXXXX";
-  if (email.length > 254 || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) errors.email = "Введіть коректний email";
-  if (!Number.isInteger(guests) || guests < 1 || guests > 6) errors.guests = "Кількість осіб: від 1 до 6";
+  if (email.length > 254 || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email))
+    errors.email = "Введіть коректний email";
+  if (!Number.isInteger(guests) || guests < 1 || guests > 6)
+    errors.guests = "Кількість осіб: від 1 до 6";
   if (comment.length > 500) errors.comment = "Коментар: максимум 500 символів";
 
   const isRealDate =
@@ -49,7 +53,18 @@ function validateBooking(body) {
   if (!isRealDate) errors.date = "Невірна дата";
   else if (date < kyivToday()) errors.date = "Дата виїзду вже минула";
 
-  return { errors, data: { tourId, name, phone, email, date, guests, comment: comment || null } };
+  return {
+    errors,
+    data: {
+      tourId,
+      name,
+      phone,
+      email,
+      date,
+      guests,
+      comment: comment || null,
+    },
+  };
 }
 
 app.get("/", (req, res) => {
@@ -75,31 +90,51 @@ app.get("/api/tours/:id", async (req, res) => {
       WHERE t.id = $1`,
     [id],
   );
-  if (rows.length === 0) return res.status(404).json({ error: "Тур не знайдено" });
+  if (rows.length === 0)
+    return res.status(404).json({ error: "Тур не знайдено" });
   res.json(rows[0]);
 });
 
 app.post("/api/bookings", async (req, res) => {
   const { errors, data } = validateBooking(req.body ?? {});
   if (Object.keys(errors).length > 0) {
-    return res.status(400).json({ error: "Перевірте дані форми", fields: errors });
+    return res
+      .status(400)
+      .json({ error: "Перевірте дані форми", fields: errors });
   }
 
   const { rows } = await pool.query(
     `INSERT INTO bookings (tour_id, name, phone, email, travel_date, guests, comment)
      VALUES ($1, $2, $3, $4, $5, $6, $7)
      RETURNING id, created_at, (SELECT title FROM tours WHERE id = tour_id) AS tour`,
-    [data.tourId, data.name, data.phone, data.email, data.date, data.guests, data.comment],
+    [
+      data.tourId,
+      data.name,
+      data.phone,
+      data.email,
+      data.date,
+      data.guests,
+      data.comment,
+    ],
   );
-  res.status(201).json({ id: rows[0].id, tour: rows[0].tour, createdAt: rows[0].created_at });
+  res
+    .status(201)
+    .json({
+      id: rows[0].id,
+      tour: rows[0].tour,
+      createdAt: rows[0].created_at,
+    });
 });
 
 app.use((req, res) => res.status(404).json({ error: "Маршрут не знайдено" }));
 
 app.use((err, req, res, next) => {
-  if (err.type === "entity.parse.failed") return res.status(400).json({ error: "Невірний формат JSON" });
-  if (err.code === "23503") return res.status(404).json({ error: "Тур не знайдено" });
-  if (err.code === "23514" || err.code === "22P02") return res.status(400).json({ error: "Перевірте дані форми" });
+  if (err.type === "entity.parse.failed")
+    return res.status(400).json({ error: "Невірний формат JSON" });
+  if (err.code === "23503")
+    return res.status(404).json({ error: "Тур не знайдено" });
+  if (err.code === "23514" || err.code === "22P02")
+    return res.status(400).json({ error: "Перевірте дані форми" });
   console.error(err);
   res.status(500).json({ error: "Помилка сервера. Спробуйте пізніше." });
 });
