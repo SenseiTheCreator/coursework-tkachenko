@@ -1,4 +1,3 @@
-/*  SECTIONS  */
 .section-head {
   display: flex;
   justify-content: space-between;
@@ -93,7 +92,6 @@
   color: var(--color-white);
 }
 
-/* DESTINATIONS */
 .destinations-section {
   overflow: hidden;
   padding: 80px 0;
@@ -153,7 +151,6 @@
   height: auto;
 }
 
-/*  SPECIAL OFFER*/
 .offer-section {
   padding: 80px 0;
   overflow: hidden;
@@ -271,7 +268,6 @@
   background: var(--color-primary);
 }
 
-/* BLOG */
 .blog-section {
   padding: 80px 0;
 }
@@ -328,7 +324,6 @@
   color: var(--color-primary);
 }
 
-/*  TRIP PLANNERS  */
 .section-subtitle--trip {
   margin-bottom: 46px;
 }
@@ -450,7 +445,7 @@
   left: -14px;
   width: 43px;
   height: 43px;
-  background: rgba(23, 36, 50, 1);
+  background: var(--color-secondary);
   z-index: -1;
 }
 
@@ -461,7 +456,7 @@
   right: -14px;
   width: 43px;
   height: 43px;
-  background: rgba(118, 126, 134, 1);
+  background: var(--text-secondary);
   z-index: -1;
 }
 
@@ -494,7 +489,6 @@
   width: 288px;
 }
 
-/*  EXPERIENCES  */
 .section-title--exp {
   font-size: 2.5rem;
 }
@@ -583,7 +577,6 @@
   background: var(--color-white);
   box-shadow: 0 0 4px rgba(0, 0, 0, 0.3);
   border-radius: 20px;
-  box-sizing: border-box;
   overflow: hidden;
 }
 
@@ -595,7 +588,7 @@
   font-family: var(--font-heading);
   font-size: 2.25rem;
   font-weight: 400;
-  color: rgba(118, 126, 134, 1);
+  color: var(--text-secondary);
 }
 
 .newsletter-form {
@@ -604,15 +597,16 @@
   justify-content: flex-end;
   gap: 32px;
   width: 100%;
+  flex-wrap: wrap;
 }
 
 .newsletter-field {
+  position: relative;
   display: flex;
   flex-direction: column;
   gap: 16px;
   width: 100%;
   min-width: 0;
-  box-sizing: border-box;
   max-width: 100%;
 }
 
@@ -620,7 +614,7 @@
   font-family: var(--font-body);
   font-size: 1.25rem;
   line-height: 24px;
-  color: #767e86;
+  color: var(--text-secondary);
 }
 
 .newsletter-input {
@@ -661,18 +655,9 @@
   opacity: 0.85;
 }
 
-/* повідомлення форми не мають зсувати поле та кнопку */
-.newsletter-form {
-  flex-wrap: wrap;
-}
-
 .newsletter-form .form-status {
   flex-basis: 100%;
   margin-top: -16px;
-}
-
-.newsletter-field {
-  position: relative;
 }
 
 .newsletter-field .field-error {
@@ -681,7 +666,6 @@
   left: 0;
 }
 
-/*  FOOTER  */
 .main-footer {
   background: var(--color-secondary);
   color: var(--color-white);
@@ -713,7 +697,7 @@
 .footer-col-list a {
   font-family: var(--font-body);
   font-size: 1.125rem;
-  color: rgba(255, 255, 255, 1);
+  color: var(--color-white);
   transition: color 0.2s;
   font-weight: 400;
 }
@@ -730,7 +714,7 @@
 .footer-copy {
   font-family: var(--font-body);
   font-size: 0.875rem;
-  color: rgba(255, 255, 255, 1);
+  color: var(--color-white);
 }
 
 .footer-social {
@@ -756,7 +740,6 @@
   background: var(--color-primary);
 }
 
-/* ABOUT HEADER */
 .main-header.main-header--inner {
   background-image:
     linear-gradient(rgba(23, 36, 50, 0.7), rgba(23, 36, 50, 0.7)),
@@ -794,7 +777,6 @@
   opacity: 0.9;
 }
 
-/* ABOUT VALUES */
 .section-title--values::after {
   width: 241px;
 }
@@ -831,7 +813,6 @@
   line-height: 1.6;
 }
 
-/* 404 */
 .error-page {
   display: flex;
   flex-direction: column;
@@ -913,7 +894,6 @@
   color: var(--color-white);
 }
 
-/* фільтри */
 .catalog {
   display: grid;
   gap: 24px;
@@ -973,7 +953,6 @@
   cursor: pointer;
 }
 
-/* панель «Знайдено турів / Сортувати» */
 .catalog-bar {
   display: flex;
   flex-wrap: wrap;
@@ -985,7 +964,6 @@
   color: var(--text-secondary);
 }
 
-/* картки турів */
 .tour-grid {
   display: grid;
   grid-template-columns: 1fr;
@@ -996,7 +974,7 @@
   display: flex;
   flex-direction: column;
   overflow: hidden;
-  border: 1px solid #eee;
+  border: 1px solid var(--color-border);
   border-radius: 12px;
   background: var(--color-white);
 }
@@ -1103,7 +1081,6 @@
   text-align: center;
 }
 
-/* ===== TOUR PAGE ===== */
 .tour-hero-meta {
   display: flex;
   flex-wrap: wrap;
@@ -1145,7 +1122,6 @@
   gap: 32px;
 }
 
-/* gallery */
 .tour-photo {
   position: relative;
   overflow: hidden;
@@ -1212,10 +1188,9 @@
   font-size: 0.75rem;
 }
 
-/* booking card */
 .tour-aside {
   padding: 24px;
-  border: 1px solid #eee;
+  border: 1px solid var(--color-border);
   border-radius: 16px;
   background: var(--color-white);
   box-shadow: 0 8px 40px rgba(0, 0, 0, 0.08);
@@ -1272,13 +1247,12 @@
   color: var(--color-primary);
 }
 
-/* tabs and sections */
 .tour-tabs {
   display: flex;
   gap: 24px;
   margin-bottom: 32px;
   overflow-x: auto;
-  border-bottom: 1px solid #eee;
+  border-bottom: 1px solid var(--color-border);
 }
 
 .tour-tabs button {
@@ -1380,7 +1354,6 @@
   color: var(--color-secondary);
 }
 
-/* reviews */
 .review-list {
   display: grid;
   gap: 16px;
@@ -1430,7 +1403,6 @@
   overflow-wrap: anywhere;
 }
 
-/* similar tours */
 .similar-section {
   margin-top: 64px;
 }
@@ -1464,7 +1436,6 @@
   color: var(--text-secondary);
 }
 
-/* ADMIN PAGE */
 .admin-bar {
   display: flex;
   flex-wrap: wrap;
@@ -1486,7 +1457,7 @@
 
 .admin-table-wrap {
   position: relative;
-  border: 1px solid #eee;
+  border: 1px solid var(--color-border);
   border-radius: 12px;
 }
 
@@ -1515,7 +1486,7 @@
 
 .admin-table tbody tr {
   padding: 16px;
-  border-bottom: 1px solid #eee;
+  border-bottom: 1px solid var(--color-border);
 }
 
 .admin-table tbody tr:last-child {
@@ -1551,10 +1522,9 @@
 }
 
 .admin-delete {
-  color: #c62828;
+  color: var(--color-error);
 }
 
-/* CONTACTS PAGE */
 .contact-layout {
   display: grid;
   grid-template-columns: minmax(0, 1fr);
@@ -1572,7 +1542,7 @@
   align-items: flex-start;
   gap: 16px;
   padding: 20px;
-  border: 1px solid #eee;
+  border: 1px solid var(--color-border);
   border-radius: 12px;
   background: var(--color-white);
 }
@@ -1656,7 +1626,6 @@ textarea.field-input {
   font-size: 1.125rem;
 }
 
-/* FAQ */
 .faq {
   margin-top: 64px;
 }
@@ -1666,7 +1635,7 @@ textarea.field-input {
 }
 
 .faq-item {
-  border-bottom: 1px solid #eee;
+  border-bottom: 1px solid var(--color-border);
 }
 
 .faq-question {
@@ -2068,7 +2037,7 @@ textarea.field-input {
   .trip-section .section-head-text {
     max-width: 390px;
   }
-  
+
   .trip-section .section-subtitle--trip {
     max-width: 390px;
     font-size: 1.125rem;
@@ -2147,7 +2116,7 @@ textarea.field-input {
     padding: 60px 80px;
     gap: 60px;
 
-    background: #fff;
+    background: var(--color-white);
     box-shadow: 0 0 4px rgba(0, 0, 0, 0.3);
     border-radius: 26px;
   }
@@ -2301,7 +2270,7 @@ textarea.field-input {
   .admin-table td {
     display: table-cell;
     padding: 12px 16px;
-    border-bottom: 1px solid #eee;
+    border-bottom: 1px solid var(--color-border);
     text-align: left;
     white-space: nowrap;
   }
@@ -2327,7 +2296,7 @@ textarea.field-input {
     content: none;
   }
 
-  .admin-table tbody tr:last-child > * {
+  .admin-table tbody tr:last-child>* {
     border-bottom: none;
   }
 
