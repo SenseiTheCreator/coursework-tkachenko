@@ -85,16 +85,13 @@ app.post("/api/bookings", async (req, res) => {
     return res.status(400).json({ error: "Перевірте дані форми", fields: errors });
   }
 
-  const tour = await pool.query("SELECT id, title FROM tours WHERE id = $1", [data.tourId]);
-  if (tour.rows.length === 0) return res.status(404).json({ error: "Тур не знайдено" });
-
   const { rows } = await pool.query(
     `INSERT INTO bookings (tour_id, name, phone, email, travel_date, guests, comment)
      VALUES ($1, $2, $3, $4, $5, $6, $7)
-     RETURNING id, created_at`,
+     RETURNING id, created_at, (SELECT title FROM tours WHERE id = tour_id) AS tour`,
     [data.tourId, data.name, data.phone, data.email, data.date, data.guests, data.comment],
   );
-  res.status(201).json({ id: rows[0].id, tour: tour.rows[0].title, createdAt: rows[0].created_at });
+  res.status(201).json({ id: rows[0].id, tour: rows[0].tour, createdAt: rows[0].created_at });
 });
 
 app.use((req, res) => res.status(404).json({ error: "Маршрут не знайдено" }));
