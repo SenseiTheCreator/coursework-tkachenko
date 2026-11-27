@@ -286,7 +286,7 @@ async function signUp(form) {
   closeModalOf(form);
 }
 
-const API_URL = "https://travellian-world.onrender.com";
+const API_URL = "https://travellian-worldwide.onrender.com";
 
 function fillBookingDates() {
   const select = qs("#booking-date");
